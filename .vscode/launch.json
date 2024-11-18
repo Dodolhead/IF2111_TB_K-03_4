@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": ".",
-      "program": "build/Debug/outDebug"
+      "cwd": "/Users/nicholaszef/Documents/ITB/STI/Semester 3/TUBES ALSTRUKDAT/IF2111_TB_K-03_4",
+      "program": "/Users/nicholaszef/Documents/ITB/STI/Semester 3/TUBES ALSTRUKDAT/IF2111_TB_K-03_4/build/Debug/outDebug"
     }
   ]
 }
