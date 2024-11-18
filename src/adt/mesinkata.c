@@ -43,6 +43,7 @@ void CopyWord() {
     CurrentWord.Length = i;
     IgnoreBlanks();
 }
+
 boolean isEndWord(){
     return EndWord;
 }
