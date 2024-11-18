@@ -14,7 +14,7 @@
 
 /* Definisi elemen dan koleksi objek */
 #define IdxType int
-#define ElType int
+typedef int ElType;
 
 typedef struct {
 	ElType A[MaxEl];  /* Memori tempat penyimpanan elemen (container) */
@@ -37,7 +37,7 @@ List MakeList();
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean IsEmpty(List L);
+boolean IsListEmpty(List L);
 /* Mengirimkan true jika list L kosong, mengirimkan false jika tidak */
 
 /* *** Menghasilkan sebuah elemen *** */

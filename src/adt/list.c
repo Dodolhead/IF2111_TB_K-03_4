@@ -13,7 +13,7 @@ List MakeList(){
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean IsEmpty(List L){
+boolean IsListEmpty(List L){
     return L.A[0] == Mark;
 }
 /* Mengirimkan true jika list L kosong, mengirimkan false jika tidak */
