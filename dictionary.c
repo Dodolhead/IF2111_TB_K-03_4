@@ -13,3 +13,30 @@ boolean stringEquals(char* str1, char* str2){
     }
     return str1[i] == '\0' && str2[i] == '\0';
 }
+
+int stringLength(char* str) {
+    int length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
+
+void stringConcat(char* dest, char* src) {
+    int destLen = stringLength(dest);
+    int srcLen = stringLength(src);
+    
+    for (int i = 0; i < srcLen; i++) {
+        dest[destLen + i] = src[i];
+    }
+    dest[destLen + srcLen] = '\0'; 
+}
+
+void CopyString(char* dest, const char* src) {
+    int i = 0;
+    while (src[i] != '\0') {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';  // Akhiri string dengan null character
+}
