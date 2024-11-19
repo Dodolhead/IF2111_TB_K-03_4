@@ -32,11 +32,11 @@ void stringConcat(char* dest, char* src) {
     dest[destLen + srcLen] = '\0'; 
 }
 
-void CopyString(char* dest, const char* src) {
+void copyString(char* dest, const char* src) {
     int i = 0;
     while (src[i] != '\0') {
         dest[i] = src[i];
         i++;
     }
-    dest[i] = '\0';  // Akhiri string dengan null character
+    dest[i] = '\0';
 }

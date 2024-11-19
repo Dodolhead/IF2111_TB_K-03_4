@@ -47,5 +47,3 @@ int main(){
         }
     }
 }
-
-//WTB Any Rivens >> [Torid] 450p [Magistar][Verglas] 300p [Dual Toxocyst] [Ocucor] 180p [Ceramic Dagger][Glaive] 100p [Burston] 80p [Furis] 50p

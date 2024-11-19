@@ -1,84 +1,140 @@
 #include <stdio.h>
 #include "listuser.h"
+#include "../../dictionary.h"
+#include "../../dictionary.c"
 
-List MakeList(){
+List MakeList() {
     List U;
-    for (int i = 0; i < MaxEl; i++){
+    for (int i = 0; i < MaxEl; i++) {
         U.A[i].money = MarkNumber;
-        U.A[i].name[0] = MarkName[0];
-        U.A[i].password[0] = MarkName[0];
+        U.A[i].name[0] = '\0';
+        U.A[i].password[0] = '\0';
     }
     return U;
 }
 /* Membentuk list kosong dengan elemen yang diisi MarkNumber/MarkName */
 
-boolean IsListEmpty(List U){
-    return (U.A[0].money == MarkNumber && U.A[0].name[0] == MarkName[0] && U.A[0].password[0] == MarkName[0]);
+boolean IsListEmpty(List U) {
+    return (U.A[0].money == MarkNumber && U.A[0].name[0] == '\0' && U.A[0].password[0] == '\0');
 }
 /* Mengembalikan true jika list kosong */
 
-User Get(List U, IdxType i){
-    return U.A[i];
+int GetMoney(List U, IdxType i) {
+    return U.A[i].money;
+}
+
+void GetName(List U, IdxType i, char* buffer) {
+    copyString(buffer, U.A[i].name);
+}
+
+void GetPassword(List U, IdxType i, char* buffer) {
+    copyString(buffer, U.A[i].password);
 }
 /* Mengambil elemen pada indeks ke-i */
 
-void Set(List *U, IdxType i, int money, char* name, char* password){
+void Set(List *U, IdxType i, int money, char* name, char* password) {
     U->A[i].money = money;
-    U->A[i].name = 
+    copyString(U->A[i].name, name);
+    copyString(U->A[i].password, password);
 }
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
 int Length(List U) {
     int count = 0;
-    while (count < MaxEl && U.A[count].name != MarkName) {
+    while (count < MaxEl && U.A[count].money != MarkNumber) {
         count++;
     }
     return count;
 }
 /* Mengembalikan jumlah elemen efektif dalam list */
 
-IdxType FirstIdx(List U){
+IdxType FirstIdx(List U) {
     return 0;
 }
 /* Mengembalikan indeks elemen pertama */
 
-IdxType LastIdx(List U){
+IdxType LastIdx(List U) {
     return Length(U) - 1;
 }
 /* Mengembalikan indeks elemen terakhir */
 
-boolean IsIdxValid(List U, IdxType i){
+boolean IsIdxValid(List U, IdxType i) {
     return i < MaxEl && i >= 0;
 }
 /* Mengecek apakah indeks valid untuk list */
 
-boolean IsIdxEff(List U, IdxType i){
+boolean IsIdxEff(List U, IdxType i) {
     return i <= LastIdx(U) && i >= FirstIdx(U);
 }
 /* Mengecek apakah indeks efektif (elemen diisi) dalam list */
 
-boolean Search(List U, User X){
-    
+boolean Search(List U, char* X) {
+    for (int i = 0; i < Length(U); i++) {
+        if (stringEquals(U.A[i].name, X)) {
+            return true;
+        }
+    }
+    return false;
 }
 /* Mengecek apakah elemen X terdapat dalam list */
 
-void InsertFirst(List *U, User X);
+void InsertFirst(List *U, int money, char* name, char* password) {
+    InsertAt(U, money, name, password, 0);
+}
 /* Menyisipkan elemen di posisi pertama */
 
-void InsertAt(List *U, User X, IdxType i);
+void InsertAt(List *U, int money, char* name, char* password, IdxType i) {
+    if (Length(*U) < MaxEl && i >= 0 && i <= Length(*U)) {
+        for (int j = Length(*U); j > i; j--) {
+            U->A[j] = U->A[j - 1];
+        }
+        Set(U, i, money, name, password);
+    }
+}
 /* Menyisipkan elemen di posisi indeks ke-i */
 
-void InsertLast(List *U, User X);
+void InsertLast(List *U, int money, char* name, char* password) {
+    if (Length(*U) < MaxEl) {
+        Set(U, Length(*U), money, name, password);
+    }
+}
 /* Menyisipkan elemen di posisi terakhir */
 
-void DeleteFirst(List *U);
+void DeleteFirst(List *U) {
+    DeleteAt(U, 0);
+}
 /* Menghapus elemen di posisi pertama */
 
-void DeleteAt(List *U, IdxType i);
+void DeleteAt(List *U, IdxType i) {
+    if (Length(*U) > 0 && i >= 0 && i < Length(*U)) {
+        for (IdxType j = i; j < LastIdx(*U); j++) {
+            U->A[j] = U->A[j + 1];
+        }
+        U->A[Length(*U) - 1].money = MarkNumber;
+        U->A[Length(*U) - 1].name[0] = '\0';
+        U->A[Length(*U) - 1].password[0] = '\0';
+    }
+}
 /* Menghapus elemen di posisi indeks ke-i */
 
-void DeleteLast(List *U);
+void DeleteLast(List *U) {
+    DeleteAt(U, LastIdx(*U));
+}
 /* Menghapus elemen di posisi terakhir */
 
-List Concat(List U1, List U2);
-/* Menggabungkan dua list menjadi satu */
+// int main() {
+//     List U = MakeList();
+//     InsertFirst(&U, 100000, "admin", "admin");
+//     InsertAt(&U, 100000, "dapid", "idiot",1);
+//     InsertLast(&U, 50000, "user", "user");
+    
+
+//     char buffer[50];
+//     for (int i = 0; i < Length(U); i++) {
+//         printf("%d\n", GetMoney(U, i));
+//         GetName(U, i, buffer);
+//         printf("%s\n", buffer);
+//         GetPassword(U, i, buffer);
+//         printf("%s\n", buffer);
+//     }
+// }
