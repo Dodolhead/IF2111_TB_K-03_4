@@ -1,7 +1,6 @@
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#include "arraydinBarang.h"
 
-void StoreList();
+void StoreList(ArrayDin Info);
 /*
 Melihat barang-barang apa saja yang ada di dalam toko. 
 Setiap barang yang ditampilkan haruslah bersifat unique.
