@@ -1,17 +1,28 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
+#include "mesinkarakter.h"
+#include "mesinkata.h"
+
 // Boolean
 #define boolean unsigned char
 #define true 1
 #define false 0
 
+#define MAX_LEN 100
 #define InitialSize 10
 
 typedef int IdxType;
-typedef int ElType;
+
+// ADT Barang
 typedef struct {
-    ElType *A;
+    char name[MAX_LEN];
+    int price;
+} Barang;
+
+// ADT Array Dinamis
+typedef struct {
+    Barang *A;
     int Capacity;
     int Neff;
 } ArrayDin;
@@ -46,7 +57,7 @@ int Length(ArrayDin array);
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
-ElType Get(ArrayDin array, IdxType i);
+Barang Get(ArrayDin array, IdxType i);
 
 /**
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
@@ -55,15 +66,9 @@ ElType Get(ArrayDin array, IdxType i);
 int GetCapacity(ArrayDin array);
 
 /**
- * Fungsi untuk menambahkan elemen baru di index ke-i
- * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ * Fungsi untuk memasukkan list barang ke dalam array dinamis
+ * Prekondisi: array sembarang
  */
-void InsertAt(ArrayDin *array, ElType el, IdxType i);
-
-/**
- * Fungsi untuk menghapus elemen di index ke-i ArrayDin
- * Prekondisi: array terdefinisi, i di antara 0..Length(array).
- */
-void DeleteAt(ArrayDin *array, IdxType i);
+void ListBarang(ArrayDin *array);
 
 #endif
