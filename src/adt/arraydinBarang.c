@@ -113,6 +113,7 @@ void ListBarang(ArrayDin *array) {
                 panjang = panjang + CurrentWord.Length;
 
             }
+            (*array).A[baris].name[panjang] = '\0';
             baris++;
         }
     }
