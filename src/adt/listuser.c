@@ -30,6 +30,7 @@ void GetName(List U, IdxType i, char* buffer) {
 void GetPassword(List U, IdxType i, char* buffer) {
     copyString(buffer, U.A[i].password);
 }
+
 /* Mengambil elemen pada indeks ke-i */
 
 void Set(List *U, IdxType i, int money, char* name, char* password) {
@@ -106,15 +107,22 @@ void DeleteFirst(List *U) {
 /* Menghapus elemen di posisi pertama */
 
 void DeleteAt(List *U, IdxType i) {
-    if (Length(*U) > 0 && i >= 0 && i < Length(*U)) {
-        for (IdxType j = i; j < LastIdx(*U); j++) {
+    int panjang = Length(*U);
+    if (panjang > 0 && i >= 0 && i < panjang) {
+        // Geser elemen dari indeks i ke depan
+        for (IdxType j = i; j < panjang - 1; j++) {
             U->A[j] = U->A[j + 1];
         }
-        U->A[Length(*U) - 1].money = MarkNumber;
-        U->A[Length(*U) - 1].name[0] = '\0';
-        U->A[Length(*U) - 1].password[0] = '\0';
+        // Hapus elemen terakhir (nilai tidak terpakai)
+        U->A[panjang - 1].money = MarkNumber;
+        U->A[panjang - 1].name[0] = '\0';
+        U->A[panjang - 1].password[0] = '\0';
+
+        // Update panjang list
+        panjang--;  // Pastikan untuk mengurangi jumlah elemen
     }
 }
+
 /* Menghapus elemen di posisi indeks ke-i */
 
 void DeleteLast(List *U) {
@@ -127,7 +135,12 @@ void DeleteLast(List *U) {
 //     InsertFirst(&U, 100000, "admin", "admin");
 //     InsertAt(&U, 100000, "dapid", "idiot",1);
 //     InsertLast(&U, 50000, "user", "user");
-    
+//     InsertLast(&U, 50000, "asu", "user");
+
+//     printf("Length before DeleteAt: %d\n", Length(U));
+//     DeleteAt(&U, 2);
+//     printf("Length after DeleteAt: %d\n", Length(U));
+
 
 //     char buffer[50];
 //     for (int i = 0; i < Length(U); i++) {

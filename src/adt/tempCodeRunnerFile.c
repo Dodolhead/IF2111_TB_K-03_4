@@ -1,1 +1,1 @@
-#include "listuser.h"
+char* GetName(List U, IdxType i, char* buffer)

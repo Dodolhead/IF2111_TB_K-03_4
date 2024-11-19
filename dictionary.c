@@ -23,13 +23,15 @@ int stringLength(char* str) {
 }
 
 void stringConcat(char* dest, char* src) {
-    int destLen = stringLength(dest);
-    int srcLen = stringLength(src);
     
+    int destLen = stringLength(dest);  // Pastikan stringLength mengembalikan panjang yang benar
+    int srcLen = stringLength(src);    // Pastikan ini juga benar
+
+    // Gabungkan kedua string
     for (int i = 0; i < srcLen; i++) {
         dest[destLen + i] = src[i];
     }
-    dest[destLen + srcLen] = '\0'; 
+    dest[destLen + srcLen] = '\0';  // Menambahkan null-terminator pada akhir string
 }
 
 void copyString(char* dest, const char* src) {
