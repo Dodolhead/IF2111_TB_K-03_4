@@ -9,6 +9,7 @@
 
 #define NMax 50
 #define BLANK ' '
+#define MARK '\n'
 
 typedef struct
 {

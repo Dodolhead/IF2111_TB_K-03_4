@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "..\..\..\dictionary.h"
 #include "..\..\..\dictionary.c" 
-#include "..\..\adt\mesinkata.c"  // Pastikan ini juga benar
-#include "..\..\adt\mesinkarakter.c"  // Pastikan ini juga benar
+#include "..\..\adt\mesinkata.c" 
+#include "..\..\adt\mesinkarakter.c"  
 
 void workDisplay() {
     printf("Daftar Pekerjaan:\n");
@@ -11,25 +11,160 @@ void workDisplay() {
     printf("    3. Cikapundunginator Caretaker (pendapatan=7000, durasi=30s)\n");
     printf("    4. Mewing Specialist (pendapatan=10000, durasi=22s)\n");
     printf("    5. Inator Connoisseur (pendapatan=997, durasi=15s)\n");
+    printf("Ketik \"EXIT\" Untuk Keluar Work\n");
 }
 
-void doWork() {
-    char buffer[200] = "";  // Buffer untuk menampung input
-    workDisplay();  // Menampilkan daftar pekerjaan
-
-    // Memulai pembacaan input
-    printf(">> ");
-    STARTWORD();  
-    while (!IsEOP()) {  // Selama tidak mencapai end of input (EOP)
-        stringConcat(buffer, CurrentWord.TabWord);  // Gabungkan kata ke buffer
-        stringConcat(buffer, " ");  // Menambahkan spasi antar kata
-        printf("\nInput yang diterima: %s\n", buffer);
-        ADVWORD();  // Lanjutkan ke kata berikutnya
+void delay(int n){
+    unsigned tes = 10*10*10*10*10*10*10*10*10;
+    int dot_counter = 0;
+    int counter = 0;
+    int time = 1;
+    for (int i = 0; i < n; i++){
+        for (int i = 0; i < tes; i++){
+            counter ++;
+            time ++;
+            if (counter == 10*10*10*10){
+                printf("...");
+                dot_counter ++;
+                if (dot_counter == 3){
+                    printf("\n");
+                    dot_counter = 0;
+                }
+            }
+        }
+        counter =0;
+        time =1;
     }
-
-    printf("\nInput yang diterima: %s\n", buffer);
 }
+
+
+void doWork(int* money) {
+    workDisplay(); 
+    // while (1) {
+    //     workDisplay(); 
+    //     printf(">> ");
+    //     STARTWORD();
+        
+    //     if (stringEquals(CurrentWord.TabWord, "Evil Lab Assistant")) {
+    //         delay(14);
+    //         printf("\n");
+    //         *money += 100;
+    //         printf("Anda mendapatkan 100 uang\n");
+    //         CurrentWord.Length = 0;
+    //     } 
+    //     else if(stringEquals(CurrentWord.TabWord, "OWCA Hiring Manager")) {
+    //         delay(21);
+    //         printf("\n");
+    //         *money += 4200;
+    //         printf("Anda mendapatkan 4200 uang\n");
+    //         CurrentWord.Length = 0;
+    //     } 
+    //     else if(stringEquals(CurrentWord.TabWord, "Cikapundunginator Caretaker")) {
+    //         delay(30);
+    //         printf("\n");
+    //         *money += 7000;
+    //         printf("Anda mendapatkan 7000 uang\n");
+    //         CurrentWord.Length = 0;
+    //     } 
+    //     else if(stringEquals(CurrentWord.TabWord, "Mewing Specialist")) {
+    //         delay(22);
+    //         printf("\n");
+    //         *money += 10000;
+    //         printf("Anda mendapatkan 10000 uang\n");
+    //         CurrentWord.Length = 0;
+    //     }
+    //     else if(stringEquals(CurrentWord.TabWord, "Inator Connoisseur")) {
+    //         delay(15);
+    //         printf("\n");
+    //         *money += 997;
+    //         printf("Anda mendapatkan 997 uang\n");
+    //         CurrentWord.Length = 0;
+    //     }
+    //     else if(stringEquals(CurrentWord.TabWord, "EXIT")) {
+    //         break;
+    //     }
+    //     else {
+    //         printf("%s Pekerjaan tidak ditemukan\n", CurrentWord.TabWord);
+    //         CurrentWord.Length = 0;
+    //     }
+    // }
+    while (1) {
+        printf(">> ");
+        STARTWORD();
+        if (stringEquals(CurrentWord.TabWord, "Evil")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "Lab")) {
+                ADVWORD();
+                if (stringEquals(CurrentWord.TabWord, "Assistant")) {
+                    delay(14);
+                    printf("\n");
+                    *money += 100;
+                    printf("Anda mendapatkan 100 uang\n");
+                    CurrentWord.Length = 0;
+                }
+            }
+        } 
+        else if(stringEquals(CurrentWord.TabWord, "OWCA")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "Hiring")) {
+                ADVWORD();
+                if (stringEquals(CurrentWord.TabWord, "Manager")) {
+                    delay(21);
+                    printf("\n");
+                    *money += 4200;
+                    printf("Anda mendapatkan 4200 uang\n");
+                    CurrentWord.Length = 0;
+                }
+            }
+        } 
+        else if(stringEquals(CurrentWord.TabWord, "Cikapundunginator")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "Caretaker")) {
+                ADVWORD();
+                if (stringEquals(CurrentWord.TabWord, "Inator")) {
+                    delay(30);
+                    printf("\n");
+                    *money += 7000;
+                    printf("Anda mendapatkan 7000 uang\n");
+                    CurrentWord.Length = 0;
+                }
+            }
+        } 
+        else if(stringEquals(CurrentWord.TabWord, "Mewing")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "Specialist")) {
+                delay(22);
+                printf("\n");
+                *money += 10000;
+                printf("Anda mendapatkan 10000 uang\n");
+                CurrentWord.Length = 0;
+            }
+        } 
+        else if(stringEquals(CurrentWord.TabWord, "Inator")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "Connoisseur")) {
+                delay(15);
+                printf("\n");
+                *money += 997;
+                printf("Anda mendapatkan 997 uang\n");
+                CurrentWord.Length = 0;
+            }
+        }
+        else if (stringEquals(CurrentWord.TabWord, "EXIT")) {
+            break;
+        }
+        else {
+            ADVWORD();
+            printf("Pekerjaan tidak ditemukan\n");
+            CurrentWord.Length = 0;
+        }
+        printf("%s\n", CurrentWord.TabWord);
+    }
+}
+
 
 int main() {
-    doWork();  // Menjalankan fungsi doWork
+    int money = 0;
+    doWork(&money);
+    printf("%d",money);
 }
