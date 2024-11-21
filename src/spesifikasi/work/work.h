@@ -4,5 +4,5 @@
 #include "..\..\adt\boolean.h"
 
 void workDisplay();
-void delay(int n)
+void delay(int n);
 void doWork();
