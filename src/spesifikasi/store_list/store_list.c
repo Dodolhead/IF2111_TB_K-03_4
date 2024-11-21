@@ -2,8 +2,9 @@
 #include "store_list.h"
 
 void StoreList(ArrayDin Info) {
+    // KAMUS
     int i, j;
-
+    // ALGORITMA
     if (Length(Info) == 0) {
         printf("TOKO KOSONG");
     } else {
@@ -11,8 +12,8 @@ void StoreList(ArrayDin Info) {
         for (i = 0; i < Length(Info); i++) {
             printf("- ");
 
-            for (j = 0; Info.A[i].name[j] != '\0'; j++) {
-                printf("%c", Info.A[i].name[j]);
+            for (j = 0; NamaBarang(Get(Info, i))[j] != '\0'; j++) {
+                printf("%c", NamaBarang(Get(Info, i))[j]);
             }
 
             printf("\n");
