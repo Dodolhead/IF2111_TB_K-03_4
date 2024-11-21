@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "arraydinBarang.h"
-#include "stdlib.h"
 
 /**
  * Konstruktor
@@ -8,8 +8,9 @@
  * F.S. Terbentuk ArrayDin kosong dengan ukuran InitialSize
  */
 ArrayDin MakeArrayDin() {
+    // KAMUS
     ArrayDin A;
-
+    // ALGORITMA
     A.Capacity = InitialSize;
     A.A = (Barang*) malloc (A.Capacity * sizeof(Barang));
     A.Neff = 0;
@@ -23,6 +24,8 @@ ArrayDin MakeArrayDin() {
  * F.S. array->A terdealokasi
  */
 void DeallocateArrayDin(ArrayDin *array) {
+    // KAMUS LOKAL
+    // ALGORITMA
     free(array->A);
     array->Capacity = 0;
     array->Neff = 0;
@@ -33,6 +36,8 @@ void DeallocateArrayDin(ArrayDin *array) {
  * Prekondisi: array terdefinisi
  */
 boolean IsEmpty(ArrayDin array) {
+    // KAMUS LOKAL
+    // ALGORITMA
     return (array.Neff == 0);
 }
 
@@ -41,6 +46,8 @@ boolean IsEmpty(ArrayDin array) {
  * Prekondisi: array terdefinisi
  */
 int Length(ArrayDin array) {
+    // KAMUS LOKAL
+    // ALGORITMA
     if (IsEmpty(array)) {
         return 0;
     } else {
@@ -53,6 +60,8 @@ int Length(ArrayDin array) {
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
 Barang Get(ArrayDin array, IdxType i) {
+    // KAMUS LOKAL
+    // ALGORITMA
     return array.A[i];
 }
 
@@ -61,15 +70,77 @@ Barang Get(ArrayDin array, IdxType i) {
  * Prekondisi: array terdefinisi
  */
 int GetCapacity(ArrayDin array) {
+    // KAMUS LOKAL
+    // ALGORITMA
     return (array.Capacity);
 }
+
+/**
+ * Fungsi untuk menambahkan elemen baru di index ke-i
+ * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ */
+void InsertAt(ArrayDin *array, char* name, int harga, IdxType i) {
+    // KAMUS LOKAL
+    IdxType j;
+    
+    // ALGORITMA
+    // Memindahkan barang
+    for (j = Length(*array)-1; j >= i; j--) {
+        (*array).A[j+1].price = HargaBarang(Get((*array,j)));
+        copyString((*array).A[j+1].name, NamaBarang(Get((*array),j)))
+    }
+
+    // Masukkan barang
+    (*array).A[i] = MakeBarang(name, harga);
+    (*array).Neff++;
+}
+
+/**
+ * Fungsi untuk menambahkan elemen baru di akhir array.
+ * Prekondisi: array terdefinisi
+ */
+void InsertLast(ArrayDin *array, char* name, int harga) {
+    // KAMUS
+    // ALGORITMA
+    InsertAt(array, name, harga, (array->Neff));
+}
+
+/**
+ * Fungsi untuk menghapus elemen di index ke-i ArrayDin
+ * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ */
+void DeleteAt(ArrayDin *array, char* name) {
+    // KAMUS
+    IdxType j, k;
+    boolean found = false;
+    // ALGORITMA
+    for (j = 0; j < Length(*array) && !found; j++) {
+        if (!stringEquals(NamaBarang(Get((*array),j)), name)) {  // Match found
+            found = true;
+
+            for (k = j; k < Length(*array) - 1; k++) {
+                (*array).A[k].price = HargaBarang(Get((*array),k+1));
+
+                copyString((*array).A[k].name, NamaBarang(Get((*array),k+1)))
+            }
+        }
+    }
+
+    if (found) {
+        (*array).Neff--;
+    }
+}
+
 
 /**
  * Fungsi untuk memasukkan list barang ke dalam array dinamis
  * Prekondisi: array sembarang
  */
 void ListBarang(ArrayDin *array) {
+    // KAMUS
     int i, j, items = 0, baris = 0;
+    int harga = 0, panjang = 0;
+    // ALGORITMA
     STARTWORD();
 
     // Mengecek jumlah barang dalam toko
@@ -82,7 +153,8 @@ void ListBarang(ArrayDin *array) {
 
         // Menyalin harga dan nama barang ke array dinamis
         while (baris < items && baris <= GetCapacity(*array)) {
-            int harga = 0, panjang = 0;
+            harga = 0;
+            panjang = 0;
 
             // Menyalin harga barang
             ADVWORD();
