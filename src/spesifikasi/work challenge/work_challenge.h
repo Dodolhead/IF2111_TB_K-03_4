@@ -7,4 +7,5 @@
 int random(int lower, int upper);
 void tebakAngka(int* money);
 void wordl3(int* money);
+void quantumWordl3(int* money);
 void workChallenge(int* money);
