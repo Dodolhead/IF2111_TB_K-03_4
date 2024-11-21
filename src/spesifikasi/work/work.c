@@ -23,7 +23,7 @@ void delay(int n){
         for (int i = 0; i < tes; i++){
             counter ++;
             time ++;
-            if (counter == 10*10*10*10){
+            if (counter == n*10*10*10){
                 printf("...");
                 dot_counter ++;
                 if (dot_counter == 3){
@@ -156,8 +156,8 @@ void doWork(int* money) {
 }
 
 
-// int main() {
-//     int money = 0;
-//     doWork(&money);
-//     printf("%d",money);
-// }
+int main() {
+    int money = 0;
+    doWork(&money);
+    printf("%d",money);
+}

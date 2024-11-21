@@ -1,6 +1,6 @@
 #include "start.h"
-#include "mesinkata.h"
-#include "mesinkarakter.h"
+#include "..\..\adt\mesinkata.c" 
+#include "..\..\adt\mesinkarakter.c"
 #include <stdio.h>
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers) {
