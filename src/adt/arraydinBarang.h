@@ -3,22 +3,17 @@
 
 #include "mesinkarakter.h"
 #include "mesinkata.h"
+#include "barang.h"
+#include "../../dictionary.h"
 
 // Boolean
 #define boolean unsigned char
 #define true 1
 #define false 0
 
-#define MAX_LEN 100
 #define InitialSize 10
 
 typedef int IdxType;
-
-// ADT Barang
-typedef struct {
-    char name[MAX_LEN];
-    int price;
-} Barang;
 
 // ADT Array Dinamis
 typedef struct {
@@ -64,6 +59,24 @@ Barang Get(ArrayDin array, IdxType i);
  * Prekondisi: array terdefinisi
  */
 int GetCapacity(ArrayDin array);
+
+/**
+ * Fungsi untuk menambahkan elemen baru di index ke-i
+ * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ */
+void InsertAt(ArrayDin *array, char* name, int harga, IdxType i);
+
+/**
+ * Fungsi untuk menambahkan elemen baru di akhir array.
+ * Prekondisi: array terdefinisi
+ */
+void InsertLast(ArrayDin *array, char* name, int harga);
+
+/**
+ * Fungsi untuk menghapus elemen di index ke-i ArrayDin
+ * Prekondisi: array terdefinisi, i di antara 0..Length(array).
+ */
+void DeleteAt(ArrayDin *array, char* name);
 
 /**
  * Fungsi untuk memasukkan list barang ke dalam array dinamis
