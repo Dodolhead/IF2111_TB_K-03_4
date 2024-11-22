@@ -7,6 +7,15 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
+void ADVFILE() {
+    if (fscanf(pita, "%c", &currentChar) == EOF) {
+        EOP = true;
+        fclose(pita);
+    } else {
+        EOP = false;
+    }
+}
+
 void START() {
     pita = stdin;
     ADV();
@@ -24,6 +33,15 @@ void ADV() {
     EOP = (currentChar == MARK);
 }
 
+void STARTFILE(char filename[]) {
+    pita = fopen(filename, "r");
+    if (pita == NULL) {
+        printf("File tidak ditemukan\n");
+        EOP = true;
+    } else {
+        ADV();
+    }
+}
 
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK

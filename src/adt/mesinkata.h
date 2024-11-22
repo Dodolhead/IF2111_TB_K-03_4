@@ -38,6 +38,7 @@ void ADVWORD();
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
+void ADVUSER();
 
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord

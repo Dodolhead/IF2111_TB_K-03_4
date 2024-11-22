@@ -20,6 +20,10 @@ void ADVANGKA();
    F.S. : currentAngka adalah angka berikutnya,
           Jika tidak ada lagi angka di pita, maka EOPAngka akan menyala (true). */
 
+int bacaAngka();
+
+int arrayToInteger(char arr[], int length);
+
 boolean IsEOPAngka();
 /* Mengirimkan true jika currentChar = MARK */
 
@@ -27,3 +31,4 @@ int GetAngka();
 /* Mengirimkan angka yang terbaca pada currentAngka. */
 
 #endif
+

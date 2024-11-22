@@ -33,6 +33,20 @@ void ADVWORD() {
     }
 }
 
+void ADVUSER() {
+    IgnoreBlanks();  // Abaikan spasi awal
+
+    CurrentWord.Length = 0; // Reset panjang kata
+
+    while (currentChar != ' ' && currentChar != MARK && CurrentWord.Length < NMax) {
+        CurrentWord.TabWord[CurrentWord.Length] = currentChar; // Tambahkan karakter ke kata
+        CurrentWord.Length++;
+        ADV(); // Pindah ke karakter berikutnya
+    }
+    
+    IgnoreBlanks(); // Abaikan spasi setelah kata
+}
+
 void CopyWord(){
     CurrentWord.Length = 0;
 
