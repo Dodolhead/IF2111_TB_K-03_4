@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include "store_supply.h"
 
-void StoreSupply() {
-    char perintah[MAX_LEN];
+void StoreSupply(Queue q, ArrayDin Info) {
+    // KAMUS
     char save[MAX_LEN];
-    int harga, i = 0;
+    int harga, i = 0, select = 0;
     boolean finish = false;
-    Queue request;
+    char Terima[6] = {'T', 'e', 'r', 'i', 'm', 'a'};
+    char Tunda[5] = {'T', 'u', 'n', 'd', 'a'};
+    char Tolak[5] = {'T', 'o', 'l', 'a', 'k'};
+    char Purry[5] = {'P', 'u', 'r', 'r', 'y'};
 
-    ArrayDin Info = MakeArrayDin();
-    ListBarang(&Info);
-        
-    CreateQueue(&request);
-
+    // ALGORITMA
+    STARTWORD();
     while (!finish) {
         printf("Apakah kamu ingin menambahkan barang ");
         i = 0;
@@ -22,43 +22,31 @@ void StoreSupply() {
         }
         printf(": ");
 
-        if (perintah[0] == 'T'
-        && perintah[1] == 'e'
-        && perintah[2] == 'r'
-        && perintah[3] == 'i'
-        && perintah[4] == 'm'
-        && perintah[5] == 'a') {
+        while (CurrentWord.TabWord[select] != '\0') {
+            printf("%c", CurrentWord.TabWord[select]);
+            select++;
+        }
+        printf("\n");
+
+        if (stringEquals(CurrentWord.TabWord, Terima)) {
             printf("Harga barang: ");
-            scanf("%d", &harga);
+            ADVWORD();
+            select = 0;
+            while (CurrentWord.TabWord[select] != '\0') {
+                printf("%c", CurrentWord.TabWord[select]);
+                select++;
+            }
+            printf("\n");
             InsertAt(&Info, HEAD(request).name, harga, Length(Info));
             dequeue(&request, save);
-        } else if (perintah[0] == 'T'
-        && perintah[1] == 'u'
-        && perintah[2] == 'n'
-        && perintah[3] == 'd'
-        && perintah[4] == 'a') {
-            displayQueue(request);
+        } else if (stringEquals(CurrentWord.TabWord, Tunda)) {
             dequeue(&request, save);
-            displayQueue(request);
             enqueue(&request, save);
-            displayQueue(request);
-            break;
-        } else if (perintah[0] == 'T'
-        && perintah[1] == 'o'
-        && perintah[2] == 'l'
-        && perintah[3] == 'a'
-        && perintah[4] == 'k') {
-            displayQueue(request);
+        } else if (stringEquals(CurrentWord.TabWord, Tolak)) {
             dequeue(&request, save);
-            displayQueue(request);
-            break;
-        } else if (perintah[0] == 'P'
-        && perintah[1] == 'u'
-        && perintah[2] == 'r'
-        && perintah[3] == 'r'
-        && perintah[4] == 'y') {
+        } else if (stringEquals(CurrentWord.TabWord, Purry)) {
             finish = true;
-            printf("Program selesai");
+            printf("STORE SUPPLY ditutup");
         } else {
             printf("Input tidak valid");
         }
