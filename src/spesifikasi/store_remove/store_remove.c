@@ -1,21 +1,25 @@
 #include <stdio.h>
 #include "store_remove.h"
-#include "store_list.h"
 
-void main() {
-    char barang[MAX_LEN];
+void StoreRemove() {
+    // KAMUS
     boolean foundList = false;
     int select = 0;
 
-    ArrayDin Info = MakeArrayDin();
-    ListBarang(&Info);
-
+    // ALGORITMA
     printf("Nama barang yang akan dihapus: ");
-    scanf("%s", &barang);
+    STARTWORD();
+
+    while (CurrentWord.TabWord[select] != '\0') {
+        printf("%c", CurrentWord.TabWord[select]);
+        select++;
+    }
+    printf("\n");
 
     if (!IsEmpty(Info)) {
+        select = 0;
         while (select < Length(Info) && !foundList) {
-            if (!CompareItem(Info.A[select].name, barang)) {
+            if (!stringEquals(NamaBarang(Get(Info,select)), CurrentWord.TabWord)) {
                 foundList = true;
             } else {
                 select++;
@@ -25,18 +29,16 @@ void main() {
 
     select = 0;
     if (foundList) {
-        StoreList(Info);
-        while (barang[select] != '\0') {
-            printf("%c", barang[select]);
+        while (CurrentWord.TabWord[select] != '\0') {
+            printf("%c", CurrentWord.TabWord[select]);
             select++;
         }
         printf(" telah berhasil dihapus.\n");
-        DeleteAt(&Info, barang);
-        StoreList(Info);
+        DeleteAt(&Info, CurrentWord.TabWord);
     } else {
         printf("Toko tidak menjual ");
-        while (barang[select] != '\0') {
-            printf("%c", barang[select]);
+        while (CurrentWord.TabWord[select] != '\0') {
+            printf("%c", CurrentWord.TabWord[select]);
             select++;
         }
         printf("\n");
