@@ -1,112 +1,69 @@
 #include "start.h"
-#include "..\..\adt\mesinkata.c" 
-#include "..\..\adt\mesinkarakter.c"
+#include "../../adt/mesinkata.h" 
+#include "../../adt/mesinkarakter.h"
+#include "../../adt/mesinangka.h"
 #include <stdio.h>
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers) {
-    *jumlahBarang = 0;
-    *jumlahUsers = 0;
+    STARTANGKA();
+    printf("DEBUG: Jumlah Barang = %d\n", currentAngka); // Tambahkan ini
+    *jumlahBarang = currentAngka;
 
-    // Membaca jumlah barang
-    STARTWORD();
-    for (int i = 0; i < CurrentWord.Length; i++) {
-        *jumlahBarang = *jumlahBarang * 10 + (CurrentWord.TabWord[i] - '0');
-    }
-    ADVWORD();
-
-    // Membaca data barang
     for (int i = 0; i < *jumlahBarang; i++) {
-        Barang b;
+        STARTANGKA();
+        printf("DEBUG: Harga Barang ke-%d = %d\n", i + 1, currentAngka); // Tambahkan ini
+        barang[i].price = currentAngka;
 
-        // Membaca harga barang
-        b.price = 0;
-        for (int j = 0; j < CurrentWord.Length; j++) {
-            b.price = b.price * 10 + (CurrentWord.TabWord[j] - '0');
+        STARTWORD();
+        printf("DEBUG: Nama Barang ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
+        for (int k = 0; k < CurrentWord.Length; k++) {
+            barang[i].name[k] = CurrentWord.TabWord[k];
         }
-        ADVWORD();
-
-        // Membaca nama barang
-        int k;
-        for (k = 0; k < CurrentWord.Length; k++) {
-            b.name[k] = CurrentWord.TabWord[k];
-        }
-        b.name[k] = '\0';
-        ADVWORD();
-
-        barang[i] = b;
+        barang[i].name[CurrentWord.Length] = '\0';
     }
 
-    // Membaca jumlah pengguna
-    for (int i = 0; i < CurrentWord.Length; i++) {
-        *jumlahUsers = *jumlahUsers * 10 + (CurrentWord.TabWord[i] - '0');
-    }
-    ADVWORD();
+    STARTANGKA();
+    printf("DEBUG: Jumlah Pengguna = %d\n", currentAngka); // Tambahkan ini
+    *jumlahUsers = currentAngka;
 
-    // Membaca data pengguna
     for (int i = 0; i < *jumlahUsers; i++) {
-        User u;
+        STARTANGKA();
+        printf("DEBUG: Uang Pengguna ke-%d = %d\n", i + 1, currentAngka); // Tambahkan ini
+        users[i].money = currentAngka;
 
-        // Membaca uang pengguna
-        u.money = 0;
-        for (int j = 0; j < CurrentWord.Length; j++) {
-            u.money = u.money * 10 + (CurrentWord.TabWord[j] - '0');
+        STARTWORD();
+        printf("DEBUG: Nama Pengguna ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
+        for (int k = 0; k < CurrentWord.Length; k++) {
+            users[i].name[k] = CurrentWord.TabWord[k];
         }
-        ADVWORD();
+        users[i].name[CurrentWord.Length] = '\0';
 
-        // Membaca nama pengguna
-        int k;
-        for (k = 0; k < CurrentWord.Length; k++) {
-            u.name[k] = CurrentWord.TabWord[k];
+        STARTWORD();
+        printf("DEBUG: Password Pengguna ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
+        for (int k = 0; k < CurrentWord.Length; k++) {
+            users[i].password[k] = CurrentWord.TabWord[k];
         }
-        u.name[k] = '\0';
-        ADVWORD();
-
-        // Membaca password pengguna
-        for (k = 0; k < CurrentWord.Length; k++) {
-            u.password[k] = CurrentWord.TabWord[k];
-        }
-        u.password[k] = '\0';
-        ADVWORD();
-
-        users[i] = u;
+        users[i].password[CurrentWord.Length] = '\0';
     }
 }
 
-void printBarang(Barang barang[], int jumlahBarang) {
-    printf("Daftar barang:\n");
+
+int main() {
+    Barang barang[100];
+    User users[100];
+    int jumlahBarang, jumlahUsers;
+
+    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers);
+
+    printf("Daftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
         printf("- %s: %d\n", barang[i].name, barang[i].price);
     }
-}
 
-void printUsers(User users[], int jumlahUsers) {
-    printf("Daftar pengguna:\n");
+    printf("Daftar Pengguna:\n");
     for (int i = 0; i < jumlahUsers; i++) {
         printf("- Nama: %s, Password: %s, Uang: %d\n", users[i].name, users[i].password, users[i].money);
     }
-}
 
-void STARTFILE(char *filename) {
-    Barang barang[MAX_ITEMS];
-    User users[MAX_USERS];
-    int jumlahBarang = 0, jumlahUsers = 0;
-
-    freopen(filename, "r", stdin);  // Mengarahkan stdin ke file
-
-    printf("Memulai sistem PURRMART...\n");
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers);
-
-    if (jumlahBarang > 0 || jumlahUsers > 0) {
-        printf("File konfigurasi berhasil dibaca. PURRMART berhasil dijalankan.\n");
-        printBarang(barang, jumlahBarang);
-        printUsers(users, jumlahUsers);
-    } else {
-        printf("Gagal menjalankan PURRMART. Tidak ada data yang tersedia.\n");
-    }
-}
-
-int main() {
-    char filename[] = "test.txt";
-    STARTFILE(filename);
     return 0;
 }
