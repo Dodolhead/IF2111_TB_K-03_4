@@ -16,7 +16,7 @@ typedef struct {
     int money;
 } User;
 
-void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers);
+void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers,char filename[]);
 void printBarang(Barang barang[], int jumlahBarang);
 void printUsers(User users[], int jumlahUsers);
 void STARTFILE(char *filename);

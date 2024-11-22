@@ -4,16 +4,18 @@
 void StoreList(ArrayDin Info) {
     // KAMUS
     int i, j;
+    char* name;
     // ALGORITMA
     if (Length(Info) == 0) {
-        printf("TOKO KOSONG");
+        printf("TOKO KOSONG\n");
     } else {
         printf("List barang yang ada di toko :\n");
         for (i = 0; i < Length(Info); i++) {
             printf("- ");
 
-            for (j = 0; NamaBarang(Get(Info, i))[j] != '\0'; j++) {
-                printf("%c", NamaBarang(Get(Info, i))[j]);
+            name = NamaBarang(Get(Info, i)); 
+            for (j = 0; name[j] != '\0'; j++) {
+                printf("%c", name[j]);
             }
 
             printf("\n");

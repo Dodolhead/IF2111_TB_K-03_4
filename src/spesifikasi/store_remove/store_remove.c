@@ -19,7 +19,7 @@ void StoreRemove(ArrayDin Info) {
     if (!IsEmpty(Info)) {
         select = 0;
         while (select < Length(Info) && !foundList) {
-            if (!stringEquals(NamaBarang(Get(Info,select)), CurrentWord.TabWord)) {
+            if (stringEquals(NamaBarang(Get(Info, select)), CurrentWord.TabWord)) {
                 foundList = true;
             } else {
                 select++;

@@ -15,7 +15,7 @@ Barang MakeBarang(char* name, int price) {
     copyString(b.name, name);
     b.price = price;
 
-    return item; 
+    return b; 
 }
 
 /* ********** SELEKTOR ********** */
@@ -24,7 +24,7 @@ int HargaBarang(Barang b) {
     return b.price;
 }
 
-char* NamaBarang(Barang b) {
+char* NamaBarang(Barang* b) {
 /* Mengirimkan nama barang */
-    return b.name;
+    return b->name;
 }

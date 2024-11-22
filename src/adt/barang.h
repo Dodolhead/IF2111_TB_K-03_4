@@ -4,7 +4,7 @@
 #include "../../dictionary.h"
 
 #define MAX_LEN 100
-#define NULL -1
+#define EMPTY -1
 
 typedef struct {
         char name[MAX_LEN];
@@ -24,7 +24,7 @@ Barang MakeBarang(char* name, int price);
 int HargaBarang(Barang b);
 /* Mengirimkan harga barang */
 
-char* NamaBarang(Barang b);
+char* NamaBarang(Barang* b);
 /* Mengirimkan nama barang */
 
 #endif
