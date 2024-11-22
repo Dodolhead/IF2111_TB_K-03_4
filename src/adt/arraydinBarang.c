@@ -86,8 +86,8 @@ void InsertAt(ArrayDin *array, char* name, int harga, IdxType i) {
     // ALGORITMA
     // Memindahkan barang
     for (j = Length(*array)-1; j >= i; j--) {
-        (*array).A[j+1].price = HargaBarang(Get((*array,j)));
-        copyString((*array).A[j+1].name, NamaBarang(Get((*array),j)))
+        (*array).A[j+1].price = HargaBarang(Get((*array), j));
+        copyString((*array).A[j+1].name, NamaBarang(&((*array).A[j])));
     }
 
     // Masukkan barang
@@ -115,13 +115,13 @@ void DeleteAt(ArrayDin *array, char* name) {
     boolean found = false;
     // ALGORITMA
     for (j = 0; j < Length(*array) && !found; j++) {
-        if (!stringEquals(NamaBarang(Get((*array),j)), name)) {  // Match found
+        if (stringEquals(NamaBarang(&((*array).A[j])), name)) {  // Match found
             found = true;
 
             for (k = j; k < Length(*array) - 1; k++) {
                 (*array).A[k].price = HargaBarang(Get((*array),k+1));
 
-                copyString((*array).A[k].name, NamaBarang(Get((*array),k+1)))
+                copyString((*array).A[k].name, NamaBarang(&((*array).A[k+1])));
             }
         }
     }
