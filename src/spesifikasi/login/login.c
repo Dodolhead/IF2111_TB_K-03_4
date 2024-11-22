@@ -1,14 +1,5 @@
-#ifndef LOGIN_H
-#define LOGIN_H
-
-#include "boolean.h"
-#include "array.h"
-
-
-// Batasan panjang username dan password
-#define MAX_USERNAME_LEN 49
-#define MIN_PASSWORD_LEN 6
-#define MAX_PASSWORD_LEN 18
+#include <stdio.h>
+#include "login.h"
 
 // Fungsi login
 void login(TabUser list, IdxType *userid, boolean *islogeged){ // Login dengan loop untuk input ulang
@@ -51,6 +42,3 @@ void login(TabUser list, IdxType *userid, boolean *islogeged){ // Login dengan l
     printf("Sudah terlalu banyak percobaan, Anda akan dikembalikan ke laman utama.\n");
     *islogged = false;
 }
-
-
-#endif
