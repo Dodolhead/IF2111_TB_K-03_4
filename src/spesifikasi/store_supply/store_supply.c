@@ -32,18 +32,18 @@ void StoreSupply(Queue q, ArrayDin Info) {
             printf("Harga barang: ");
             ADVWORD();
             select = 0;
-            while (CurrentWord.TabWord[select] != '\0') {
+            while (HEAD(q).name[select] != '\0') {
                 printf("%c", CurrentWord.TabWord[select]);
                 select++;
             }
             printf("\n");
-            InsertAt(&Info, HEAD(request).name, harga, Length(Info));
-            dequeue(&request, save);
+            InsertLast(&Info, HEAD(q).name, CurrentWord.TabWord);
+            dequeue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Tunda)) {
-            dequeue(&request, save);
-            enqueue(&request, save);
+            dequeue(&q, save);
+            enqueue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Tolak)) {
-            dequeue(&request, save);
+            dequeue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Purry)) {
             finish = true;
             printf("STORE SUPPLY ditutup");
