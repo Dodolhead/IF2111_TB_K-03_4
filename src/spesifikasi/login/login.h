@@ -1,3 +1,3 @@
-#include "../ADT/boolean/boolean.h"
+#include "boolean.h"
 #include "../Header/misc.h"
-#include "../ADT/array/array.h"
+#include "array.h"
