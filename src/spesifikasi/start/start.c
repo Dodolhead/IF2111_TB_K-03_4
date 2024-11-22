@@ -4,15 +4,17 @@
 #include "../../adt/mesinangka.h"
 #include <stdio.h>
 
-void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers) {
+void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers, char filename[]) {
+    STARTFILE(filename);
     STARTANGKA();
     printf("DEBUG: Jumlah Barang = %d\n", currentAngka); // Tambahkan ini
     *jumlahBarang = currentAngka;
-
+    ADV();
     for (int i = 0; i < *jumlahBarang; i++) {
         STARTANGKA();
         printf("DEBUG: Harga Barang ke-%d = %d\n", i + 1, currentAngka); // Tambahkan ini
         barang[i].price = currentAngka;
+        ADVWORD();
 
         STARTWORD();
         printf("DEBUG: Nama Barang ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
@@ -20,6 +22,7 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
             barang[i].name[k] = CurrentWord.TabWord[k];
         }
         barang[i].name[CurrentWord.Length] = '\0';
+        ADV();
     }
 
     STARTANGKA();
@@ -53,7 +56,7 @@ int main() {
     User users[100];
     int jumlahBarang, jumlahUsers;
 
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers);
+    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "test.txt");
 
     printf("Daftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
