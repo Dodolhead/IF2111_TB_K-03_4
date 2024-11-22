@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "store_remove.h"
 
-void StoreRemove() {
+void StoreRemove(ArrayDin Info) {
     // KAMUS
     boolean foundList = false;
     int select = 0;
