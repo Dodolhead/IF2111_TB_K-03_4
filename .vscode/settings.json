@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "queue.h": "c",
-    "boolean.h": "c"
+    "boolean.h": "c",
+    "dictionary.h": "c"
   }
 }

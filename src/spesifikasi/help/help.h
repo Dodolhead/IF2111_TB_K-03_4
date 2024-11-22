@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "dictionary.h"
+#include "..\..\..\dictionary.h"
+#include "..\..\adt\mesinangka.h"
+#include "..\..\adt\mesinkarakter.h"
 
 int welcomeMenu();
 
