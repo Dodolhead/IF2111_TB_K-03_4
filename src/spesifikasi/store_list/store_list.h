@@ -1,4 +1,4 @@
-#include "arraydinBarang.h"
+#include "..\..\adt\arraydinBarang.h"
 
 void StoreList(ArrayDin Info);
 /*
