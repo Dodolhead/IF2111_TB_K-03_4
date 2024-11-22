@@ -16,12 +16,13 @@ void StoreSupply(Queue q, ArrayDin Info) {
     while (!finish) {
         printf("Apakah kamu ingin menambahkan barang ");
         i = 0;
-        while (HEAD(request).name[i] != '\0') {
-            printf("%c",HEAD(request).name[i]);
+        while (HEAD(q).name[i] != '\0') {
+            printf("%c", HEAD(q).name[i]);
             i++;
         }
         printf(": ");
 
+        select = 0;
         while (CurrentWord.TabWord[select] != '\0') {
             printf("%c", CurrentWord.TabWord[select]);
             select++;
@@ -32,12 +33,17 @@ void StoreSupply(Queue q, ArrayDin Info) {
             printf("Harga barang: ");
             ADVWORD();
             select = 0;
-            while (HEAD(q).name[select] != '\0') {
+            while (CurrentWord.TabWord[select] != '\0') {
                 printf("%c", CurrentWord.TabWord[select]);
                 select++;
             }
+            for (i = 0; i < CurrentWord.Length; i++) {
+                if (CurrentWord.TabWord[i] >= '0' && CurrentWord.TabWord[i] <= '9') {
+                    harga = harga * 10 + ((CurrentWord.TabWord[i]) - '0');
+                }
+            }
             printf("\n");
-            InsertLast(&Info, HEAD(q).name, CurrentWord.TabWord);
+            InsertLast(&Info, HEAD(q).name, harga);
             dequeue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Tunda)) {
             dequeue(&q, save);
@@ -46,9 +52,9 @@ void StoreSupply(Queue q, ArrayDin Info) {
             dequeue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Purry)) {
             finish = true;
-            printf("STORE SUPPLY ditutup");
+            printf("STORE SUPPLY ditutup\n");
         } else {
-            printf("Input tidak valid");
+            printf("Input tidak valid\n");
         }
     }
 }
