@@ -10,7 +10,7 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
     // Membaca jumlah barang
     STARTANGKA();
     *jumlahBarang = currentAngka;
-    printf("DEBUG: Jumlah Barang = %d\n", *jumlahBarang);
+    //printf("DEBUG: Jumlah Barang = %d\n", *jumlahBarang);
     ADV(); // Pindah ke elemen berikutnya
 
     // Membaca data barang
@@ -22,14 +22,14 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
             barang[i].name[k] = CurrentWord.TabWord[k];
         }
         barang[i].name[CurrentWord.Length] = '\0';
-        printf("DEBUG: Barang ke-%d: Nama = %s, Harga = %d\n", i + 1, barang[i].name, barang[i].price);
+        //printf("DEBUG: Barang ke-%d: Nama = %s, Harga = %d\n", i + 1, barang[i].name, barang[i].price);
 
         ADV(); // Pindah ke elemen berikutnya
     }
 
     STARTANGKA();
     *jumlahUsers = currentAngka;
-    printf("DEBUG: Jumlah Pengguna = %d\n", *jumlahUsers);
+    //printf("DEBUG: Jumlah Pengguna = %d\n", *jumlahUsers);
     ADV(); // Pindah ke elemen berikutnya
 
     // Membaca data pengguna
@@ -48,13 +48,13 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
             users[i].password[k] = CurrentWord.TabWord[k];
         }
         users[i].password[CurrentWord.Length] = '\0';
-        printf("DEBUG: Pengguna ke-%d: Nama = %s, Password = %s, Uang = %d\n", i + 1, users[i].name, users[i].password, users[i].money);
+        //printf("DEBUG: Pengguna ke-%d: Nama = %s, Password = %s, Uang = %d\n", i + 1, users[i].name, users[i].password, users[i].money);
 
         ADV();
     }
 }
 
-int main() {
+/*int main() {
     Barang barang[100];
     User users[100];
     int jumlahBarang, jumlahUsers;
@@ -63,7 +63,7 @@ int main() {
 
     printf("\nDaftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
-        printf("- %s: %d\n", barang[i].name, barang[i].price);
+        printf("- %s, Harga : %d\n", barang[i].name, barang[i].price);
     }
 
     printf("\nDaftar Pengguna:\n");
@@ -72,4 +72,4 @@ int main() {
     }
 
     return 0;
-}
+}*/
