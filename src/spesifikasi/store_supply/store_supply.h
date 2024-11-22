@@ -2,7 +2,7 @@
 #include "..\..\adt\arraydinBarang.h"
 #include "..\..\adt\boolean.h"
 
-void StoreSupply();
+void StoreSupply(Queue q, ArrayDin Info);
 /*
 Menambahkan barang baru ke dalam toko berdasarkan antrian permintaan. 
 Barang yang berada pada antrian paling depan akan dimasukan ke toko. 
