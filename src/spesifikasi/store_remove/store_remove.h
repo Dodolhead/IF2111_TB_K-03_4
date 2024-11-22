@@ -1,7 +1,7 @@
 #include "..\..\adt\arraydinBarang.h"
 #include "..\..\adt\boolean.h"
 
-void StoreRemove();
+void StoreRemove(ArrayDin Info);
 /*
 Menghapus barang yang ada di toko. 
 Akan dilakukan input akan barang yang akan dihapus. 
