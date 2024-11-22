@@ -1,5 +1,5 @@
-#include "arraydinBarang.h"
-#include "boolean.h"
+#include "..\..\adt\arraydinBarang.h"
+#include "..\..\adt\boolean.h"
 
 void StoreRemove();
 /*
