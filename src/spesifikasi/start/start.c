@@ -6,50 +6,53 @@
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers, char filename[]) {
     STARTFILE(filename);
+
+    // Membaca jumlah barang
     STARTANGKA();
-    printf("DEBUG: Jumlah Barang = %d\n", currentAngka); // Tambahkan ini
     *jumlahBarang = currentAngka;
-    ADV();
+    printf("DEBUG: Jumlah Barang = %d\n", *jumlahBarang);
+    ADV(); // Pindah ke elemen berikutnya
+
+    // Membaca data barang
     for (int i = 0; i < *jumlahBarang; i++) {
         STARTANGKA();
-        printf("DEBUG: Harga Barang ke-%d = %d\n", i + 1, currentAngka); // Tambahkan ini
         barang[i].price = currentAngka;
         ADVWORD();
-
-        STARTWORD();
-        printf("DEBUG: Nama Barang ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
         for (int k = 0; k < CurrentWord.Length; k++) {
             barang[i].name[k] = CurrentWord.TabWord[k];
         }
         barang[i].name[CurrentWord.Length] = '\0';
-        ADV();
+        printf("DEBUG: Barang ke-%d: Nama = %s, Harga = %d\n", i + 1, barang[i].name, barang[i].price);
+
+        ADV(); // Pindah ke elemen berikutnya
     }
 
     STARTANGKA();
-    printf("DEBUG: Jumlah Pengguna = %d\n", currentAngka); // Tambahkan ini
     *jumlahUsers = currentAngka;
+    printf("DEBUG: Jumlah Pengguna = %d\n", *jumlahUsers);
+    ADV(); // Pindah ke elemen berikutnya
 
+    // Membaca data pengguna
     for (int i = 0; i < *jumlahUsers; i++) {
         STARTANGKA();
-        printf("DEBUG: Uang Pengguna ke-%d = %d\n", i + 1, currentAngka); // Tambahkan ini
         users[i].money = currentAngka;
+        ADVUSER();
 
-        STARTWORD();
-        printf("DEBUG: Nama Pengguna ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
         for (int k = 0; k < CurrentWord.Length; k++) {
             users[i].name[k] = CurrentWord.TabWord[k];
         }
         users[i].name[CurrentWord.Length] = '\0';
+        ADVUSER();
 
-        STARTWORD();
-        printf("DEBUG: Password Pengguna ke-%d = %.*s\n", i + 1, CurrentWord.Length, CurrentWord.TabWord); // Tambahkan ini
         for (int k = 0; k < CurrentWord.Length; k++) {
             users[i].password[k] = CurrentWord.TabWord[k];
         }
         users[i].password[CurrentWord.Length] = '\0';
+        printf("DEBUG: Pengguna ke-%d: Nama = %s, Password = %s, Uang = %d\n", i + 1, users[i].name, users[i].password, users[i].money);
+
+        ADV();
     }
 }
-
 
 int main() {
     Barang barang[100];
@@ -58,12 +61,12 @@ int main() {
 
     STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "test.txt");
 
-    printf("Daftar Barang:\n");
+    printf("\nDaftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
         printf("- %s: %d\n", barang[i].name, barang[i].price);
     }
 
-    printf("Daftar Pengguna:\n");
+    printf("\nDaftar Pengguna:\n");
     for (int i = 0; i < jumlahUsers; i++) {
         printf("- Nama: %s, Password: %s, Uang: %d\n", users[i].name, users[i].password, users[i].money);
     }
