@@ -1,22 +1,22 @@
 #include "start.h"
 #include "../../adt/mesinkata.h" 
 #include "../../adt/mesinkarakter.h"
-#include "../../adt/mesinangka.h"
 #include "../../spesifikasi/login/login.h"
+#include "../../../utilities.h"
 #include <stdio.h>
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers, char filename[]) {
     STARTFILE(filename);
 
     // Membaca jumlah barang
-    STARTANGKA();
+    STARTANGKA_START();
     *jumlahBarang = currentAngka;
     //printf("DEBUG: Jumlah Barang = %d\n", *jumlahBarang);
     ADV(); // Pindah ke elemen berikutnya
 
     // Membaca data barang
     for (int i = 0; i < *jumlahBarang; i++) {
-        STARTANGKA();
+        STARTANGKA_START();
         barang[i].price = currentAngka;
         ADVWORD();
         for (int k = 0; k < CurrentWord.Length; k++) {
@@ -28,14 +28,14 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
         ADV(); // Pindah ke elemen berikutnya
     }
 
-    STARTANGKA();
+    STARTANGKA_START();
     *jumlahUsers = currentAngka;
     //printf("DEBUG: Jumlah Pengguna = %d\n", *jumlahUsers);
     ADV(); // Pindah ke elemen berikutnya
 
     // Membaca data pengguna
     for (int i = 0; i < *jumlahUsers; i++) {
-        STARTANGKA();
+        STARTANGKA_START();
         users[i].money = currentAngka;
         ADVUSER();
 
@@ -62,7 +62,7 @@ void START_PURRMART(){
     STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "../../data/config.txt");
     printf("File konfigurasi aplikasi berhasil dibaca. PURRMART berhasil dijalankan.\n");
 
-    /*printf("\nDaftar Barang:\n");
+    printf("\nDaftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
         printf("- %s, Harga : %d\n", barang[i].name, barang[i].price);
     }
@@ -70,6 +70,11 @@ void START_PURRMART(){
     printf("\nDaftar Pengguna:\n");
     for (int i = 0; i < jumlahUsers; i++) {
         printf("- Nama: %s, Password: %s, Uang: %d\n", users[i].name, users[i].password, users[i].money);
-    }*/
+    }
 
+}
+
+int main(){
+    START_PURRMART();
+    
 }
