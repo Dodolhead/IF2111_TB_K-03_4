@@ -36,10 +36,10 @@ void LOAD(char filename[]) {
     }*/
 }
 
-int main() {
+/*int main() {
 
     LOAD("test.txt");
-    /*char filename[100]; // Buffer untuk menyimpan nama file
+    char filename[100]; // Buffer untuk menyimpan nama file
     int i;
 
     printf(">> ");
@@ -61,5 +61,5 @@ int main() {
     // Contoh penggunaan dengan filename
     printf("Loading file: %s\n", filename);
 
-    return 0;*/
-}
+    return 0;
+}*/

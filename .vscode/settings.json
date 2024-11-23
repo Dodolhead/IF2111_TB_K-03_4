@@ -59,6 +59,7 @@
   "files.associations": {
     "queue.h": "c",
     "boolean.h": "c",
-    "dictionary.h": "c"
+    "dictionary.h": "c",
+    "help.h": "c"
   }
 }

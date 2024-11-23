@@ -2,6 +2,7 @@
 #include "../../adt/mesinkata.h" 
 #include "../../adt/mesinkarakter.h"
 #include "../../adt/mesinangka.h"
+#include "../../spesifikasi/login/login.h"
 #include <stdio.h>
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers, char filename[]) {
@@ -61,7 +62,6 @@ void START_PURRMART(){
     STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "../../data/config.txt");
     printf("File konfigurasi aplikasi berhasil dibaca. PURRMART berhasil dijalankan.\n");
 
-
     /*printf("\nDaftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
         printf("- %s, Harga : %d\n", barang[i].name, barang[i].price);
@@ -73,9 +73,3 @@ void START_PURRMART(){
     }*/
 
 }
-
-/*int main() {
-
-    START_PURRMART();
-
-}*/

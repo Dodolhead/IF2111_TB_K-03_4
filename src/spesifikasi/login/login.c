@@ -1,44 +1,54 @@
-#include <stdio.h>
 #include "login.h"
 
-// Fungsi login
-void login(TabUser list, IdxType *userid, boolean *islogeged){ // Login dengan loop untuk input ulang
-     char username[50], password[50];
-    IdxType index;
-    int ctr = 0;
+// Fungsi untuk membandingkan dua string
+boolean stringEquals(char *str1, char *str2) {
+    int i = 0;
 
-    if (*islogged == true) {
-        printf("Kamu sudah masuk sebagai %s.\n", list.TC[*userid].name);
-        return;
+    while (str1[i] != '\0' && str2[i] != '\0') {
+        if (str1[i] != str2[i]) {
+            return 0; // False jika ada karakter yang tidak cocok
+        }
+        i++;
     }
 
-    while (ctr < 5) {
-        // Input username
-        printf("Masukkan username: ");
-        if (!readInput(username, 50)) continue; // Ulang jika input gagal
+    return str1[i] == '\0' && str2[i] == '\0'; // True jika keduanya selesai bersamaan
+}
 
-        while (1) {
-            // Input password
-            printf("Masukkan password: ");
-            if (!readInput(password, 20)) continue; // Ulang jika input gagal
-            ctr++;
-            break;
-        }
-
-        // Validasi username dan password
-        index = IndexUserInFile(list, username);
-        if (isUserInFile(list, username) && isStrEqual(list.TC[index].password, password)) {
-            printf("Anda telah login ke PURRMART sebagai %s.\n", username);
-            *islogged = true;
-            *userid = index;
-            return;
-        } else {
-            printf("Username atau password salah. Coba lagi.\n");
-            continue;
-        }
-        ctr++;
+// Fungsi untuk login
+int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex) {
+    if (*loggedInUserIndex != -1) {
+        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", users[*loggedInUserIndex].name);
+        return *loggedInUserIndex; // Tetap login dengan user yang sebelumnya
     }
 
-    printf("Sudah terlalu banyak percobaan, Anda akan dikembalikan ke laman utama.\n");
-    *islogged = false;
+    // Input username
+    printf("Username: ");
+    STARTWORD();
+    char username[NMax];
+    for (int i = 0; i < CurrentWord.Length; i++) {
+        username[i] = CurrentWord.TabWord[i];
+    }
+    username[CurrentWord.Length] = '\0';
+
+    // Input password
+    printf("Password: ");
+    STARTWORD();
+    char password[NMax];
+    for (int i = 0; i < CurrentWord.Length; i++) {
+        password[i] = CurrentWord.TabWord[i];
+    }
+    password[CurrentWord.Length] = '\0';
+
+    // Proses pengecekan login
+    for (int i = 0; i < jumlahUsers; i++) {
+        if (stringEquals(users[i].name, username) && stringEquals(users[i].password, password)) {
+            *loggedInUserIndex = i; // Tandai sebagai login
+            printf("Anda telah login ke PURRMART sebagai %s.\n", users[i].name);
+            return i;
+        }
+    }
+
+    // Jika tidak ditemukan
+    printf("Username atau password salah.\n");
+    return -1;
 }

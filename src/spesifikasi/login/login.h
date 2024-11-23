@@ -1,14 +1,13 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include "..\..\adt\boolean.h"
-#include "..\..\adt\array.h"
+#include "../../adt/mesinkata.h"
+#include "../../adt/mesinkarakter.h"
+#include "../../adt/mesinangka.h"
+#include <stdio.h>
+#include "../../spesifikasi/start/start.h"
 
-// Batasan panjang username dan password
-#define MAX_USERNAME_LEN 49
-#define MIN_PASSWORD_LEN 6
-#define MAX_PASSWORD_LEN 18
-
-void login(TabUser list, IdxType *userid, boolean *islogeged);
+// Fungsi untuk login
+int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex);
 
 #endif
