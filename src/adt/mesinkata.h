@@ -40,6 +40,8 @@ void ADVWORD();
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 void ADVUSER();
 
+void ADVONEWORD();
+
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata

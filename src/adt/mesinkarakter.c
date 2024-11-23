@@ -36,7 +36,7 @@ void ADV() {
 void STARTFILE(char filename[]) {
     pita = fopen(filename, "r");
     if (pita == NULL) {
-        printf("File tidak ditemukan\n");
+        printf("Save file tidak ditemukan. PURRMART gagal dijalankan\n");
         EOP = true;
     } else {
         ADV();

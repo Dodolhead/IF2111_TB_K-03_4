@@ -34,17 +34,39 @@ void ADVWORD() {
 }
 
 void ADVUSER() {
-    IgnoreBlanks();  // Abaikan spasi awal
+    IgnoreBlanks(); 
 
-    CurrentWord.Length = 0; // Reset panjang kata
+    CurrentWord.Length = 0; 
 
     while (currentChar != ' ' && currentChar != MARK && CurrentWord.Length < NMax) {
-        CurrentWord.TabWord[CurrentWord.Length] = currentChar; // Tambahkan karakter ke kata
+        CurrentWord.TabWord[CurrentWord.Length] = currentChar;
         CurrentWord.Length++;
-        ADV(); // Pindah ke karakter berikutnya
+        ADV();
     }
     
-    IgnoreBlanks(); // Abaikan spasi setelah kata
+    IgnoreBlanks(); 
+}
+
+void ADVONEWORD() {
+    // Lewati karakter-karakter dalam kata pertama
+    while (currentChar != BLANK && currentChar != MARK) {
+        ADV(); // Pindahkan ke karakter berikutnya
+    }
+
+    // Lewati spasi setelah kata pertama
+    while (currentChar == BLANK && currentChar != MARK) {
+        ADV(); // Pindahkan ke karakter berikutnya
+    }
+
+    // Salin kata berikutnya ke CurrentWord
+    CurrentWord.Length = 0;
+    while (currentChar != BLANK && currentChar != MARK) {
+        if (CurrentWord.Length < NMax) {  // Pastikan tidak melebihi kapasitas
+            CurrentWord.TabWord[CurrentWord.Length] = currentChar;
+            CurrentWord.Length++;
+            ADV();  // Pindahkan ke karakter berikutnya
+        }
+    }
 }
 
 void CopyWord(){

@@ -54,14 +54,15 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
     }
 }
 
-/*int main() {
+void START_PURRMART(){
     Barang barang[100];
     User users[100];
     int jumlahBarang, jumlahUsers;
+    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "../../data/config.txt");
+    printf("File konfigurasi aplikasi berhasil dibaca. PURRMART berhasil dijalankan.\n");
 
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "test.txt");
 
-    printf("\nDaftar Barang:\n");
+    /*printf("\nDaftar Barang:\n");
     for (int i = 0; i < jumlahBarang; i++) {
         printf("- %s, Harga : %d\n", barang[i].name, barang[i].price);
     }
@@ -69,7 +70,12 @@ void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUser
     printf("\nDaftar Pengguna:\n");
     for (int i = 0; i < jumlahUsers; i++) {
         printf("- Nama: %s, Password: %s, Uang: %d\n", users[i].name, users[i].password, users[i].money);
-    }
+    }*/
 
-    return 0;
+}
+
+/*int main() {
+
+    START_PURRMART();
+
 }*/
