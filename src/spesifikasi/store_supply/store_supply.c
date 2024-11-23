@@ -58,3 +58,17 @@ void StoreSupply(Queue q, ArrayDin Info) {
         }
     }
 }
+
+/*
+int main() {
+    Queue request;
+    ArrayDin Info = MakeArrayDin();
+    CreateQueue(&request);
+    ListBarang(&Info);
+    char item[] = "Kata";
+
+    enqueue(&request, item);
+    StoreSupply(request, Info);
+    return 0;
+}
+*/
