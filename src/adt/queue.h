@@ -6,7 +6,7 @@
 
 #include "boolean.h"
 #include "barang.h"
-#include "../../dictionary.h"
+#include "../../utilities.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100

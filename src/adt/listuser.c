@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "listuser.h"
-#include "../../dictionary.h"
-#include "../../dictionary.c"
+#include "../../utilities.c"
 
 List MakeList() {
     List U;

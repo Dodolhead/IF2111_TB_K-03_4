@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "..\..\..\dictionary.h"
+#include "..\..\..\utilities.h"
 #include "..\..\adt\mesinangka.h"
 #include "..\..\adt\mesinkarakter.h"
 

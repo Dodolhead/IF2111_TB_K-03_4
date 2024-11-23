@@ -2,6 +2,7 @@
 #define LISTUSER_H
 
 #include "boolean.h"
+#include "../../utilities.h"
 
 #define MaxEl 100
 #define MarkNumber -9999   

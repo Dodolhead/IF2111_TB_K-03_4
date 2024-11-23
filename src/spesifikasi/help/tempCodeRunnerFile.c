@@ -1,1 +1,0 @@
-#include "..\..\adt\mesinangka.c"

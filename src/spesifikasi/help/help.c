@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "help.h"
-#include "..\..\..\dictionary.c"
+#include "..\..\..\utilities.c"
 #include "..\..\adt\mesinangka.c"
 #include "..\..\adt\mesinkarakter.c"
 

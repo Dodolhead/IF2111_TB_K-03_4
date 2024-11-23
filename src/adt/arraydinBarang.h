@@ -4,7 +4,7 @@
 #include "mesinkarakter.h"
 #include "mesinkata.h"
 #include "barang.h"
-#include "../../dictionary.h"
+#include "../../utilities.h"
 
 // Boolean
 #define boolean unsigned char

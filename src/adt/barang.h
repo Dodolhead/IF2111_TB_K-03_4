@@ -1,7 +1,7 @@
 #ifndef BARANG_H
 #define BARANG_H
 
-#include "../../dictionary.h"
+#include "../../utilities.h"
 
 #define MAX_LEN 100
 #define EMPTY -1
