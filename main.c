@@ -12,6 +12,7 @@
 #include "../../spesifikasi/start/start.h"
 #include "../../spesifikasi/load/load.h"
 #include "../../spesifikasi/start/start.h"
+#include "../../adt/arraydinBarang.h"
 
 
 //AKSES DATA BARANG = barang
@@ -59,14 +60,11 @@ int main(){
             help_menu=2;
         }
 
-        else if(stringEquals(CurrentWord.TabWord, "HELP")) {
-            if (help_menu==1) welcomeMenu();
-            else if (help_menu==2) loginMenu();
-            else if (help_menu==3) mainMenu();
-
+        else if (stringEquals(CurrentWord.TabWord, "LOGIN")) { // nanti ditambahin kondisi biar kalo belum START/LOAD gabisa login berlaku buat yg dua kebawah ini
+            LOGIN(users, jumlahUsers, &loggedInUserIndex);
         }
 
-        else if (stringEquals(CurrentWord.TabWord, "LOGIN")) { // nanti ditambahin kondisi biar kalo belum START/LOAD gabisa login berlaku buat yg dua kebawah ini
+        else if (stringEquals(CurrentWord.TabWord, "LOGOUT")) {
             LOGIN(users, jumlahUsers, &loggedInUserIndex);
         }
 
@@ -74,8 +72,33 @@ int main(){
             LOGIN(users, jumlahUsers, &loggedInUserIndex);
         }
 
-        else if (stringEquals(CurrentWord.TabWord, "LOGOUT")) {
-            LOGIN(users, jumlahUsers, &loggedInUserIndex);
+        else if (stringEquals(CurrentWord.TabWord, "STORE")) {
+            ADVWORD();
+            if (stringEquals(CurrentWord.TabWord, "LIST")) {
+                StoreList(Info);
+            }
+
+            else if (stringEquals(CurrentWord.TabWord, "REQUEST")) {
+                StoreRequest(q, Info);
+            }
+
+            else if (stringEquals(CurrentWord.TabWord, "SUPPLY")) {
+                StoreSupply(q, Info);
+            }
+
+            else if (stringEquals(CurrentWord.TabWord, "REMOVE")) {
+                StoreRemove(Info);
+            }
+        }
+
+        else if(stringEquals(CurrentWord.TabWord, "HELP")) {
+            if (help_menu==1) welcomeMenu();
+            else if (help_menu==2) loginMenu();
+            else if (help_menu==3) mainMenu();
+        }
+
+        else if(stringEquals(CurrentWord.TabWord, "SAVE")) {
+            Save(Info, User);
         }
 
         else if (stringEquals(CurrentWord.TabWord, "QUIT")) {
