@@ -13,7 +13,7 @@ void StoreList(ArrayDin Info) {
         for (i = 0; i < Length(Info); i++) {
             printf("- ");
 
-            name = NamaBarang(Get(Info, i)); 
+            name = NamaBarang(&(Info.A[i])); 
             for (j = 0; name[j] != '\0'; j++) {
                 printf("%c", name[j]);
             }
@@ -22,3 +22,13 @@ void StoreList(ArrayDin Info) {
         }
     }
 }
+
+/*
+int main() {
+    ArrayDin Info = MakeArrayDin();
+    ListBarang(&Info);
+
+    StoreList(Info);
+    return 0;
+}
+*/
