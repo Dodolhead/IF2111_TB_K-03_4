@@ -14,33 +14,40 @@ void Save(ArrayDin Info, List User) {
     // ALGORITMA
     STARTWORD();
 
-    int i = 0;
+    // Membaca nama file dari CurrentWord
+    i = 0;
     while (CurrentWord.TabWord[i] != '\0') {
         filename[i] = CurrentWord.TabWord[i];
         i++;
     }
     filename[i] = '\0';
 
+    // Membuat fullpath
     copyString(fullpath, folder);
     stringConcat(fullpath, filename);
     stringConcat(fullpath, txt);
 
+    // Membuka file untuk penulisan
     file = fopen(fullpath, "w");
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file %s untuk penulisan.\n", fullpath);
+        return;
+    }
 
     // Menulis data barang
-    fprintf(file, "%d \n", Info.Neff);
+    fprintf(file, "%d\n", Info.Neff); 
     for (i = 0; i < Info.Neff; i++) {
         fprintf(file, "%d ", HargaBarang(Info.A[i]));
         j = 0;
         while (NamaBarang(&(Info.A[i]))[j] != '\0') {
-            fprintf(file, "%c", NamaBarang(&(Info.A[i]))[j]);
+            fprintf(file, "%c", NamaBarang(&(Info.A[i]))[j]); 
             j++;
         }
-        fprintf(file, " \n");
+        fprintf(file, "\n"); 
     }
 
     // Menulis data user
-    fprintf(file, "%d \n", Length(User));
+    fprintf(file, "%d\n", Length(User));
     for (i = 0; i < Length(User); i++) {
         fprintf(file, "%d ", GetMoney(User, i));
         j = 0;
@@ -51,22 +58,18 @@ void Save(ArrayDin Info, List User) {
         fprintf(file, " ");
         j = 0;
         while (User.A[i].password[j] != '\0') {
-            fprintf(file, "%c", User.A[i].password[j]);
+            fprintf(file, "%c", User.A[i].password[j]); 
             j++;
         }
-        fprintf(file, " \n");
+        fprintf(file, "\n"); 
     }
 
-    fclose(file);
-}
+    // Menutup file
+    if (fclose(file) != 0) {
+        printf("Error: Gagal menutup file %s dengan benar.\n", fullpath);
+        return;
+    }
 
-/*
-int main() {
-    ArrayDin Info = MakeArrayDin();
-    ListBarang(&Info);
-    List User = MakeList();
-
-    Save(Info, User);
-    return 0;
+    // Notifikasi keberhasilan
+    printf("Save file berhasil disimpan di %s.\n", fullpath);
 }
-*/
