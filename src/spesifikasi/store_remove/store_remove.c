@@ -5,7 +5,7 @@ void StoreRemove(ArrayDin Info) {
     // KAMUS
     boolean foundList = false;
     int select = 0;
-
+    
     // ALGORITMA
     printf("Nama barang yang akan dihapus: ");
     STARTWORD();
@@ -19,7 +19,7 @@ void StoreRemove(ArrayDin Info) {
     if (!IsEmpty(Info)) {
         select = 0;
         while (select < Length(Info) && !foundList) {
-            if (stringEquals(NamaBarang(Get(Info, select)), CurrentWord.TabWord)) {
+            if (stringEquals(NamaBarang(&(Info.A[select])), CurrentWord.TabWord)) {
                 foundList = true;
             } else {
                 select++;
@@ -44,3 +44,17 @@ void StoreRemove(ArrayDin Info) {
         printf("\n");
     }
 }
+
+/*
+int main() {
+    ArrayDin Info = MakeArrayDin();
+    ListBarang(&Info);
+
+    char item[] = "Kata";
+    InsertLast(&Info, item, 100);
+
+    StoreRemove(Info);
+
+    return 0;
+}
+*/
