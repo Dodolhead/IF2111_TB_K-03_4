@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "dictionary.h"
+#include "utilities.h"
 
 boolean stringEquals(char* str1, char* str2){
     int i = 0;

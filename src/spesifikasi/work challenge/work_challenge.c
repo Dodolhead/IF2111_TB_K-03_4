@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include "..\..\..\dictionary.c" 
+#include "..\..\..\utilities.c" 
 #include "..\..\adt\mesinkata.c" 
 #include "..\..\adt\mesinkarakter.c" 
 #include "..\..\adt\mesinangka.c"
-#include "work_challenge.h"
 #include <stdlib.h>
 #include <time.h>
 

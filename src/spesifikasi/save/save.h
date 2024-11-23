@@ -1,6 +1,6 @@
 #include "arraydinBarang.h"
 #include "boolean.h"
-#include "../../../dictionary.h"
+#include "../../../utilities.h"
 #include "../../adt/listuser.h"
 
 void Save(ArrayDin Info, List User);

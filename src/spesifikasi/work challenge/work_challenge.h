@@ -2,7 +2,7 @@
 #include "..\..\adt\mesinkata.h" 
 #include "..\..\adt\mesinkarakter.h"
 #include "..\..\adt\boolean.h"
-#include "..\..\..\dictionary.h"
+#include "..\..\..\utilities.h"
 
 int random(int lower, int upper);
 void tebakAngka(int* money);

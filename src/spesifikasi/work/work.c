@@ -1,8 +1,10 @@
 #include <stdio.h>
-#include "..\..\..\dictionary.h"
-#include "..\..\..\dictionary.c" 
-#include "..\..\adt\mesinkata.c" 
-#include "..\..\adt\mesinkarakter.c"  
+#include "..\..\..\utilities.h"
+#include "..\..\adt\mesinkata.h" 
+#include "..\..\adt\mesinkarakter.h"  
+// #include "..\..\..\utilities.c" 
+// #include "..\..\adt\mesinkata.c" 
+// #include "..\..\adt\mesinkarakter.c"  
 
 void workDisplay() {
     printf("Daftar Pekerjaan:\n");
