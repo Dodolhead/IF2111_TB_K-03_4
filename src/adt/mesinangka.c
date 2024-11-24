@@ -23,6 +23,15 @@ void ADVANGKA() {
     }
 }
 
+int bacaAngka(){
+    int total=0;
+    while (!IsEOPAngka()) {
+        total = total * 10 + currentAngka;
+    ADVANGKA();
+    }
+    return total;
+}
+
 boolean IsEOPAngka() {
     return EOPAngka;
 }
