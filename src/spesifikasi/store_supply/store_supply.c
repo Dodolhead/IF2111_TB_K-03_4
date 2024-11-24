@@ -43,7 +43,7 @@ void StoreSupply(Queue q, ArrayDin Info) {
                 }
             }
             printf("\n");
-            InsertLast(&Info, HEAD(q).name, harga);
+            ArrInsertLast(&Info, HEAD(q).name, harga);
             dequeue(&q, save);
         } else if (stringEquals(CurrentWord.TabWord, Tunda)) {
             dequeue(&q, save);
