@@ -46,7 +46,7 @@ boolean IsEmpty(ArrayDin array);
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
  * Prekondisi: array terdefinisi
  */
-int Length(ArrayDin array);
+int ArrLength(ArrayDin array);
 
 /**
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
@@ -64,24 +64,24 @@ int GetCapacity(ArrayDin array);
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void InsertAt(ArrayDin *array, char* name, int harga, IdxType i);
+void ArrInsertAt(ArrayDin *array, char* name, int harga, IdxType i);
 
 /**
  * Fungsi untuk menambahkan elemen baru di akhir array.
  * Prekondisi: array terdefinisi
  */
-void InsertLast(ArrayDin *array, char* name, int harga);
+void ArrInsertLast(ArrayDin *array, char* name, int harga);
 
 /**
  * Fungsi untuk menghapus elemen di index ke-i ArrayDin
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void DeleteAt(ArrayDin *array, char* name);
+void ArrDeleteAt(ArrayDin *array, char* name);
 
 /**
  * Fungsi untuk memasukkan list barang ke dalam array dinamis
  * Prekondisi: array sembarang
  */
-void ListBarang(ArrayDin *array);
+void ListBarang(ArrayDin *array, char filename[]);
 
 #endif
