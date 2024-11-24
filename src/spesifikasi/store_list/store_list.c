@@ -6,11 +6,11 @@ void StoreList(ArrayDin Info) {
     int i, j;
     char* name;
     // ALGORITMA
-    if (Length(Info) == 0) {
+    if (ArrLength(Info) == 0) {
         printf("TOKO KOSONG\n");
     } else {
         printf("List barang yang ada di toko :\n");
-        for (i = 0; i < Length(Info); i++) {
+        for (i = 0; i < ArrLength(Info); i++) {
             printf("- ");
 
             name = NamaBarang(&(Info.A[i])); 
