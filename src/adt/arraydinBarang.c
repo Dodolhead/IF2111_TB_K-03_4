@@ -45,7 +45,7 @@ boolean IsEmpty(ArrayDin array) {
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
  * Prekondisi: array terdefinisi
  */
-int Length(ArrayDin array) {
+int ArrLength(ArrayDin array) {
     // KAMUS LOKAL
     // ALGORITMA
     if (IsEmpty(array)) {
@@ -79,13 +79,13 @@ int GetCapacity(ArrayDin array) {
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void InsertAt(ArrayDin *array, char* name, int harga, IdxType i) {
+void ArrInsertAt(ArrayDin *array, char* name, int harga, IdxType i) {
     // KAMUS LOKAL
     IdxType j;
     
     // ALGORITMA
     // Memindahkan barang
-    for (j = Length(*array)-1; j >= i; j--) {
+    for (j = ArrLength(*array)-1; j >= i; j--) {
         (*array).A[j+1].price = HargaBarang(Get((*array), j));
         copyString((*array).A[j+1].name, NamaBarang(&((*array).A[j])));
     }
@@ -99,26 +99,26 @@ void InsertAt(ArrayDin *array, char* name, int harga, IdxType i) {
  * Fungsi untuk menambahkan elemen baru di akhir array.
  * Prekondisi: array terdefinisi
  */
-void InsertLast(ArrayDin *array, char* name, int harga) {
+void ArrInsertLast(ArrayDin *array, char* name, int harga) {
     // KAMUS
     // ALGORITMA
-    InsertAt(array, name, harga, (array->Neff));
+    ArrInsertAt(array, name, harga, (array->Neff));
 }
 
 /**
  * Fungsi untuk menghapus elemen di index ke-i ArrayDin
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void DeleteAt(ArrayDin *array, char* name) {
+void ArrDeleteAt(ArrayDin *array, char* name) {
     // KAMUS
     IdxType j, k;
     boolean found = false;
     // ALGORITMA
-    for (j = 0; j < Length(*array) && !found; j++) {
+    for (j = 0; j < ArrLength(*array) && !found; j++) {
         if (stringEquals(NamaBarang(&((*array).A[j])), name)) {  // Match found
             found = true;
 
-            for (k = j; k < Length(*array) - 1; k++) {
+            for (k = j; k < ArrLength(*array) - 1; k++) {
                 (*array).A[k].price = HargaBarang(Get((*array),k+1));
 
                 copyString((*array).A[k].name, NamaBarang(&((*array).A[k+1])));
@@ -136,12 +136,13 @@ void DeleteAt(ArrayDin *array, char* name) {
  * Fungsi untuk memasukkan list barang ke dalam array dinamis
  * Prekondisi: array sembarang
  */
-void ListBarang(ArrayDin *array) {
+void ListBarang(ArrayDin *array, char filename[]) {
     // KAMUS
     int i, j, items = 0, baris = 0;
     int harga = 0, panjang = 0;
     // ALGORITMA
-    STARTWORD();
+    STARTFILE(filename);
+    ADVWORD();
 
     // Mengecek jumlah barang dalam toko
     for (i = 0; i < CurrentWord.Length; i++) {
