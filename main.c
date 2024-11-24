@@ -5,16 +5,27 @@
 #include <math.h>
 #include "utilities.h"
 #include "src/adt/boolean.h"
-#include "src/adt/list.h"
+#include "src/adt/mesinangka.h"
 #include "src/adt/mesinkarakter.h"
 #include "src/adt/mesinkata.h"  
 #include "src/adt/queue.h"
-#include "src/adt/stack.h"
-#include "src/spesifikasi/start/start.h"
-#include "src/spesifikasi/load/load.h"
-#include "src/spesifikasi/start/start.h"
 #include "src/adt/arraydinBarang.h"
 #include "src/adt/barang.h"
+
+#include "src/spesifikasi/start/start.h"
+#include "src/spesifikasi/load/load.h"
+#include "src/spesifikasi/login/login.h"
+#include "src/spesifikasi/logout/logout.h"
+#include "src/spesifikasi/register/register.h"
+#include "src/spesifikasi/work/work.h"
+#include "src/spesifikasi/work_challenge/work_challenge.h"
+#include "src/spesifikasi/store_list/store_list.h"
+#include "src/spesifikasi/store_remove/store_remove.h"
+#include "src/spesifikasi/store_request/store_request.h"
+#include "src/spesifikasi/store_supply/store_supply.h"
+#include "src/spesifikasi/help/help.h"
+#include "src/spesifikasi/save/save.h"
+#include "src/spesifikasi/quit/quit.h"
 
 /* DESCRIPTION ----------------------------------------------------------------------------- */
 
@@ -217,12 +228,13 @@ int main(){
         
         // SAVE
         else if(stringEquals(CurrentWord.TabWord, "SAVE")) {
-            Save(Information, users);
+            Save(Information, users, jumlahUsers);
         }
         
         // QUIT
         else if (stringEquals(CurrentWord.TabWord, "QUIT")) {
             break;
+            DeallocateArrayDin(&Information);
             printf("***** | Thank you for visiting PURRMART! | *****\n");
         }
         
