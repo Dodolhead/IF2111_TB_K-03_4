@@ -18,7 +18,7 @@ void StoreRemove(ArrayDin Info) {
 
     if (!IsEmpty(Info)) {
         select = 0;
-        while (select < Length(Info) && !foundList) {
+        while (select < ArrLength(Info) && !foundList) {
             if (stringEquals(NamaBarang(&(Info.A[select])), CurrentWord.TabWord)) {
                 foundList = true;
             } else {
@@ -34,7 +34,7 @@ void StoreRemove(ArrayDin Info) {
             select++;
         }
         printf(" telah berhasil dihapus.\n");
-        DeleteAt(&Info, CurrentWord.TabWord);
+        ArrDeleteAt(&Info, CurrentWord.TabWord);
     } else {
         printf("Toko tidak menjual ");
         while (CurrentWord.TabWord[select] != '\0') {
