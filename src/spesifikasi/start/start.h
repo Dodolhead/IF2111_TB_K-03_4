@@ -5,16 +5,8 @@
 #define MAX_ITEMS 100
 #define MAX_USERS 100
 
-typedef struct {
-    char name[MAX_LEN];
-    int price;
-} Barang;
-
-typedef struct {
-    char name[MAX_LEN];
-    char password[MAX_LEN];
-    int money;
-} User;
+#include "../../adt/barang.h"
+#include "../../adt/listuser.h"
 
 void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers,char filename[]);
 void START_PURRMART();
