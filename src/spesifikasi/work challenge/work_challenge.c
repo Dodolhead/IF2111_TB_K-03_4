@@ -1,19 +1,8 @@
 #include <stdio.h>
-#include "..\..\..\utilities.c" 
-#include "..\..\adt\mesinkata.c" 
-#include "..\..\adt\mesinkarakter.c" 
-#include "..\..\adt\mesinangka.c"
 #include <stdlib.h>
 #include <time.h>
+#include "work_challenge.h"
 
-int bacaAngka(){
-    int total=0;
-    while (!IsEOPAngka()) {
-        total = total * 10 + currentAngka;
-    ADVANGKA();
-    }
-    return total;
-}
 int random(int lower, int upper){
     srand(time(0));
     int randomNumber = (rand() % (upper - lower + 1)) + lower;
