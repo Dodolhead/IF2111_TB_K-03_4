@@ -42,10 +42,6 @@ void copyString(char* dest, const char* src) {
     dest[i] = '\0';
 }
 
-
-int currentAngka;
-boolean EndAngka;
-
 int arrayToInteger(char arr[], int length) {
     int result = 0;
     for (int i = 0; i < length; i++) {
@@ -54,6 +50,7 @@ int arrayToInteger(char arr[], int length) {
     return result;
 }
 void STARTANGKA_START() {
+    boolean EndAngka;
     IgnoreBlanks();
     if (IsEOP()) {
         EndAngka = true;
