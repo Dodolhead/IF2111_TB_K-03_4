@@ -73,8 +73,3 @@ void START_PURRMART(){
     }
 
 }
-
-int main(){
-    START_PURRMART();
-    
-}
