@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "save.h"
 
-void Save(ArrayDin Info, List User) {
+void Save(ArrayDin Info, User* User, int jumlahUser) {
     // KAMUS
     int i, j;
     FILE *file;
@@ -47,18 +47,18 @@ void Save(ArrayDin Info, List User) {
     }
 
     // Menulis data user
-    fprintf(file, "%d\n", Length(User));
-    for (i = 0; i < Length(User); i++) {
-        fprintf(file, "%d ", GetMoney(User, i));
+    fprintf(file, "%d\n", jumlahUser);
+    for (i = 0; i < jumlahUser; i++) {
+        fprintf(file, "%d ", User[i].money);
         j = 0;
-        while (User.A[i].name[j] != '\0') {
-            fprintf(file, "%c", User.A[i].name[j]);
+        while (User[i].name[j] != '\0') {
+            fprintf(file, "%c", User[i].name[j]);
             j++;
         }
         fprintf(file, " ");
         j = 0;
-        while (User.A[i].password[j] != '\0') {
-            fprintf(file, "%c", User.A[i].password[j]); 
+        while (User[i].password[j] != '\0') {
+            fprintf(file, "%c", User[i].password[j]); 
             j++;
         }
         fprintf(file, "\n"); 
