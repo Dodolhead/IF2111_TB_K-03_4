@@ -1,17 +1,5 @@
 #include <stdio.h>
 #include "help.h"
-#include "..\..\..\utilities.c"
-#include "..\..\adt\mesinangka.c"
-#include "..\..\adt\mesinkarakter.c"
-
-int bacaAngka(){
-    int total=0;
-    while (!IsEOPAngka()) {
-        total = total * 10 + currentAngka;
-    ADVANGKA();
-    }
-    return total;
-}
 
 int welcomeMenu() {
     printf(">>>HELP\n");
@@ -61,8 +49,4 @@ int mainMenu() {
             return inputUser;
         }
     }*/
-}
-
-int main(){
-    mainMenu();
 }
