@@ -1,19 +1,5 @@
 #include "login.h"
 
-// Fungsi untuk membandingkan dua string
-boolean stringEquals(char *str1, char *str2) {
-    int i = 0;
-
-    while (str1[i] != '\0' && str2[i] != '\0') {
-        if (str1[i] != str2[i]) {
-            return 0; // False jika ada karakter yang tidak cocok
-        }
-        i++;
-    }
-
-    return str1[i] == '\0' && str2[i] == '\0'; // True jika keduanya selesai bersamaan
-}
-
 // Fungsi untuk login
 int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex) {
     if (*loggedInUserIndex != -1) {
