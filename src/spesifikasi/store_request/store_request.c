@@ -11,7 +11,7 @@ void StoreRequest(Queue q, ArrayDin Info) {
 
     // Mengecek nama barang di toko
     if (!IsEmpty(Info)) {
-        while (i < Length(Info) && !foundList) {
+        while (i < ArrLength(Info) && !foundList) {
             if (stringEquals(NamaBarang(&(Info.A[i])), CurrentWord.TabWord)) {
                 foundList = true;
             } else {
@@ -38,7 +38,7 @@ void StoreRequest(Queue q, ArrayDin Info) {
         if (foundQueue) {
             printf("Barang dengan nama yang sama sudah ada di antrian!\n");
         } else {
-            enqueue(&q, nama);
+            enqueue(&q, CurrentWord.TabWord);
             printf("Barang berhasil ditambahkan ke antrian!\n");
         }
     }
