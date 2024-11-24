@@ -57,7 +57,6 @@ void enqueue(Queue *q, char* name) {
     }
 
     copyString(TAIL(*q).name, name);
-    TAIL(*q).price = NULL;
 }
 
 
