@@ -1,9 +1,9 @@
-#include "arraydinBarang.h"
-#include "boolean.h"
+#include "../../adt/arraydinBarang.h"
+#include "../../adt/boolean.h"
 #include "../../../utilities.h"
 #include "../../adt/listuser.h"
 
-void Save(ArrayDin Info, List User);
+void Save(ArrayDin Info, User* User, int jumlahUser);
 /*
 Menyimpan state aplikasi terbaru ke dalam suatu file. 
 Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan. 
