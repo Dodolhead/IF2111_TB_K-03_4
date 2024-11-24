@@ -6,6 +6,7 @@
 #include "../../adt/mesinangka.h"
 #include <stdio.h>
 #include "../../spesifikasi/start/start.h"
+#include "../../../utilities.h"
 
 // Fungsi untuk login
 int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex);
