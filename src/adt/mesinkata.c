@@ -6,30 +6,46 @@ boolean EndWord; // Define the EndWord variable
 Word CurrentWord; // Define CurrentWord variable
 
 void IgnoreBlanks() {
-    while (currentChar == BLANK && currentChar != MARK) {
+    while (currentChar == BLANK) {
         ADV();
     }
 }
 
-void STARTWORD() {
+void STARTWORD()
+{
+    /* I.S. : currentChar sembarang
+       F.S. : endWord = true, dan currentChar = MARK;
+              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+              currentChar karakter pertama sesudah karakter terakhir kata */
     START();
     IgnoreBlanks();
-    if (currentChar == MARK) {
+    if (currentChar == MARK)
+    {
         EndWord = true;
-    } 
-    else {
+    }
+    else
+    {
         EndWord = false;
         CopyWord();
     }
 }
 
-void ADVWORD() {
+void ADVWORD()
+{
+    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+              Jika currentChar = MARK, endWord = true.
+       Proses : Akuisisi kata menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if (currentChar == MARK) {
+    if (GetCC() == MARK) {
         EndWord = true;
-    } 
-    else {
+    } else { 
+        if (GetCC() == '\n') {
+            ADV();
+        }
         CopyWord();
+        IgnoreBlanks(); 
     }
 }
 
@@ -69,16 +85,26 @@ void ADVONEWORD() {
     }
 }
 
-void CopyWord(){
+void CopyWord()
+{
+    /* Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = MARK;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     CurrentWord.Length = 0;
-
-    while (currentChar != MARK && CurrentWord.Length < NMax) {
-        CurrentWord.TabWord[CurrentWord.Length] = currentChar;
-        CurrentWord.Length++;
-        ADV(); 
+    while (currentChar != BLANK && currentChar != MARK)
+    {
+        if (CurrentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
+            ADV();
+        }
+        else
+            break;
     }
-
-    IgnoreBlanks(); 
+    CurrentWord.TabWord[CurrentWord.Length] = '\0';
 }
 
 boolean isEndWord(){
