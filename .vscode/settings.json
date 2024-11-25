@@ -62,6 +62,7 @@
     "dictionary.h": "c",
     "help.h": "c",
     "save.h": "c",
-    "utilities.h": "c"
+    "utilities.h": "c",
+    "mesinkata.h": "c"
   }
 }
