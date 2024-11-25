@@ -60,6 +60,8 @@
     "queue.h": "c",
     "boolean.h": "c",
     "dictionary.h": "c",
-    "help.h": "c"
+    "help.h": "c",
+    "save.h": "c",
+    "utilities.h": "c"
   }
 }
