@@ -55,7 +55,7 @@ int main(){
     // KAMUS
     // File address
     char folder[] = "src/data/";
-    char filename[100] = "";
+    char filename[100] = "config";
     char fullpath[150] = "";
     char txt[] = ".txt";
 
@@ -67,6 +67,7 @@ int main(){
     User users[100];
     int jumlahBarang = 0, jumlahUsers = 0;
     int loggedInUserIndex = -1; //buat ngecek user yang lagi login
+    int baris = 1, currBaris;
 
     // Array dinamis dan antrian
     ArrayDin Information;
@@ -82,24 +83,39 @@ int main(){
     printf("                                                            \n");
     printf("***** | (START) Start shopping | (LOAD) Load your file | (HELP) Help | (QUIT) | *****\n");
     
-    STARTWORD();
-    while (1) {
-        printf(">> ");
+    while (baris < 5) {
+        STARTFILE("command.txt");
+
+        // Meletakkan posisi baris
+        currBaris = 1;
+        while (currBaris < baris) {
+            ADVWORD();
+            currBaris++;
+            while (GetCC() != '\n') {
+                ADVWORD();
+            }
+        }
+
+        printf("\n>> ");
+        ADVWORD();
         // Mencetak command
         i = 0;
-        while (CurrentWord.TabWord[i] != '\0') {
+        while (i < CurrentWord.Length) {
             printf("%c", CurrentWord.TabWord[i]);
-        }
-        printf("\n");
+            i++;
+        }        
 
         // START
         if (stringEquals(CurrentWord.TabWord, "START")) {
+            printf("\n");
             // Mengubah state
             startup = true;
 
             // Membuat list barang dan antrian
             Information = MakeArrayDin();
             CreateQueue(&request);
+
+            printf("\n");
 
             // Memuat isi file default ke dalam list
             copyString(fullpath, folder);
@@ -127,10 +143,13 @@ int main(){
             CreateQueue(&request);
 
             // Menyimpan nama file
+            printf(" ");
             for (i = 0; i < CurrentWord.Length; i++) {
+                printf("%c", CurrentWord.TabWord[i]);
                 filename[i] = CurrentWord.TabWord[i];
             }
             filename[i] = '\0';
+            printf("\n");
 
             // Membuka dan membaca file
             LOAD(filename);
@@ -196,6 +215,14 @@ int main(){
             // Mengecek kata command berikutnya
             ADVWORD();
 
+            printf(" ");
+            i = 0;
+            while (i < CurrentWord.Length) {
+                printf("%c", CurrentWord.TabWord[i]);
+                i++;
+            }
+            printf("\n");
+
             // validasi input
             if (startup) {
                 // STORE LIST
@@ -217,6 +244,7 @@ int main(){
             } 
             else if (!startup) { printf("ERROR: There's no file loaded\n"); } 
             else { printf("ERROR: Invalid input\n"); }
+
         }
         
         // HELP
@@ -233,15 +261,14 @@ int main(){
         
         // QUIT
         else if (stringEquals(CurrentWord.TabWord, "QUIT")) {
-            break;
+            printf("\n");
             DeallocateArrayDin(&Information);
             printf("***** | Thank you for visiting PURRMART! | *****\n");
+            startup = false;
+            break;
         }
         
-        // Input tidak termasuk di atas
-        else {
-            ADVWORD();
-        }
+        baris++;
     }
 
     return 0;
