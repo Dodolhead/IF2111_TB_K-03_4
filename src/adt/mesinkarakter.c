@@ -31,9 +31,12 @@ void START() {
 void ADV() {
     retval = fscanf(pita, "%c", &currentChar);
     EOP = (currentChar == MARK);
+    if (EOP) {
+        fclose(pita);
+    }
 }
 
-void STARTFILE(char filename[]) {
+void STARTFILE(char* filename) {
     pita = fopen(filename, "r");
     if (pita == NULL) {
         printf("Save file tidak ditemukan. PURRMART gagal dijalankan\n");
