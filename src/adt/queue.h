@@ -13,9 +13,9 @@
 
 // ADT Queue
 typedef struct {
-	Barang buffer[CAPACITY]; 
-	int idxHead;
-	int idxTail;
+        Barang buffer[CAPACITY]; 
+        int idxHead;
+        int idxTail;
 } Queue;
 
 
