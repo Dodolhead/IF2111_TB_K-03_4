@@ -22,25 +22,34 @@ typedef struct {
     List wishlist;             // List untuk wishlist
 } User;
 
+boolean isEmptyUser(User U);
+boolean isEmptyUserList(User U);
+boolean isEmptyUserMap(User U);
+boolean isEmptyUserStack(User U);
 // Fungsi untuk membuat User baru
-void CreateUser(User *U, const char *name, const char *password, int money);
+void CreateUser(User U, const charname, const char password, int money);
 
 // Fungsi untuk menambahkan item ke wishlist
-void AddToWishlist(User *U, infoListtype item);
+void AddToWishlist(UserU, infoListtype item);
 
 // Fungsi untuk menghapus item dari wishlist
-void RemoveFromWishlist(User *U, infoListtype item);
+void RemoveFromWishlist(User U, infoListtype item);
 
+addressList SearchWishList(UserU, infoListtype item);
+
+void DelPWishList(List L, infoListtype X);
+
+int WishlistCount(UserU);
 // Fungsi untuk menambahkan item ke keranjang
-void AddToKeranjang(User *U, keytype k, valuetype v);
+void AddToKeranjang(User U, keytype k, valuetype v);
 
 // Fungsi untuk menghapus item dari keranjang
-void RemoveFromKeranjang(User *U, keytype k);
+void RemoveFromKeranjang(UserU, keytype k);
 
 // Fungsi untuk menambah riwayat pembelian ke Stack
-void AddToRiwayat(User *U, infoStacktype item);
+void AddToRiwayat(User U, infoStacktype item);
 
 // Fungsi untuk menampilkan informasi user
-void PrintUserInfo(User *U);
+void PrintUserInfo(UserU);
 
 #endif // USER2_H
