@@ -22,6 +22,10 @@ typedef struct {
     List wishlist;             // List untuk wishlist
 } User;
 
+boolean isEmptyUser(User U);
+boolean isEmptyUserList(User U);
+boolean isEmptyUserMap(User U);
+boolean isEmptyUserStack(User U);
 // Fungsi untuk membuat User baru
 void CreateUser(User *U, const char *name, const char *password, int money);
 
@@ -31,6 +35,11 @@ void AddToWishlist(User *U, infoListtype item);
 // Fungsi untuk menghapus item dari wishlist
 void RemoveFromWishlist(User *U, infoListtype item);
 
+addressList SearchWishList(User *U, infoListtype item);
+
+void DelPWishList(List *L, infoListtype X);
+
+int WishlistCount(User *U);
 // Fungsi untuk menambahkan item ke keranjang
 void AddToKeranjang(User *U, keytype k, valuetype v);
 

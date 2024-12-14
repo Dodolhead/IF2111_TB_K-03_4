@@ -16,12 +16,13 @@ void CreateListEmpty (List *L){
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-addressList Alokasi (infoListtype X){
+addressList Alokasi(infoListtype X) {
     addressList P = (addressList)malloc(sizeof(ElmtList));
     if (P != Nil) {
-        Info(P) = X;
+        Info(P) = X;  // Salin pointer ke info
         Next(P) = Nil;
     }
+    return P;
 }
 /* Mengirimkan addressList hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addressList tidak nil, dan misalnya */

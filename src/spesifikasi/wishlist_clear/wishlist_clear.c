@@ -1,6 +1,22 @@
-#include "boolean.h"
-#include "user2.h"
-#include "user2.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include "wishlist_clear.h"
+#include "..\..\adt\user2.c"
+
+void wishlistClear(User *U) {
+    addressList P = First(U->wishlist);
+    addressList temp;
+
+    while (P != Nil) {
+        temp = P;            // Simpan elemen saat ini
+        P = Next(P);         // Pindah ke elemen berikutnya
+        free(Info(temp));    // Bebaskan memori string
+        free(temp);          // Bebaskan node
+    }
+
+    First(U->wishlist) = Nil; // Setel ulang pointer wishlist menjadi kosong
+    printf("Wishlist telah dikosongkan.\n");
+}
 
 int main() {
     User U;
@@ -28,6 +44,6 @@ int main() {
     // Menampilkan informasi user setelah penghapusan
     printf("\nInformasi User Setelah Penghapusan Item:\n");
     PrintUserInfo(&U);
-
-    WishlistCount(&U);
+    wishlistClear(&U);
+    PrintUserInfo(&U);
 }

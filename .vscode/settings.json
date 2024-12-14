@@ -63,6 +63,8 @@
     "help.h": "c",
     "save.h": "c",
     "utilities.h": "c",
-    "mesinkata.h": "c"
+    "mesinkata.h": "c",
+    "listlinier.h": "c",
+    "stdlib.h": "c"
   }
 }

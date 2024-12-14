@@ -26,6 +26,7 @@ void IgnoreBlanks();
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
 void STARTWORD();
+void STARTSENTENCE();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -41,6 +42,7 @@ void ADVUSER();
 
 void ADVONEWORD();
 
+void CopySentence();
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
