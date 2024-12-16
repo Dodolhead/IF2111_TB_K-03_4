@@ -41,7 +41,7 @@ void delay(int n){
 void doWork(int* money) {
     workDisplay(); 
     printf(">> ");
-    STARTWORD();
+    STARTSENTENCE();
     if (stringEquals(CurrentWord.TabWord, "Evil Lab Assistant")) {
         delay(14);
         printf("\n");
