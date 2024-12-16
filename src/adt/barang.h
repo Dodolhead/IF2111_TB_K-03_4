@@ -9,6 +9,7 @@
 typedef struct {
         char name[MAX_LEN];
         int price;
+        int jumlahBarang;  
 } Barang;
 
 /* ********** KONSTRUKTOR BARANG ********** */
