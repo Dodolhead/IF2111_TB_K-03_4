@@ -6,15 +6,15 @@ void History(Stack history, int N) {
         N jumlah barang yang ingin muncul */
     // KAMUS
     // ALGORITMA
-    if (!IsEmpty(history)) {
+    if (!IsStackEmpty(history)) {
         Stack temp;
         char[100] name;
         int cost, i;
-        CreateEmpty(&temp);
+        CreateStackEmpty(&temp);
 
         printf("Riwayat pembelian barang:\n");
 
-        for (i = 1; i <= N && !IsEmpty(history); i++) {
+        for (i = 1; i <= N && !IsStackEmpty(history); i++) {
             printf("%d. ", i);
 
             while ((history).T[(history).TOP].name[i] != '\0') {
@@ -26,7 +26,7 @@ void History(Stack history, int N) {
             Push(&temp, name, cost);
         }
 
-        for (i = 1; i <= N && !IsEmpty(history); i++) {
+        for (i = 1; i <= N && !IsStackEmpty(temp); i++) {
             Pop(&temp, &name, &cost);
             Push(&history, name, cost);
         }
