@@ -69,7 +69,7 @@ int ArrLength(ArrayDin array) {
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
-Barang Get(ArrayDin array, IdxType i) {
+Barang GetArrDin(ArrayDin array, IdxType i) {
     // KAMUS LOKAL
     // ALGORITMA
     return array.A[i];
@@ -79,7 +79,7 @@ Barang Get(ArrayDin array, IdxType i) {
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
  * Prekondisi: array terdefinisi
  */
-int GetCapacity(ArrayDin array) {
+int GetCapacityArrDin(ArrayDin array) {
     // KAMUS LOKAL
     // ALGORITMA
     return (array.Capacity);
