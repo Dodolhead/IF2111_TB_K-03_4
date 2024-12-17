@@ -39,7 +39,7 @@ void Set(List *U, IdxType i, int money, char* name, char* password) {
 }
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
-int Length(List U) {
+int ListUserLength(List U) {
     int count = 0;
     while (count < MaxEl && U.A[count].money != MarkNumber) {
         count++;

@@ -35,10 +35,20 @@ void DeallocateArrayDin(ArrayDin *array) {
  * Fungsi untuk mengetahui apakah suatu array kosong.
  * Prekondisi: array terdefinisi
  */
-boolean IsEmpty(ArrayDin array) {
+boolean IsArrEmpty(ArrayDin array) {
     // KAMUS LOKAL
     // ALGORITMA
     return (array.Neff == 0);
+}
+
+/**
+ * Fungsi untuk mengetahui apakah suatu array penuh.
+ * Prekondisi: array terdefinisi
+ */
+boolean IsArrFull(ArrayDin array) {
+    // KAMUS LOKAL
+    // ALGORITMA
+    return (array.Neff == array.Capacity);
 }
 
 /**

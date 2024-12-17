@@ -4,73 +4,109 @@
 #include "../../spesifikasi/login/login.h"
 #include "../../adt/mesinangka.h" 
 #include "../../../utilities.h"
+#include "../../adt/arraydinBarang.h"
 #include <stdio.h>
 
-void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers, char filename[]) {
-    STARTFILE(filename);
+void START_PURRMART(ArrayDin Informasi, List InfoUser){
+    // KAMUS
+    /* Barang */
+    int baris, i;
+    int items = 0, baris, harga = 0, panjang; 
+    /* User */
+    int user = 0, uang = 0;
+    // ALGORITMA
+    STARTWORD("src/data/config.txt");
 
-    // Membaca jumlah barang
-    STARTANGKA_START();
-    *jumlahBarang = currentAngka;
-    //printf("DEBUG: Jumlah Barang = %d\n", *jumlahBarang);
-    ADV(); // Pindah ke elemen berikutnya
-
-    // Membaca data barang
-    for (int i = 0; i < *jumlahBarang; i++) {
-        STARTANGKA_START();
-        barang[i].price = currentAngka;
-        ADVWORD();
-        for (int k = 0; k < CurrentWord.Length; k++) {
-            barang[i].name[k] = CurrentWord.TabWord[k];
-        }
-        barang[i].name[CurrentWord.Length] = '\0';
-        //printf("DEBUG: Barang ke-%d: Nama = %s, Harga = %d\n", i + 1, barang[i].name, barang[i].price);
-
-        ADV(); // Pindah ke elemen berikutnya
+    // Mengecek jumlah barang di toko
+    for (i = 0; i < CurrentWord.Length; i++) {
+        items = items * 10 + ((CurrentWord.TabWord[i]) - '0');
     }
 
-    STARTANGKA_START();
-    *jumlahUsers = currentAngka;
-    //printf("DEBUG: Jumlah Pengguna = %d\n", *jumlahUsers);
-    ADV(); // Pindah ke elemen berikutnya
+    // Membaca barang dan menyimpan di dalam list
+    if (items > 0) {
+        // Membaca tiap baris (harga dan nama)
+        for (baris = 1; baris <= items; i++) {
+            harga = 0;
 
-    // Membaca data pengguna
-    for (int i = 0; i < *jumlahUsers; i++) {
-        STARTANGKA_START();
-        users[i].money = currentAngka;
-        ADVUSER();
+            // Menyalin harga barang
+            ADVWORD();
+            for (i = 0; i < CurrentWord.Length; i++) {
+                if (CurrentWord.TabWord[i] >= '0' && CurrentWord.TabWord[i] <= '9') {
+                    harga = harga * 10 + ((CurrentWord.TabWord[i]) - '0');
+                }
+            }
 
-        for (int k = 0; k < CurrentWord.Length; k++) {
-            users[i].name[k] = CurrentWord.TabWord[k];
+            // Mengecek ruang kosong
+            if (!IsArrFull(Informasi)) {
+                Informasi.A[baris-1].price = harga;
+            }
+
+            // Menyalin kata pertama dari nama barang
+            ADVWORD();
+            if (!IsArrFull(Informasi)) {
+                for (i = 0; i < CurrentWord.Length; i++) {
+                    Informasi.A[baris-1].name[i] = CurrentWord.TabWord[i];
+                }
+                panjang = CurrentWord.Length;
+            }
+
+            // Menyalin barang yang memiliki lebih dari satu kata
+            while (GetCC() != '\n') {
+                ADVWORD();
+
+                if (!IsArrFull(Informasi)) {
+                    Informasi.A[baris].name[panjang] = BLANK;
+                    panjang++;
+
+                    for (j = 0; j < CurrentWord.Length; j++) {
+                        Informasi.A[baris].name[j+panjang] = CurrentWord.TabWord[j];
+                    }
+                    panjang = panjang + CurrentWord.Length;
+
+                    Informasi.A[baris].name[panjang] = '\0';
+                }
+            }
         }
-        users[i].name[CurrentWord.Length] = '\0';
-        ADVUSER();
-
-        for (int k = 0; k < CurrentWord.Length; k++) {
-            users[i].password[k] = CurrentWord.TabWord[k];
-        }
-        users[i].password[CurrentWord.Length] = '\0';
-        //printf("DEBUG: Pengguna ke-%d: Nama = %s, Password = %s, Uang = %d\n", i + 1, users[i].name, users[i].password, users[i].money);
-
-        ADV();
     }
-}
 
-void START_PURRMART(){
-    Barang barang[100];
-    User users[100];
-    int jumlahBarang, jumlahUsers;
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, "src/data/config.txt");
+    ADVWORD();
+
+    // Mengecek jumlah user di toko
+    for (i = 0; i < CurrentWord.Length; i++) {
+        user = user * 10 + ((CurrentWord.TabWord[i]) - '0');
+    }
+
+    if (user > 0) {
+        // Membaca tiap baris
+        for (baris = 1; baris <= user; i++) {
+            uang = 0;
+
+            // Menyalin uang pengguna
+            ADVWORD();
+            for (i = 0; i < CurrentWord.Length; i++) {
+                if (CurrentWord.TabWord[i] >= '0' && CurrentWord.TabWord[i] <= '9') {
+                    uang = uang * 10 + ((CurrentWord.TabWord[i]) - '0');
+                }
+            }
+
+            // Mengecek ruang kosong
+                InfoUser.ElList[baris-1].money = uang;
+
+            // Menyalin username
+            ADVWORD();
+                for (i = 0; i < CurrentWord.Length; i++) {
+                    InfoUser.ElList[baris-1].name[i] = CurrentWord.TabWord[i];
+                }
+                InfoUser.ElList[baris-1].name[i] = '\0'
+
+            // Menyalin password
+            ADVWORD();
+                for (i = 0; i < CurrentWord.Length; i++) {
+                    InfoUser.ElList[baris-1].password[i] = CurrentWord.TabWord[i];
+                }
+                InfoUser.ElList[baris-1].password[i] = '\0'
+        }
+    }
+    
     printf("File konfigurasi aplikasi berhasil dibaca. PURRMART berhasil dijalankan.\n");
-
-    printf("\nDaftar Barang:\n");
-    for (int i = 0; i < jumlahBarang; i++) {
-        printf("- %s, Harga : %d\n", barang[i].name, barang[i].price);
-    }
-
-    printf("\nDaftar Pengguna:\n");
-    for (int i = 0; i < jumlahUsers; i++) {
-        printf("- Nama: %s, Password: %s, Uang: %d\n", users[i].name, users[i].password, users[i].money);
-    }
-
 }

@@ -68,6 +68,7 @@ int main(){
     int jumlahBarang = 0, jumlahUsers = 0;
     int loggedInUserIndex = -1; //buat ngecek user yang lagi login
     int baris = 1, currBaris;
+    char command[100];
 
     // Array dinamis dan antrian
     ArrayDin Information;
@@ -84,29 +85,11 @@ int main(){
     printf("***** | (START) Start shopping | (LOAD) Load your file | (HELP) Help | (QUIT) | *****\n");
     
     while (baris < 5) {
-        STARTFILE("command.txt");
-
-        // Meletakkan posisi baris
-        currBaris = 1;
-        while (currBaris < baris) {
-            ADVWORD();
-            currBaris++;
-            while (GetCC() != '\n') {
-                ADVWORD();
-            }
-        }
-
-        printf("\n>> ");
-        ADVWORD();
-        // Mencetak command
-        i = 0;
-        while (i < CurrentWord.Length) {
-            printf("%c", CurrentWord.TabWord[i]);
-            i++;
-        }        
+        scanf(">> ", command);
 
         // START
-        if (stringEquals(CurrentWord.TabWord, "START")) {
+        if (stringEquals(command, "START")) {
+            START_PURRMART()
             printf("\n");
             // Mengubah state
             startup = true;

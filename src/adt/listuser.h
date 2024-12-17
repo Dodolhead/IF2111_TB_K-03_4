@@ -17,7 +17,7 @@ typedef struct {
 } User;                   
 
 typedef struct {
-    User A[MaxEl];       
+    User ElList[MaxEl];       
 } List;                   
 
 /* Primitif List */
@@ -35,7 +35,7 @@ void GetPassword(List U, IdxType i, char* buffer);
 void Set(List *U, IdxType i, int money, char* name, char* password);
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
-int Length(List U);
+int ListUserLength(List U);
 /* Mengembalikan jumlah elemen efektif dalam list */
 
 IdxType FirstIdx(List U);

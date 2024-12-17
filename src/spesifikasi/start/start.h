@@ -8,7 +8,6 @@
 #include "../../adt/barang.h"
 #include "../../adt/listuser.h"
 
-void STARTREAD(Barang barang[], int *jumlahBarang, User users[], int *jumlahUsers,char filename[]);
 void START_PURRMART();
 
 #endif
