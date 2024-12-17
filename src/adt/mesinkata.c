@@ -9,7 +9,7 @@ void IgnoreBlanks()
     /* Mengabaikan satu atau beberapa BLANK
      I.S. : currentChar sembarang
        F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (CurrentChar == BLANK || CurrentChar == NEWLINE)
+    while (currentChar == BLANK || currentChar == NEWLINE)
     {
         ADV();
     }
@@ -23,7 +23,7 @@ void STARTWORD(char* filename)
               currentChar karakter pertama sesudah karakter terakhir kata */
     START(filename);
     IgnoreBlanks();
-    if (CurrentChar == MARK)
+    if (currentChar == MARK)
     {
         endWord = true;
     }
@@ -42,7 +42,7 @@ void ADVWORD()
               Jika currentChar = MARK, endWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if (CurrentChar == MARK)
+    if (currentChar == MARK)
     {
         endWord = true;
     }
@@ -62,12 +62,12 @@ void CopyWord()
               currentChar = BLANK atau currentChar = MARK;
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    CurrentWord.Length = 0;
-    while (CurrentChar != BLANK && CurrentChar != MARK)
+    currentWord.Length = 0;
+    while (currentChar != BLANK && currentChar != MARK)
     {
-        if (CurrentWord.Length < NMax)
+        if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV();
         }
         else

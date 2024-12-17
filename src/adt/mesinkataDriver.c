@@ -11,6 +11,6 @@ int main(){
     {
         ADVWORD();
     }
-    printf("%s\n", CurrentWord.TabWord);
+    printf("%s\n", currentWord.TabWord);
     
 }

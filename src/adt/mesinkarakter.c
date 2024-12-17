@@ -3,34 +3,32 @@
 
 char currentChar;
 boolean EOP;
+
 static FILE *pita;
 static int retval;
 
-void START(char* filename) {
-    /* Mesin siap dioperasikan. Pita disiapkan ... */
-    /* Algoritma */
-    pita = fopen(filename,"r");
-    ADV();
+void START(char *filename) {
+    pita = fopen(filename, "r");
+    if (pita == NULL) {
+        printf("File tidak ditemukan: %s\n", filename);
+        EOP = true;
+    } else {
+        ADV();
+    }
 }
 
 void ADV() {
-    /* Pita dimajukan satu karakter. ... */
-    /* Algoritma */
     retval = fscanf(pita, "%c", &currentChar);
-    EOP = (currentChar == MARK);
+    EOP = (retval == EOF);
     if (EOP) {
         fclose(pita);
     }
 }
 
 char GetCC() {
-    /* Mengirimkan currentChar */
-    /* Algoritma */
     return currentChar;
 }
 
 boolean IsEOP() {
-    /* Mengirimkan true jika currentChar = MARK */
-    /* Algoritma */
     return EOP;
 }

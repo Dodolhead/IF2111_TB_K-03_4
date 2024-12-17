@@ -2,7 +2,8 @@
 #include "mesinkata.h"
 
 int main(){
-    START();
+    char filename = "test.txt";
+    STARTWORD(filename);
     while (!IsEOP())
     {
         printf("%c", GetCC());

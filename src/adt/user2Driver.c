@@ -5,6 +5,7 @@
 #include "mesinkata.h"
 #include "mesinkarakter.h"
 #include "mesinangka.h"
+#include "user2.h"
 #include "../../utilities.h"
 
 int main() {
