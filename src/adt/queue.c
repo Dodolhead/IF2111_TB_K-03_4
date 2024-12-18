@@ -15,14 +15,14 @@ void CreateQueue(Queue *q) {
 }
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q) {
+boolean isQueueEmpty(Queue q) {
 /* Mengirim true jika q kosong: lihat definisi di atas */
     // KAMUS
     // ALGORITMA
     return (q.idxHead == IDX_UNDEF) && (q.idxTail == IDX_UNDEF);
 }
 
-boolean isFull(Queue q) {
+boolean isQueueFull(Queue q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
     // KAMUS
@@ -30,7 +30,7 @@ boolean isFull(Queue q) {
     return ((q.idxHead == 0) && (q.idxTail == CAPACITY-1));
 }
 
-int length(Queue q) {
+int QueueLength(Queue q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
     // KAMUS
     // ALGORITMA

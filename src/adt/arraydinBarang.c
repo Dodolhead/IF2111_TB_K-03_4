@@ -35,7 +35,7 @@ void DeallocateArrayDin(ArrayDin *array) {
  * Fungsi untuk mengetahui apakah suatu array kosong.
  * Prekondisi: array terdefinisi
  */
-boolean IsEmpty(ArrayDin array) {
+boolean IsArrDinEmpty(ArrayDin array) {
     // KAMUS LOKAL
     // ALGORITMA
     return (array.Neff == 0);
@@ -59,7 +59,7 @@ int ArrLength(ArrayDin array) {
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
-Barang Get(ArrayDin array, IdxType i) {
+Barang ArrDinGet(ArrayDin array, IdxType i) {
     // KAMUS LOKAL
     // ALGORITMA
     return array.A[i];
@@ -69,7 +69,7 @@ Barang Get(ArrayDin array, IdxType i) {
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
  * Prekondisi: array terdefinisi
  */
-int GetCapacity(ArrayDin array) {
+int ArrDinGetCapacity(ArrayDin array) {
     // KAMUS LOKAL
     // ALGORITMA
     return (array.Capacity);
