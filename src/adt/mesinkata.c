@@ -1,31 +1,35 @@
-#include "mesinkata.h"
-#include "mesinkarakter.h"
 #include <stdio.h>
+#include "mesinkata.h"
 
-boolean EndWord; // Define the EndWord variable
-Word CurrentWord; // Define CurrentWord variable
+boolean endWord;
+Word currentWord;
 
-void IgnoreBlanks() {
-    while (currentChar == BLANK) {
+void IgnoreBlanks()
+{
+    /* Mengabaikan satu atau beberapa BLANK
+     I.S. : currentChar sembarang
+       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+    while (currentChar == BLANK || currentChar == NEWLINE)
+    {
         ADV();
     }
 }
 
-void STARTWORD()
+void STARTWORD(char* filename)
 {
     /* I.S. : currentChar sembarang
        F.S. : endWord = true, dan currentChar = MARK;
               atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(filename);
     IgnoreBlanks();
     if (currentChar == MARK)
     {
-        EndWord = true;
+        endWord = true;
     }
     else
     {
-        EndWord = false;
+        endWord = false;
         CopyWord();
     }
 }
@@ -38,50 +42,14 @@ void ADVWORD()
               Jika currentChar = MARK, endWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if (GetCC() == MARK) {
-        EndWord = true;
-    } else { 
-        if (GetCC() == '\n') {
-            ADV();
-        }
+    if (currentChar == MARK)
+    {
+        endWord = true;
+    }
+    else
+    {
+        endWord = false;
         CopyWord();
-        IgnoreBlanks(); 
-    }
-}
-
-void ADVUSER() {
-    IgnoreBlanks(); 
-
-    CurrentWord.Length = 0; 
-
-    while (currentChar != ' ' && currentChar != MARK && CurrentWord.Length < NMax) {
-        CurrentWord.TabWord[CurrentWord.Length] = currentChar;
-        CurrentWord.Length++;
-        ADV();
-    }
-    
-    IgnoreBlanks(); 
-}
-
-void ADVONEWORD() {
-    // Lewati karakter-karakter dalam kata pertama
-    while (currentChar != BLANK && currentChar != MARK) {
-        ADV(); // Pindahkan ke karakter berikutnya
-    }
-
-    // Lewati spasi setelah kata pertama
-    while (currentChar == BLANK && currentChar != MARK) {
-        ADV(); // Pindahkan ke karakter berikutnya
-    }
-
-    // Salin kata berikutnya ke CurrentWord
-    CurrentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK) {
-        if (CurrentWord.Length < NMax) {  // Pastikan tidak melebihi kapasitas
-            CurrentWord.TabWord[CurrentWord.Length] = currentChar;
-            CurrentWord.Length++;
-            ADV();  // Pindahkan ke karakter berikutnya
-        }
     }
 }
 
@@ -93,31 +61,19 @@ void CopyWord()
               currentChar = BLANK atau currentChar = MARK;
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    CurrentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK)
+    currentWord.Length = 0;
+    while (currentChar != BLANK && currentChar != MARK && currentChar != NEWLINE)
     {
-        if (CurrentWord.Length < NMax)
+        if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV();
         }
         else
             break;
     }
-    CurrentWord.TabWord[CurrentWord.Length] = '\0';
 }
 
-boolean isEndWord(){
-    return EndWord;
-}
-
-void stringCopy(char *destination, const char *source) {
-    int i = 0;
-
-    while (source[i] != '\0') {
-        destination[i] = source[i];
-        i++;
-    }
-
-    destination[i] = '\0';
+boolean isEndWord() {
+    return endWord;
 }
