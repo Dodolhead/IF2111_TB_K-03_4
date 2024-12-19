@@ -5,8 +5,8 @@
 #ifndef stackt_H
 #define stackt_H
 
-#include "boolean.h"
-#include "barang.h"
+#include "../../adt/boolean/boolean.h"
+#include "../../adt/barang/barang.h"
 
 #define NilStack 0
 #define MaxEl 100

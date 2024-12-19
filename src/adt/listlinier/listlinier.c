@@ -188,7 +188,7 @@ void PrintInfo(LinkedList L) {
     addressLinkedList P = First(L);
     printf("[");
     while (P != Nil) {
-        printf("%d", Info(P));
+        printf("%s", Info(P));
         P = Next(P);
         if (P != Nil) printf(",");
     }
