@@ -2,6 +2,12 @@
 #define LISTUSER_H
 
 #include "boolean.h"
+#include "map.h"
+#include "stack.h"
+#include "listlinier.h"
+#include "mesinkata.h"
+#include "mesinkarakter.h"
+#include "mesinangka.h"
 #include "../../utilities.h"
 
 #define MaxEl 100
@@ -11,13 +17,17 @@
 
 typedef int IdxType;      
 typedef struct {
-    char name[50];        
-    char password[50];    
-    int money;            
-} User;                   
+    char name[50];
+    char password[50];
+    int money;
+    Map keranjang;
+    Stack riwayat_pembelian;
+    LinkedList wishlist;
+} User;
+
 
 typedef struct {
-    User ElList[MaxEl];       
+    User A[MaxEl];       
 } List;                   
 
 /* Primitif List */
@@ -50,25 +60,34 @@ boolean IsIdxValid(List U, IdxType i);
 boolean IsIdxEff(List U, IdxType i);
 /* Mengecek apakah indeks efektif (elemen diisi) dalam list */
 
-boolean Search(List U, char* X);
+boolean ListSearch(List U, char* X);
 /* Mengecek apakah elemen X terdapat dalam list */
 
-void InsertFirst(List *U, int money, char* name, char* password);
+void InsertListFirst(List *U, int money, char* name, char* password);
 /* Menyisipkan elemen di posisi pertama */
 
-void InsertAt(List *U, int money, char* name, char* password, IdxType i);
+void InsertListAt(List *U, int money, char* name, char* password, IdxType i);
 /* Menyisipkan elemen di posisi indeks ke-i */
 
-void InsertLast(List *U, int money, char* name, char* password);
+void InsertListLast(List *U, int money, char* name, char* password);
 /* Menyisipkan elemen di posisi terakhir */
 
-void DeleteFirst(List *U);
+void DeleteListFirst(List *U);
 /* Menghapus elemen di posisi pertama */
 
-void DeleteAt(List *U, IdxType i);
+void DeleteListAt(List *U, IdxType i);
 /* Menghapus elemen di posisi indeks ke-i */
 
-void DeleteFirst(List *U);
+void DeleteListLast(List *U);
 /* Menghapus elemen di posisi terakhir */
+
+void CreateUser(User *U, const char *name, const char *password, int money);
+void AddToWishlist(User *U, infoLinkedListtype item);
+addressLinkedList SearchWishList(User *U, infoLinkedListtype item);
+int WishlistCount(User *U);
+void DelPWishList(LinkedList *L, infoLinkedListtype X);
+void AddToKeranjang(User *U, keytype k, valuetype v);
+void RemoveFromKeranjang(User *U, keytype k);
+void PrintUserInfo(User *U);
 
 #endif /* LISTUSER_H */

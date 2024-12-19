@@ -1,7 +1,7 @@
 /* File : listlinier.h */
 /* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi addressList dengan pointer */
-/* infoListtype adalah integer */
+/* Representasi addressLinkedList dengan pointer */
+/* infoLinkedListtype adalah integer */
 
 #ifndef listlinier_H
 #define listlinier_H
@@ -10,141 +10,141 @@
 
 #define Nil NULL
 
-typedef char* infoListtype;
-typedef struct tElmtlist *addressList;
-typedef struct tElmtlist { 
-	infoListtype info;
-	addressList next;
-} ElmtList;
+typedef char* infoLinkedListtype;
+typedef struct tElmtLinkedlist *addressLinkedList;
+typedef struct tElmtLinkedlist { 
+	infoLinkedListtype info;
+	addressLinkedList next;
+} ElmtLinkedList;
 
 typedef struct {
-	addressList First;
-} List;
+	addressLinkedList First;
+} LinkedList;
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
-/* Setiap elemen dengan addressList P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir list : jika addressListnya Last, maka Next(Last)=Nil */
+/* Setiap elemen dengan addressLinkedList P dapat diacu Info(P), Next(P) */
+/* Elemen terakhir list : jika addressLinkedListnya Last, maka Next(Last)=Nil */
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsListEmpty (List L);
+boolean IsLinkedListEmpty (LinkedList L);
 /* Mengirim true jika list kosong */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreatListeEmpty (List *L);
+void CreateLinkedListEmpty (LinkedList *L);
 /* I.S. sembarang             */
-/* F.S. Terbentuk list kosong */
+/* F.S. Terbentuk LinkedList kosong */
 
 /****************** Manajemen Memori ******************/
-addressList Alokasi (infoListtype X);
-/* Mengirimkan addressList hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addressList tidak nil, dan misalnya */
+addressLinkedList Alokasi (infoLinkedListtype X);
+/* Mengirimkan addressLinkedList hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressLinkedList tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (addressList *P);
+void Dealokasi (addressLinkedList *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian addressList P */
+/* Melakukan dealokasi/pengembalian addressLinkedList P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-addressList Search (List L, infoListtype X);
+addressLinkedList LinkedListSearch (LinkedList L, infoLinkedListtype X);
 /* Mencari apakah ada elemen list dengan info(P)= X */
-/* Jika ada, mengirimkan addressList elemen tersebut. */
+/* Jika ada, mengirimkan addressLinkedList elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, infoListtype X);
+void InsVFirst (LinkedList *L, infoLinkedListtype X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (List *L, infoListtype X);
+void InsVLast (LinkedList *L, infoLinkedListtype X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, infoListtype *X);
+void DelVFirst (LinkedList *L, infoLinkedListtype *X);
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast (List *L, infoListtype *X);
+void DelVLast (LinkedList *L, infoLinkedListtype *X);
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, addressList P);
+void InsertLinkedListFirst (LinkedList *L, addressLinkedList P);
 /* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-addressList P sebagai elemen pertama */
-void InsertAfter (List *L, addressList P, addressList Prec);
+/* F.S. Menambahkan elemen ber-addressLinkedList P sebagai elemen pertama */
+void InsertLinkedListAfter (LinkedList *L, addressLinkedList P, addressLinkedList Prec);
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertLast (List *L, addressList P);
+void InsertLinkedListLast (LinkedList *L, addressLinkedList P);
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, addressList *P);
+void DelLinkedListFirst (LinkedList *L, addressLinkedList *P);
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelP (List *L, infoListtype X);
+void DelLinkedListP (LinkedList *L, infoLinkedListtype X);
 /* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddressList P, dengan info(P)=X  */
+/* F.S. Jika ada elemen list beraddressLinkedList P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* Jika tidak ada elemen list dengan info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
-void DelLast (List *L, addressList *P);
+void DelLinkedListLast (LinkedList *L, addressLinkedList *P);
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
-void DelAfter (List *L, addressList *Pdel, addressList Prec);
+void DelLinkedListAfter (LinkedList *L, addressLinkedList *Pdel, addressLinkedList Prec);
 /* I.S. List tidak kosong. Prec adalah anggota list  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L);
+void PrintInfo (LinkedList L);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah terkecuali untuk newline di akhir output */
-int NbElmt (List L);
+int NbElmt (LinkedList L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-infoListtype Max (List L);
+infoLinkedListtype Max (LinkedList L);
 /* Mengirimkan nilai info(P) yang maksimum */
-addressList AdrMax (List L);
-/* Mengirimkan addressList P, dengan info(P) yang bernilai maksimum */
-infoListtype Min (List L);
+addressLinkedList AdrMax (LinkedList L);
+/* Mengirimkan addressLinkedList P, dengan info(P) yang bernilai maksimum */
+infoLinkedListtype Min (LinkedList L);
 /* Mengirimkan nilai info(P) yang minimum */
-addressList AdrMin (List L);
-/* Mengirimkan addressList P, dengan info(P) yang bernilai minimum */
-float Average (List L);
+addressLinkedList AdrMin (LinkedList L);
+/* Mengirimkan addressLinkedList P, dengan info(P) yang bernilai minimum */
+float Average (LinkedList L);
 /* Mengirimkan nilai rata-rata info(P) */
 
 /****************** PROSES TERHADAP LIST ******************/
 
-void InversList (List *L);
+void InversList (LinkedList *L);
 /* I.S. sembarang. */
 /* F.S. elemen list dibalik : */
 /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
 /* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
 
-void Konkat1 (List *L1, List *L2, List *L3);
+void Konkat1 (LinkedList *L1, LinkedList *L2, LinkedList *L3);
 /* I.S. L1 dan L2 sembarang */
 /* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
 /* Konkatenasi dua buah list : L1 dan L2    */

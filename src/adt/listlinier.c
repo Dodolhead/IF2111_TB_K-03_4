@@ -3,32 +3,32 @@
 #include "listlinier.h"
 
 
-boolean IsListEmpty (List L){
+boolean IsLinkedListEmpty (LinkedList L){
     return First(L) == Nil;
 }
 /* Mengirim true jika list kosong */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListEmpty (List *L){
+void CreateLinkedListEmpty (LinkedList *L){
     First(*L) = Nil;
 }
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-addressList Alokasi(infoListtype X) {
-    addressList P = (addressList)malloc(sizeof(ElmtList));
+addressLinkedList Alokasi(infoLinkedListtype X) {
+    addressLinkedList P = (addressLinkedList)malloc(sizeof(ElmtLinkedList));
     if (P != Nil) {
         Info(P) = X;  // Salin pointer ke info
         Next(P) = Nil;
     }
     return P;
 }
-/* Mengirimkan addressList hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addressList tidak nil, dan misalnya */
+/* Mengirimkan addressLinkedList hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressLinkedList tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (addressList *P){
+void Dealokasi (addressLinkedList *P){
     free(*P);
     *P = Nil;
 }
@@ -37,8 +37,8 @@ void Dealokasi (addressList *P){
 /* Melakukan dealokasi/pengembalian addressList P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-addressList Search (List L, infoListtype X){
-    addressList P = First(L);
+addressLinkedList LinkedListSearch (LinkedList L, infoLinkedListtype X){
+    addressLinkedList P = First(L);
     while (P != Nil) {
         if (Info(P) == X) {
             return P;
@@ -47,14 +47,14 @@ addressList Search (List L, infoListtype X){
     }
     return Nil;
 }
-/* Mencari apakah ada elemen list dengan info(P)= X */
-/* Jika ada, mengirimkan addressList elemen tersebut. */
+/* Mencari apakah ada elemen LinkedList dengan info(P)= X */
+/* Jika ada, mengirimkan addressLinkedList elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst(List *L, infoListtype X) {
-    addressList P = Alokasi(X);
+void InsVFirst(LinkedList *L, infoLinkedListtype X) {
+    addressLinkedList P = Alokasi(X);
     if (P != Nil) {
         Next(P) = First(*L);
         First(*L) = P;
@@ -63,13 +63,13 @@ void InsVFirst(List *L, infoListtype X) {
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast(List *L, infoListtype X) {
-    addressList P = Alokasi(X);
+void InsVLast(LinkedList *L, infoLinkedListtype X) {
+    addressLinkedList P = Alokasi(X);
     if (P != Nil) {
-        if (IsListEmpty(*L)) {
+        if (IsLinkedListEmpty(*L)) {
             First(*L) = P;
         } else {
-            addressList Last = First(*L);
+            addressLinkedList Last = First(*L);
             while (Next(Last) != Nil) {
                 Last = Next(Last);
             }
@@ -79,19 +79,19 @@ void InsVLast(List *L, infoListtype X) {
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst(List *L, infoListtype *X) {
-    if (!IsListEmpty(*L)) {
-        addressList P = First(*L);
+void DelVFirst(LinkedList *L, infoLinkedListtype *X) {
+    if (!IsLinkedListEmpty(*L)) {
+        addressLinkedList P = First(*L);
         *X = Info(P);
         First(*L) = Next(P);
         Dealokasi(&P);
     }
 }
 
-void DelVLast(List *L, infoListtype *X) {
-    if (!IsListEmpty(*L)) {
-        addressList P = First(*L);
-        addressList Prec = Nil;
+void DelVLast(LinkedList *L, infoLinkedListtype *X) {
+    if (!IsLinkedListEmpty(*L)) {
+        addressLinkedList P = First(*L);
+        addressLinkedList Prec = Nil;
         while (Next(P) != Nil) {
             Prec = P;
             P = Next(P);
@@ -108,21 +108,21 @@ void DelVLast(List *L, infoListtype *X) {
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst(List *L, addressList P) {
+void InsertLinkedListFirst(LinkedList *L, addressLinkedList P) {
     Next(P) = First(*L);
     First(*L) = P;
 }
 
-void InsertAfter(List *L, addressList P, addressList Prec) {
+void InsertLinkedListAfter(LinkedList *L, addressLinkedList P, addressLinkedList Prec) {
     Next(P) = Next(Prec);
     Next(Prec) = P;
 }
 
-void InsertLast(List *L, addressList P) {
-    if (IsListEmpty(*L)) {
+void InsertLinkedListLast(LinkedList *L, addressLinkedList P) {
+    if (IsLinkedListEmpty(*L)) {
         First(*L) = P;
     } else {
-        addressList Last = First(*L);
+        addressLinkedList Last = First(*L);
         while (Next(Last) != Nil) {
             Last = Next(Last);
         }
@@ -131,17 +131,17 @@ void InsertLast(List *L, addressList P) {
 }
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst(List *L, addressList *P) {
-    if (!IsListEmpty(*L)) {
+void DelLinkedListFirst(LinkedList *L, addressLinkedList *P) {
+    if (!IsLinkedListEmpty(*L)) {
         *P = First(*L);
         First(*L) = Next(*P);
         Next(*P) = Nil;
     }
 }
 
-void DelP(List *L, infoListtype X) {
-    addressList P = First(*L);
-    addressList Prec = Nil;
+void DelLinkedListP(LinkedList *L, infoLinkedListtype X) {
+    addressLinkedList P = First(*L);
+    addressLinkedList Prec = Nil;
 
     while (P != Nil && Info(P) != X) {
         Prec = P;
@@ -158,9 +158,9 @@ void DelP(List *L, infoListtype X) {
     }
 }
 
-void DelLast(List *L, addressList *P) {
-    addressList Last = First(*L);
-    addressList Prec = Nil;
+void DelLinkedListLast(LinkedList *L, addressLinkedList *P) {
+    addressLinkedList Last = First(*L);
+    addressLinkedList Prec = Nil;
 
     while (Next(Last) != Nil) {
         Prec = Last;
@@ -175,7 +175,7 @@ void DelLast(List *L, addressList *P) {
     }
 }
 
-void DelAfter(List *L, addressList *Pdel, addressList Prec) {
+void DelLinkedListAfter(LinkedList *L, addressLinkedList *Pdel, addressLinkedList Prec) {
     *Pdel = Next(Prec);
     if (*Pdel != Nil) {
         Next(Prec) = Next(*Pdel);
@@ -183,9 +183,9 @@ void DelAfter(List *L, addressList *Pdel, addressList Prec) {
     }
 }
 
-/****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo(List L) {
-    addressList P = First(L);
+/****************** PROSES SEMUA ELEMEN LinkedList ******************/
+void PrintInfo(LinkedList L) {
+    addressLinkedList P = First(L);
     printf("[");
     while (P != Nil) {
         printf("%d", Info(P));
@@ -195,9 +195,9 @@ void PrintInfo(List L) {
     printf("]\n");
 }
 
-int NbElmt(List L) {
+int NbElmt(LinkedList L) {
     int count = 0;
-    addressList P = First(L);
+    addressLinkedList P = First(L);
     while (P != Nil) {
         count++;
         P = Next(P);
@@ -205,9 +205,9 @@ int NbElmt(List L) {
     return count;
 }
 
-infoListtype Max(List L) {
-    infoListtype max = Info(First(L));
-    addressList P = Next(First(L));
+infoLinkedListtype Max(LinkedList L) {
+    infoLinkedListtype max = Info(First(L));
+    addressLinkedList P = Next(First(L));
     while (P != Nil) {
         if (Info(P) > max) {
             max = Info(P);
@@ -217,9 +217,9 @@ infoListtype Max(List L) {
     return max;
 }
 
-addressList AdrMax(List L) {
-    infoListtype max = Max(L);
-    addressList P = First(L);
+addressLinkedList AdrMax(LinkedList L) {
+    infoLinkedListtype max = Max(L);
+    addressLinkedList P = First(L);
     while (P != Nil) {
         if (Info(P) == max) {
             return P;
@@ -229,9 +229,9 @@ addressList AdrMax(List L) {
     return Nil;
 }
 
-infoListtype Min(List L) {
-    infoListtype min = Info(First(L));
-    addressList P = Next(First(L));
+infoLinkedListtype Min(LinkedList L) {
+    infoLinkedListtype min = Info(First(L));
+    addressLinkedList P = Next(First(L));
     while (P != Nil) {
         if (Info(P) < min) {
             min = Info(P);
@@ -241,9 +241,9 @@ infoListtype Min(List L) {
     return min;
 }
 
-addressList AdrMin(List L) {
-    infoListtype min = Min(L);
-    addressList P = First(L);
+addressLinkedList AdrMin(LinkedList L) {
+    infoLinkedListtype min = Min(L);
+    addressLinkedList P = First(L);
     while (P != Nil) {
         if (Info(P) == min) {
             return P;
@@ -253,9 +253,9 @@ addressList AdrMin(List L) {
     return Nil;
 }
 
-void InversList(List *L) {
-    addressList P = First(*L);
-    addressList Prev = Nil, NextNode;
+void InversLinkedList(LinkedList *L) {
+    addressLinkedList P = First(*L);
+    addressLinkedList Prev = Nil, NextNode;
 
     while (P != Nil) {
         NextNode = Next(P);
@@ -266,12 +266,12 @@ void InversList(List *L) {
     First(*L) = Prev;
 }
 
-void Konkat1(List *L1, List *L2, List *L3) {
-    CreateListEmpty(L3);
+void Konkat1(LinkedList *L1, LinkedList *L2, LinkedList *L3) {
+    CreateLinkedListEmpty(L3);
     First(*L3) = First(*L1);
 
-    if (!IsListEmpty(*L1)) {
-        addressList Last = First(*L1);
+    if (!IsLinkedListEmpty(*L1)) {
+        addressLinkedList Last = First(*L1);
         while (Next(Last) != Nil) {
             Last = Next(Last);
         }
@@ -280,15 +280,15 @@ void Konkat1(List *L1, List *L2, List *L3) {
         First(*L3) = First(*L2);
     }
 
-    CreateListEmpty(L1);
-    CreateListEmpty(L2);
+    CreateLinkedListEmpty(L1);
+    CreateLinkedListEmpty(L2);
 }
 
 
 // int main(){
-//     List fibonacci;
-//     addressList P1, P2;
-//     infoListtype i = 2, el, x1, x2;
+//     LinkedList fibonacci;
+//     addressLinkedList P1, P2;
+//     infoLinkedListtype i = 2, el, x1, x2;
 //     CreateEmpty(&fibonacci);
 //     scanf("%d", &el);
 //     if (el == 1)
@@ -315,13 +315,13 @@ void Konkat1(List *L1, List *L2, List *L3) {
 // }
 
 // int main(){
-//     addressList P;
+//     addressLinkedList P;
 //     int n;
 //     int temp;
 //     int el1;
 //     int el2;
 //     int next;
-//     List l;
+//     LinkedList l;
 //     CreateEmpty(&l);
 //     scanf("%d", &n);
 //     if (n == 1){
