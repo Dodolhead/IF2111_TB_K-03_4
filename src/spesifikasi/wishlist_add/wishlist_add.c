@@ -7,7 +7,7 @@ void wishlistAdd(User *U){
     printf("Masukkan nama barang: ");
     STARTWORD();
     addressLinkedList P = SearchWishList(U, currentWord.TabWord);
-    if (P == Nil || isEmptyUserList(U)) {
+    if (P == Nil || isEmptyUserLinkedList(*U)) {
         AddToWishlist(U, currentWord.TabWord);
         printf("Berhasil menambahkan %s ke wishlist!\n",currentWord.TabWord);
     }
@@ -21,10 +21,6 @@ int main() {
     LinkedList wishlist;
     CreateLinkedListEmpty(&wishlist);
 
-    wishlistAdd(&U);
-    PrintUserInfo(&U);
-    wishlistAdd(&U);
-    PrintUserInfo(&U);
-    wishlistAdd(&U);
-    PrintUserInfo(&U);
+    wishlistAdd(&U.A[0]);
+    PrintUserInfo(U.A[0],0);
 }
