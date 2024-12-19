@@ -1,6 +1,11 @@
 #include "boolean.h"
-#include "user2.h"
-#include "user2.c"
+#include "map.h"
+#include "stack.h"
+#include "listlinier.h"
+#include "mesinkata.h"
+#include "mesinkarakter.h"
+#include "mesinangka.h"
+#include "../../utilities.h"
 
 int main() {
     User U;

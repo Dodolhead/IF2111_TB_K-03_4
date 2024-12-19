@@ -7,7 +7,7 @@
 extern int currentAngka;
 extern boolean EOPAngka;
 
-void STARTANGKA();
+void STARTANGKA(char* filename);
 /* Mesin siap dioperasikan untuk membaca angka.
    I.S. : sembarang
    F.S. : currentAngka adalah angka pertama yang terbaca.

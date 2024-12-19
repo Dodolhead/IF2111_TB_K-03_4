@@ -1,33 +1,33 @@
 #include <stdio.h>
 #include "mesinangka.h"
-#include "mesinkarakter.h" // Menggunakan Mesin Karakter sebagai dasar
+#include "mesinkarakter.h"
 
 int currentAngka;
 boolean EOPAngka;
 
-void STARTANGKA() {
-    START(); // Inisialisasi Mesin Karakter
+void STARTANGKA(char* filename) {
+    START(filename); // Perbaikan dengan argumen filename
     EOPAngka = false;
-    ADVANGKA(); // Cari angka pertama
+    ADVANGKA();
 }
 
 void ADVANGKA() {
     while (!IsEOP() && (GetCC() < '0' || GetCC() > '9')) {
-        ADV(); // Lewati karakter non-angka
+        ADV();
     }
     if (IsEOP()) {
         EOPAngka = true;
     } else {
-        currentAngka = GetCC() - '0'; // Konversi karakter angka ke integer
-        ADV(); // Pindah ke karakter berikutnya
+        currentAngka = GetCC() - '0';
+        ADV();
     }
 }
 
-int bacaAngka(){
-    int total=0;
+int bacaAngka() {
+    int total = 0;
     while (!IsEOPAngka()) {
         total = total * 10 + currentAngka;
-    ADVANGKA();
+        ADVANGKA();
     }
     return total;
 }

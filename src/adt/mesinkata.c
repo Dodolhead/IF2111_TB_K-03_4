@@ -84,25 +84,15 @@ void CopyWord()
     currentWord.Length = 0;
     while (currentChar != BLANK && currentChar != MARK)
     {
-        if (currentWord.Length < NMax)
-        {
-            currentWord.TabWord[currentWord.Length] = currentChar;
-            currentWord.Length++;
+        if (CurrentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
+            ADV();
         }
-        ADV();
+        else
+            break;
     }
 }
-
-// copyword 3 (buat cek 1 kata 1 kata)
-// void CopyWord() {
-//     int i = 0;
-//     while (currentChar != BLANK && currentChar != MARK && i < NMax) {
-//         currentWord.TabWord[i] = currentChar; // Salin karakter
-//         ADV();
-//         i++;
-//     }
-//     currentWord.TabWord[currentWord.Length] = '\0';
-// }
 
 boolean isEndWord() {
     return endWord;

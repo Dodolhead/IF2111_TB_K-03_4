@@ -1,16 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "user2.h"
-#include "map.h"
-#include "stack.h"
-#include "listlinier.h"
-#include "mesinkata.c"
-#include "mesinkarakter.c"
-#include "mesinangka.c"
-#include "map.c"
-#include "stack.c"
-#include "listlinier.c"
-#include "../../utilities.c"
+
 
 
 boolean isEmptyUser(User U) {
