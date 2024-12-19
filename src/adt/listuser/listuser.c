@@ -87,7 +87,7 @@ int ListUserLength(List U) {
     int count = 0;
     while (count < MaxEl && U.A[count].money != MarkNumber) {
         count++;
-    } printf("count: %d\n", count);
+    }
     return count;
 }
 /* Mengembalikan jumlah elemen efektif dalam list */
@@ -263,11 +263,13 @@ void PrintUserInfo(List U, IdxType i) {
     PrintName(U, i);
     PrintPassword(U, i);
     PrintMoney(U, i);
+    
+}
+void PrintUserBarang(List *U, IdxType i) {
     PrintKeranjang(U, i);
     PrintRiwayatPembelian(U, i);
     PrintWishlist(U, i);
 }
-
 // Implementasi fungsi
 void PrintName(List U, IdxType i) {
     printf("User: %s\n", U.A[i].name);
@@ -277,32 +279,62 @@ void PrintPassword(List U, IdxType i) {
     printf("Password: %s\n", U.A[i].password);
 }
 
+
 void PrintMoney(List U, IdxType i) {
     printf("Money: %d\n", U.A[i].money);
 }
 
-void PrintKeranjang(List U, IdxType i) {
+void PrintKeranjang(List *U, IdxType i) {
     printf("Keranjang:\n");
-    for (int j = 0; j < U.A[i].keranjang.Count; j++) {
+    for (int j = 0; j < U->A[i].keranjang.Count; j++) {
         printf("Key: %d, Value: %d\n",
-               U.A[i].keranjang.Elements[j].Key,
-               U.A[i].keranjang.Elements[j].Value);
+               U->A[i].keranjang.Elements[j].Key,
+               U->A[i].keranjang.Elements[j].Value);
     }
 }
 
-void PrintRiwayatPembelian(List U, IdxType i) {
+void PrintRiwayatPembelian(List *U, IdxType i) {
     printf("Riwayat Pembelian:\n");
-    for (int j = 0; j <= U.A[i].riwayat_pembelian.TOP; j++) {
+    for (int j = 0; j <= U->A[i].riwayat_pembelian.TOP; j++) {
         printf("Nama Barang: %s, Harga: %d, Jumlah: %d\n",
-               U.A[i].riwayat_pembelian.T[j].name,
-               U.A[i].riwayat_pembelian.T[j].price,
-               U.A[i].riwayat_pembelian.T[j].jumlahBarang);
+               U->A[i].riwayat_pembelian.T[j].name,
+               U->A[i].riwayat_pembelian.T[j].price,
+               U->A[i].riwayat_pembelian.T[j].jumlahBarang);
     }
 }
 
-void PrintWishlist(List U, IdxType i) {
+void PrintWishlist(List *U, IdxType i) {
     printf("Wishlist:\n");
-    addressLinkedList P = First(U.A[i].wishlist);
+    addressLinkedList P = First(U->A[i].wishlist);
+    while (P != Nil) {
+        printf("- %s\n", Info(P));
+        P = Next(P);
+    }
+    printf("\n");
+}
+
+void PrintUserLengkap(List *U, IdxType i) {
+    printf("User: %s\n", U->A[i].name);
+    printf("Password: %s\n", U->A[i].password);
+    printf("Money: %d\n", U->A[i].money);
+    
+    printf("Keranjang:\n");
+    for (int j = 0; j < U->A[i].keranjang.Count; j++) {
+        printf("Key: %d, Value: %d\n",
+               U->A[i].keranjang.Elements[j].Key,
+               U->A[i].keranjang.Elements[j].Value);
+    }
+
+        printf("Riwayat Pembelian:\n");
+    for (int j = 0; j <= U->A[i].riwayat_pembelian.TOP; j++) {
+        printf("Nama Barang: %s, Harga: %d, Jumlah: %d\n",
+               U->A[i].riwayat_pembelian.T[j].name,
+               U->A[i].riwayat_pembelian.T[j].price,
+               U->A[i].riwayat_pembelian.T[j].jumlahBarang);
+    }
+
+    printf("Wishlist:\n");
+    addressLinkedList P = First(U->A[i].wishlist);
     while (P != Nil) {
         printf("- %s\n", Info(P));
         P = Next(P);

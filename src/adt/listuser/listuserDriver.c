@@ -18,47 +18,77 @@
 #include "../../adt/mesinangka/mesinangka.h"
 #include "../../adt/listlinier/listlinier.h"
 
-int main() {
-    // Membuat list kosong
+void testAllFunctions() {
+    // Membuat list user
     List userList = MakeList();
-    printf("List berhasil dibuat.\n");
 
-    // Menambahkan pengguna pertama
+    // Menambahkan user baru ke list
+    printf("Menambahkan User ke List:\n");
     Map keranjang;
     Stack riwayat;
     LinkedList wishlist;
-
     CreateMapEmpty(&keranjang);
     CreateStackEmpty(&riwayat);
     CreateLinkedListEmpty(&wishlist);
-    
 
-    InsertListAt(&userList, 100000, "admin", "admin123", keranjang, riwayat, wishlist, 0);
-    printf("Menambahkan pengguna pertama.\n");
-    PrintUserInfo(userList, 0);
+    InsertListLast(&userList, 1000, "User1", "password1", keranjang, riwayat, wishlist);
+    InsertListLast(&userList, 500, "User2", "password2", keranjang, riwayat, wishlist);
+    PrintUserLengkap(&userList, 0);
+    PrintUserLengkap(&userList, 1);
 
-    InsertListAt(&userList, 50000, "user1", "password1", keranjang, riwayat, wishlist, 1);
-    printf("Menambahkan pengguna kedua.\n");
-    
-    InsertListAt(&userList, 75000, "user2", "password2", keranjang, riwayat, wishlist, 2);
-    printf("Menambahkan pengguna ketiga di posisi tengah.\n");
-    
-    ListUserLength(userList);
- 
+    // Mengakses atribut user
+    printf("\nMengakses atribut user:\n");
+    char buffer[50];
+    GetName(userList, 0, buffer);
+    printf("Nama user pertama: %s\n", buffer);
 
+    GetPassword(userList, 1, buffer);
+    printf("Password user kedua: %s\n", buffer);
 
-    DeleteListLast(&userList);
-    printf("Menghapus pengguna terakhir.\n");
+    printf("Uang user pertama: %d\n", GetMoney(userList, 0));
 
-    // Menampilkan ulang seluruh elemen
-    printf("List pengguna setelah semua operasi:\n");
+    // Menambah item ke wishlist
+    printf("\nMenambah item ke wishlist:\n");
+    AddToWishlist(&userList.A[0], "Item1");
+    AddToWishlist(&userList.A[0], "Item2");
+    PrintWishlist(&userList, 0);
 
+    // Menghapus item dari wishlist
+    printf("\nMenghapus item dari wishlist:\n");
+    RemoveFromWishlist(&userList.A[0], "Item1");
+    PrintWishlist(&userList, 0);
 
-    // Menambahkan item ke wishlist pengguna pertama
-    AddToWishlist(&userList.A[0], "Barang 1");
-    AddToWishlist(&userList.A[0], "Barang 2");
-    printf("Wishlist pengguna pertama setelah penambahan:\n");
-    PrintWishlist(userList, 0);
+    // Menambah item ke keranjang
+    printf("\nMenambah item ke keranjang:\n");
+    AddToKeranjang(&userList.A[0], 1, 10);
+    AddToKeranjang(&userList.A[0], 2, 20);
+    PrintKeranjang(&userList, 0);
 
+    // Menghapus item dari keranjang
+    printf("\nMenghapus item dari keranjang:\n");
+    RemoveFromKeranjang(&userList.A[0], 1);
+    PrintKeranjang(&userList, 0);
 
+    // Menambah riwayat pembelian
+    printf("\nMenambah riwayat pembelian:\n");
+    Push(&userList.A[0].riwayat_pembelian, "Barang1", 500);
+    Push(&userList.A[0].riwayat_pembelian, "Barang2", 1000);
+    PrintRiwayatPembelian(&userList, 0);
+
+    // Menghapus user dari list
+    printf("\nMenghapus user pertama dari list:\n");
+    DeleteListFirst(&userList);
+    if (IsListEmpty(userList)) {
+        printf("List kosong setelah penghapusan.\n");
+    } else {
+        PrintUserLengkap(&userList, 0);
+    }
+
+    printf("\nTesting selesai.\n");
+}
+
+int main() {
+    printf("Testing semua fungsi:\n\n");
+    testAllFunctions();
+    return 0;
 }

@@ -103,8 +103,10 @@ void PrintUserInfo(List U, IdxType i);
 void PrintName(List U, IdxType i);
 void PrintPassword(List U, IdxType i);
 void PrintMoney(List U, IdxType i);
-void PrintKeranjang(List U, IdxType i);
-void PrintRiwayatPembelian(List U, IdxType i);
-void PrintWishlist(List U, IdxType i);
+void PrintKeranjang(List *U, IdxType i);
+void PrintRiwayatPembelian(List *U, IdxType i);
+void PrintWishlist(List *U, IdxType i);
+void PrintUserBarang(List *U, IdxType i);
+void PrintUserLengkap(List *U, IdxType i);
 
 #endif /* LISTUSER_H */
