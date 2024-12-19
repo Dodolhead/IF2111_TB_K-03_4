@@ -5,41 +5,49 @@ void StoreRemove(ArrayDin Info) {
     // KAMUS
     boolean foundList = false;
     int select = 0;
+    char name[50];
     
     // ALGORITMA
     printf("Nama barang yang akan dihapus: ");
-    STARTWORD();
+    
+    // Membaca kata pertama nama barang
+    ADVWORD();
+    copyString(name, currentWord.TabWord);
 
-    while (CurrentWord.TabWord[select] != '\0') {
-        printf("%c", CurrentWord.TabWord[select]);
-        select++;
+    // Jika nama barang lebih dari satu kata
+    while (GetCC() != '\n') {
+        ADVWORD();
+            name[stringLength(name)] = BLANK;
+            stringConcat(name, currentWord.TabWord);
+    }
+
+    // Mencetak nama barang
+    for (int i = 0; name[i] != '\0'; i++) {
+        printf("%c", name[i]);
     }
     printf("\n");
 
-    if (!IsEmpty(Info)) {
-        select = 0;
-        while (select < ArrLength(Info) && !foundList) {
-            if (stringEquals(NamaBarang(&(Info.A[select])), CurrentWord.TabWord)) {
+    // Mengecek ketersediaan barang dalam toko
+    if (!IsArrDinEmpty(Info)) {
+        for (int j = 0; j < ArrLength(Info) && !foundList; j++) {
+            if (stringEquals(NamaBarang(&(Info.A[j])), name)) {
                 foundList = true;
-            } else {
-                select++;
             }
         }
+    } else {
+        printf("ERROR: Toko Kosong!");
     }
 
-    select = 0;
     if (foundList) {
-        while (CurrentWord.TabWord[select] != '\0') {
-            printf("%c", CurrentWord.TabWord[select]);
-            select++;
+        for (int k = 0; name[k] != '\0'; k++) {
+            printf("%c", name[k]);
         }
         printf(" telah berhasil dihapus.\n");
-        ArrDeleteAt(&Info, CurrentWord.TabWord);
+        ArrDeleteAt(&Info, name);
     } else {
         printf("Toko tidak menjual ");
-        while (CurrentWord.TabWord[select] != '\0') {
-            printf("%c", CurrentWord.TabWord[select]);
-            select++;
+        for (int a = 0; name[a] != '\0'; a++) {
+            printf("%c", name[a]);
         }
         printf("\n");
     }
