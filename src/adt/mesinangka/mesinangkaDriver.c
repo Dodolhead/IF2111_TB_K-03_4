@@ -2,7 +2,7 @@
 #include "../../adt/mesinkata/mesinkata.h"
 
 int main(){
-    char filename = 'test.txt';
+    char filename[] = "config.txt"; // Use double quotes for string literals
     START(filename);
     while (!IsEOP())
     {
@@ -10,4 +10,5 @@ int main(){
         ADV();
     }
     
+    return 0;
 }
