@@ -4,9 +4,10 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "boolean.h"
-#include "barang.h"
-#include "../../utilities.h"
+#include "../../adt/boolean/boolean.h"
+#include "../../adt/barang/barang.h"
+#include "../../../utilities.h"
+
 
 #define IDX_UNDEF -1
 #define CAPACITY 100

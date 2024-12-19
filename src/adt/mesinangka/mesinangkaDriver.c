@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "mesinkata.h"
+#include "../../adt/mesinkata/mesinkata.h"
 
 int main(){
     char filename = 'test.txt';
