@@ -3,33 +3,50 @@
 
 void StoreRequest(Queue q, ArrayDin Info) {
     // KAMUS
-    int i = 0;
+    int i = 0, j = 0;
     boolean foundQueue = false, foundList = false;
+    char name[50];
 
     // ALGORITMA
-    STARTWORD();
+    // Membaca kata pertama nama barang
+    ADVWORD();
+    copyString(name, currentWord.TabWord);
 
-    // Mengecek nama barang di toko
-    if (!IsEmpty(Info)) {
-        while (i < ArrLength(Info) && !foundList) {
-            if (stringEquals(NamaBarang(&(Info.A[i])), CurrentWord.TabWord)) {
+    // Jika nama barang lebih dari satu kata
+    while (GetCC() != '\n') {
+        ADVWORD();
+            name[stringLength(name)] = BLANK;
+            stringConcat(name, currentWord.TabWord);
+    }
+
+    // Mencetak nama barang
+    for (i = 0; name[i] != '\0'; i++) {
+        printf("%c", name[i]);
+    }
+    printf("\n");
+
+    // Mengecek ketersediaan barang dalam toko
+    if (!IsArrDinEmpty(Info)) {
+        for (j = 0; j < ArrLength(Info) && !foundList; j++) {
+            if (stringEquals(NamaBarang(&(Info.A[j])), name)) {
                 foundList = true;
-            } else {
-                i++;
             }
         }
+    } else {
+        printf("ERROR: Toko Kosong!");
     }
 
     // Mengecek nama barang di antrian
-    if (!isEmpty(q)) {
-        i = IDX_HEAD(q);
-        while (i <= IDX_TAIL(q) && !foundQueue) {
-            if (stringEquals(NamaBarang(&(q.buffer[i])), CurrentWord.TabWord)) {
+    if (!isQueueEmpty(q)) {
+        for (i = IDX_HEAD(q); i <= IDX_TAIL(q) && !foundQueue; i++) {
+            if (stringEquals(NamaBarang(&(q.buffer[i])), name)) {
                 foundQueue = true;
             } else {
                 i = (i + 1) % CAPACITY;
             }
         }
+    } else {
+        printf("ERROR: Antrian Kosong!");
     }
 
     if (foundList) {
@@ -38,7 +55,7 @@ void StoreRequest(Queue q, ArrayDin Info) {
         if (foundQueue) {
             printf("Barang dengan nama yang sama sudah ada di antrian!\n");
         } else {
-            enqueue(&q, CurrentWord.TabWord);
+            enqueue(&q, name);
             printf("Barang berhasil ditambahkan ke antrian!\n");
         }
     }

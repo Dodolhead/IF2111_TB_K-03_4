@@ -1,6 +1,6 @@
-#include "..\..\adt\queue.h"
-#include "..\..\adt\arraydinBarang.h"
-#include "..\..\adt\boolean.h"
+#include "../../adt/queue/queue.h"
+#include "../../adt/arraydinBarang/arraydinBarang.h"
+#include "../../adt/boolean/boolean.h"
 
 void StoreSupply(Queue q, ArrayDin Info);
 /*

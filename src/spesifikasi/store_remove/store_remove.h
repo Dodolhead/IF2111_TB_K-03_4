@@ -1,5 +1,6 @@
-#include "..\..\adt\arraydinBarang.h"
-#include "..\..\adt\boolean.h"
+#include "../../adt/arraydinBarang/arraydinBarang.h"
+#include "../../adt/boolean/boolean.h"
+#include "../../../utilities.h"
 
 void StoreRemove(ArrayDin Info);
 /*

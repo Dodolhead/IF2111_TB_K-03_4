@@ -1,8 +1,10 @@
 #include "cart_show.h"
 #include <stdio.h>
 
-void CartShow(Cart cart) {
-    if (IsArrDinEmpty(cart.Cart)) {
+void CartShow(Map cart, ArrayDin Info) {
+    int total = 0;
+
+    if (IsMapEmpty(cart)) {
         printf("Keranjang kamu kosong!\n");
         return;
     }
@@ -10,20 +12,29 @@ void CartShow(Cart cart) {
     printf("Berikut adalah isi keranjangmu.\n");
     printf("Kuantitas  Nama    Total\n");
     
-    int totalBiaya = 0;
-    
-    // Iterate through items in cart and display them
-    for (int i = 0; i < ArrLength(cart.Cart); i++) {
-        Barang currentBarang = GetArrDin(cart.Cart, i);
-        int itemTotal = currentBarang.jumlahBarang * currentBarang.price;
-        totalBiaya += itemTotal;
-        
-        // Print item details with proper formatting
-        printf("%-10d %-7s %d\n", 
-            currentBarang.jumlahBarang, 
-            currentBarang.name, 
-            itemTotal);
+    for (int i = 0; i < cart.Count; i++) {
+        // Mencetak jumlah barang yang ada di keranjang
+        printf("%d ", cart.Elements[i].Value);
+
+        // Mencetak nama barang
+        for (int j = 0; cart.Elements[i].keytype[j] != '\0'; j++) {
+            printf("%c", cart.Elements[i].keytype[j]);
+        }
+
+        // Menghitung subtotal harga barang
+        int k = 0;
+        while (k < ArrLength(Info)) {
+            if (stringEquals(cart.Elements[i].keytype, Info.A[k].name)) {
+                break;
+            } else {
+                k++;
+            }
+        }
+
+        // Mencetak subtotal harga barang
+        printf(" %d", cart.Elements[i].Value * Info.A[k].price);
+        total = total + cart.Elements[i].Value * Info.A[k].price;
     }
     
-    printf("Total biaya yang harus dikeluarkan adalah %d.\n", totalBiaya);
+    printf("Total biaya yang harus dikeluarkan adalah %d.\n", total);
 }

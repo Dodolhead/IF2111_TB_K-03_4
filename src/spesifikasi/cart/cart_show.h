@@ -2,6 +2,7 @@
 #define CART_SHOW_H
 
 #include "cart.h"
+#include "../../../utilities.h"
 
 /**
  * Shows the contents of the shopping cart
