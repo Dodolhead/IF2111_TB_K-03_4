@@ -4,8 +4,8 @@
 int currentAngka;
 boolean EOPAngka;
 
-void STARTANGKA(char* filename) {
-    START(filename); // Perbaikan dengan argumen filename
+void STARTANGKA() {
+    START(); // Perbaikan dengan argumen filename
     EOPAngka = false;
     ADVANGKA();
 }

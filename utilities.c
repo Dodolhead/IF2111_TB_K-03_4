@@ -49,12 +49,3 @@ int arrayToInteger(char arr[], int length) {
     }
     return result;
 }
-
-int bacaAngka() {
-    int total = 0;
-    while (!IsEOPAngka()) {
-        total = total * 10 + currentAngka;
-        ADVANGKA();
-    }
-    return total;
-}

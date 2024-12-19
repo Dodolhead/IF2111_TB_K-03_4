@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include "work_challenge.h"
+#include "../../../utilities.c" 
+#include "../../adt/mesinkata/mesinkata.c" 
+#include "../../adt/mesinkarakter/mesinkarakter.c" 
+
 
 int random(int lower, int upper){
     srand(time(0));
@@ -19,8 +23,8 @@ void tebakAngka(int* money) {
     for (int i =0;i<10;i++){
         printf("Tebak Angka:\n");
         printf(">> ");
-        STARTANGKA();
-        tebakan = bacaAngka();
+        STARTWORD();
+        tebakan = arrayToInteger(currentWord.TabWord, 2);
         if (tebakan == angka_random) {
             printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun anda.\n", getMoney);
             *money += getMoney;
@@ -80,15 +84,15 @@ void wordl3(int* money) {
         printf(">> ");
         STARTWORD();
 
-        if (CurrentWord.Length != 5) {
+        if (currentWord.Length != 5) {
             printf("Kata harus terdiri dari 5 huruf, jangan rusak permainan ya kids :)\n");
             break;
         } 
 
         int correctCount = 0;
         for (int j = 0; j < 5; j++) {
-            matrix[i][j] = CurrentWord.TabWord[j];
-            if (CurrentWord.TabWord[j] == kata[j]) {
+            matrix[i][j] = currentWord.TabWord[j];
+            if (currentWord.TabWord[j] == kata[j]) {
                 feedbackMatrix[i][j] = '*';
                 correctCount++;
             } else {
@@ -199,14 +203,14 @@ void quantumWordl3(int* money) {
             printf(">> ");
             STARTWORD();
 
-            if (CurrentWord.Length != 5) {
+            if (currentWord.Length != 5) {
                 printf("Kata harus terdiri dari 5 huruf, jangan rusak permainan ya kids :)\n");
                 break;
             } 
 
             for (int k = 0; k < 5; k++) {
-                matrix[j][k] = CurrentWord.TabWord[k];
-                if (CurrentWord.TabWord[k] == kata[k]) {
+                matrix[j][k] = currentWord.TabWord[k];
+                if (currentWord.TabWord[k] == kata[k]) {
                     correctCount++;
                 }
             }
@@ -250,8 +254,8 @@ void workChallenge(int* money) {
     printf("1. Tebak Angka (biaya main=200\n");
     printf("2. W0RDL399 (biaya main=500)\n");
     printf("3. Quantum W0RDL399 (biaya main=5000)\n>> ");
-    STARTANGKA();
-    input = bacaAngka();
+    STARTWORD();
+    input = arrayToInteger(currentWord.TabWord, 1);
     if (input == 1 && *money >= 200) {
         tebakAngka(money);
     } 
@@ -266,10 +270,9 @@ void workChallenge(int* money) {
     }
 }
 
-/*
+
 int main(){
     int money = 5001;
     workChallenge(&money);
     printf("%d",money);
 }
-*/

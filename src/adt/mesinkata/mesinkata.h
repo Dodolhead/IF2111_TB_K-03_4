@@ -6,6 +6,7 @@
 
 #include "../../adt/boolean/boolean.h"
 #include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../../utilities.h"
 
 #define NMax 100
 #define BLANK ' '
@@ -19,18 +20,20 @@ typedef struct
 
 /* State Mesin Kata */
 extern boolean EndWord;
-extern Word CurrentWord;
+extern Word currentWord;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD(char* filename);
+void STARTWORD();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
+
+void STARTSENTENCE();
 
 void ADVWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -47,5 +50,7 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
           
+
+void CopySentence();
 
 #endif
