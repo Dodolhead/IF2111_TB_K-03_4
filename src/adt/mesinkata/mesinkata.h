@@ -22,6 +22,7 @@ typedef struct
 extern boolean endWord;
 extern Word currentWord;
 
+
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
@@ -53,5 +54,6 @@ void CopyWord();
 
 void CopySentence();
 
+void ADVONEWORD();
 boolean isEndWord();
 #endif
