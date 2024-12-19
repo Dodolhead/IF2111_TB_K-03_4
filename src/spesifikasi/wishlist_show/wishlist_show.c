@@ -5,7 +5,7 @@
 
 void wishlistShow(User U){
     printf("Wishlist:\n");
-    addressList P = First(U.wishlist);
+    addressLinkedLis P = First(U.wishlist);
     if (isEmptyUserList(U)){
         printf("Wishlist kamu kosong!");
     }

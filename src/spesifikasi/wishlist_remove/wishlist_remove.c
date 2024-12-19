@@ -6,7 +6,7 @@
 void wishlistRemove(User *U){
     printf("Masukkan nama barang yang akan dihapus: ");
     STARTSENTENCE();
-    addressList P = SearchWishList(U, currentWord.TabWord);
+    addressLinkedLis P = SearchWishList(U, currentWord.TabWord);
     if (P == Nil || isEmptyUserList(U)) {
         printf("%s Tidak ada di wishlist\n",currentWord.TabWord);
     }

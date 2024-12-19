@@ -20,8 +20,8 @@ void wishlistSwap(User *U) {
     }
 
     // Menemukan node pertama
-    addressList P1 = First(U->wishlist);
-    addressList P2 = First(U->wishlist);
+    addressLinkedLis P1 = First(U->wishlist);
+    addressLinkedLis P2 = First(U->wishlist);
 
     int i = 0;
     // Mencari node pertama
