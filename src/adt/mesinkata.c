@@ -34,6 +34,25 @@ void STARTWORD(char* filename)
     }
 }
 
+void STARTSENTENCE()
+{
+    /* I.S. : currentChar sembarang
+       F.S. : endWord = true, dan currentChar = MARK;
+              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+              currentChar karakter pertama sesudah karakter terakhir kata */
+    START();
+    IgnoreBlanks();
+    if (currentChar == MARK)
+    {
+        EndWord = true;
+    }
+    else
+    {
+        EndWord = false;
+        CopySentence();
+    }
+}
+
 void ADVWORD()
 {
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -63,16 +82,26 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     CurrentWord.Length = 0;
-    while (CurrentChar != BLANK && CurrentChar != MARK)
+    while (currentChar != BLANK && currentChar != MARK)
     {
         if (CurrentWord.Length < NMax)
-        { // jika lebih akan terpotong
-            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
-            ADV();
+        {
+            CurrentWord.TabWord[CurrentWord.Length] = currentChar;
+            CurrentWord.Length++;
         }
-        else
-            break;
+        ADV();
     }
+}
+
+// copyword 3 (buat cek 1 kata 1 kata)
+void CopyWord() {
+    int i = 0;
+    while (currentChar != BLANK && currentChar != MARK && i < NMax) {
+        CurrentWord.TabWord[i] = currentChar; // Salin karakter
+        ADV();
+        i++;
+    }
+    CurrentWord.TabWord[CurrentWord.Length] = '\0';
 }
 
 boolean isEndWord() {

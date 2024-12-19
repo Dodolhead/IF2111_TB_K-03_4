@@ -37,9 +37,6 @@ void RemoveFromWishlist(User U, infoListtype item);
 
 addressList SearchWishList(UserU, infoListtype item);
 
-void DelPWishList(List L, infoListtype X);
-
-int WishlistCount(UserU);
 // Fungsi untuk menambahkan item ke keranjang
 void AddToKeranjang(User U, keytype k, valuetype v);
 
