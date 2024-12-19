@@ -11,6 +11,10 @@
 #include "src/adt/queue.h"
 #include "src/adt/arraydinBarang.h"
 #include "src/adt/barang.h"
+#include "src/adt/stack.h"
+#include "src/adt/listlinier.h"
+#include "src/adt/map.h"
+#include "src/adt/barang.h"
 
 #include "src/spesifikasi/start/start.h"
 #include "src/spesifikasi/load/load.h"
@@ -27,38 +31,28 @@
 #include "src/spesifikasi/save/save.h"
 #include "src/spesifikasi/quit/quit.h"
 
+#include "src/spesifikasi/profile/profile.h"
+#include "src/spesifikasi/cart/cart.h"
+#include "src/spesifikasi/history/history.h"
+#include "src/spesifikasi/wishlist_swap/wishlist_swap.h"
+#include "src/spesifikasi/wishlist_remove/wishlist_remove.h"
+#include "src/spesifikasi/wishlist_remove_i/wishlist_remove_i.h"
+#include "src/spesifikasi/wishlist_clear/wishlist_clear.h"
+
 /* DESCRIPTION ----------------------------------------------------------------------------- */
 
 //AKSES DATA BARANG = barang
 //AKSES DATA USER = users
 
 /*
-STATUS:
-START v
-LOAD v
-LOGIN v
-LOGOUT v
-REGISTER v
-WORK v
-WORK CHALLENGE v
-STORE LIST v
-STORE REQUEST v
-STORE SUPPLY v
-STORE REMOVE v
-HELP v
-SAVE v
-QUIT v
+TOLONG NAMA FUNGSI DAN INPUTNYA SESUAIN SAMA NAMA FUNGSI DISINI
+INI UDAH CARA PALING SEDERHANA TOLONG JANGAN DIUBAH
+KALO ADA YANG INGIN DITANYAKAN BILANG DI GRUP PLIZ!!
 */
 
 /* MAIN ----------------------------------------------------------------------------------- */
 int main(){
     // KAMUS
-    // File address
-    char folder[] = "src/data/";
-    char filename[100] = "config";
-    char fullpath[150] = "";
-    char txt[] = ".txt";
-
     // System state
     boolean startup = false; // Kondisi sistem dibuka
     IdxType i, acc_id; // i untuk looping, acc_id untuk index akun user
@@ -68,11 +62,15 @@ int main(){
     int jumlahBarang = 0, jumlahUsers = 0;
     int loggedInUserIndex = -1; //buat ngecek user yang lagi login
     int baris = 1, currBaris;
-    char command[100];
 
-    // Array dinamis dan antrian
+    // Penyimpanan
     ArrayDin Information;
     Queue request;
+    List User;
+
+    // Masukkan program utama
+    char perintah[50] = "";
+    char keterangan[50] = "";
 
     // ALGORTIMA
     printf("  _____  _    _ _____  _____  __  __          _____ _______ \n");
@@ -85,11 +83,29 @@ int main(){
     printf("***** | (START) Start shopping | (LOAD) Load your file | (HELP) Help | (QUIT) | *****\n");
     
     while (baris < 5) {
-        scanf(">> ", command);
+        STARTFILE("command.txt");
+
+        // Meletakkan posisi baris
+        currBaris = 1;
+        while (currBaris < baris) {
+            ADVWORD();
+            currBaris++;
+            while (GetCC() != '\n') {
+                ADVWORD();
+            }
+        }
+
+        printf("\n>> ");
+        ADVWORD();
+        // Mencetak command
+        i = 0;
+        while (i < CurrentWord.Length) {
+            printf("%c", CurrentWord.TabWord[i]);
+            i++;
+        }        
 
         // START
-        if (stringEquals(command, "START")) {
-            START_PURRMART()
+        if (stringEquals(CurrentWord.TabWord, "START")) {
             printf("\n");
             // Mengubah state
             startup = true;
@@ -97,51 +113,26 @@ int main(){
             // Membuat list barang dan antrian
             Information = MakeArrayDin();
             CreateQueue(&request);
+            User = MakeList();
 
-            printf("\n");
-
-            // Memuat isi file default ke dalam list
-            copyString(fullpath, folder);
-            stringConcat(fullpath, filename);
-            stringConcat(fullpath, txt);
-            ListBarang(&Information, fullpath);
-
-            // Membuka dan membaca file default
-            START_PURRMART();
-
-            printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
-
+            START_PURRMART(Information, User); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
+            
             // Mengubah tampilan HELP
             help_menu = 2;
-
-        } 
+        }
 
         // LOAD
-        else if (stringEquals(CurrentWord.TabWord, "LOAD")) {
-            // Membaca nama file
-            ADVWORD();
-
-            // Membuat list barang dan antrian
+        else if (stringEquals(perintah, "LOAD")) {
+            // Membuat penyimpanan sistem
             Information = MakeArrayDin();
             CreateQueue(&request);
+            User = MakeList();
 
-            // Menyimpan nama file
-            printf(" ");
-            for (i = 0; i < CurrentWord.Length; i++) {
-                printf("%c", CurrentWord.TabWord[i]);
-                filename[i] = CurrentWord.TabWord[i];
-            }
-            filename[i] = '\0';
-            printf("\n");
+            // Masukkan nama file
+            scanf("%s", keterangan); // 'keterangan' -> nama file yang ingin di load
 
             // Membuka dan membaca file
-            LOAD(filename);
-
-            // Memuat isi file default ke dalam list
-            copyString(fullpath, folder);
-            stringConcat(fullpath, filename);
-            stringConcat(fullpath, txt);
-            ListBarang(&Information, fullpath);
+            LOAD(keterangan, Information, User); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
 
             printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
             
@@ -150,109 +141,187 @@ int main(){
         }
 
         // LOGIN
-        else if (stringEquals(CurrentWord.TabWord, "LOGIN")) {
+        else if (stringEquals(perintah, "LOGIN")) {
             if (startup) {
-                acc_id = LOGIN(users, jumlahUsers, &loggedInUserIndex);
+                acc_id = LOGIN(); // LOGIN bakal mengembalikan index user dari List User
+                loggedin = true;
             } else {
                 printf("ERROR: There's no file loaded\n");
             }
         }
         
         // LOGOUT
-        else if (stringEquals(CurrentWord.TabWord, "LOGOUT")) {
-            if (startup) {
-                LOGOUT(&loggedInUserIndex);
+        else if (stringEquals(perintah, "LOGOUT")) {
+            if (loggedin) {
+                acc_id = LOGOUT(); // LOGOUT bakal mengubah acc_id = -1
+                loggedin = false;
             } else {
-                printf("ERROR: There's no file loaded\n");
+                printf("ERROR: There's no account loaded\n");
             }
         }
 
         // REGISTER
-        else if (stringEquals(CurrentWord.TabWord, "REGISTER")) {
+        else if (stringEquals(perintah, "REGISTER")) {
             if (startup) {
-                REGISTER(users, &jumlahUsers);
+                REGISTER(User); // REGISTER bakal insert nama dan password ke List User 
             } else {
                 printf("ERROR: There's no file loaded\n");
             }
         }
 
         // WORK
-        else if (stringEquals(CurrentWord.TabWord, "WORK")) {
-            // Mengecek kata command berikutnya
-            ADVWORD();
+        else if (stringEquals(perintah, "WORK")) {
+            // Masukkan keterangan
+            scanf("%s", keterangan);
 
             // validasi input
-            if (startup) {
-                if (stringEquals(CurrentWord.TabWord, "CHALLENGE")) {
-                    workChallenge(&(users[acc_id].money));
+            if (loggedin) {
+                if (stringEquals(keterangan, "CHALLENGE")) {
+                    workChallenge(User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user
                 }
-            } else if (!startup) {
+            } else if (!loggedin) {
                 printf("ERROR: No account is loaded\n");
             } else {
-                doWork(&(users[acc_id].money));
+                doWork(User.A[acc_id].money); // WORK bakal menambah uang user
             }
         }
 
         // STORE
-        else if (stringEquals(CurrentWord.TabWord, "STORE")) {
-            // Mengecek kata command berikutnya
-            ADVWORD();
-
-            printf(" ");
-            i = 0;
-            while (i < CurrentWord.Length) {
-                printf("%c", CurrentWord.TabWord[i]);
-                i++;
-            }
-            printf("\n");
+        else if (stringEquals(perintah, "STORE")) {
+            // Masukkan keterangan
+            scanf("%s", keterangan); // Masukkan perintah tambahan
 
             // validasi input
-            if (startup) {
+            if (loggedin) {
                 // STORE LIST
-                if (stringEquals(CurrentWord.TabWord, "LIST")) {
-                    StoreList(Information);
+                if (stringEquals(keterangan, "LIST")) {
+                    StoreList(Information); // Menampilkan isi ArrayDin Information
                 }
                 // STORE REQUEST
-                else if (stringEquals(CurrentWord.TabWord, "REQUEST")) {
-                    StoreRequest(request, Information);
+                else if (stringEquals(keterangan, "REQUEST")) {
+                    StoreRequest(request, Information); // Meminta barang baru
                 }
                 // STORE SUPPLY
-                else if (stringEquals(CurrentWord.TabWord, "SUPPLY")) {
-                    StoreSupply(request, Information);
+                else if (stringEquals(keterangan, "SUPPLY")) {
+                    StoreSupply(request, Information); // Masukkan harga barang
                 }
                 // STORE REMOVE
-                else if (stringEquals(CurrentWord.TabWord, "REMOVE")) {
-                    StoreRemove(Information);
+                else if (stringEquals(keterangan, "REMOVE")) {
+                    StoreRemove(Information); // Menghapus barang di Information
                 }
             } 
-            else if (!startup) { printf("ERROR: There's no file loaded\n"); } 
-            else { printf("ERROR: Invalid input\n"); }
-
+            else if (!loggedin) { printf("ERROR: There's no file loaded\n"); } 
+            else { printf("ERROR: Input tidak valid!\n"); }
         }
         
         // HELP
-        else if(stringEquals(CurrentWord.TabWord, "HELP")) {
+        else if(stringEquals(perintah, "HELP")) {
             if (help_menu == 1) welcomeMenu();
             else if (help_menu == 2) loginMenu();
             else if (help_menu == 3) mainMenu();
         }
         
         // SAVE
-        else if(stringEquals(CurrentWord.TabWord, "SAVE")) {
-            Save(Information, users, jumlahUsers);
+        else if(stringEquals(perintah, "SAVE")) {
+            Save(Information, User); // SAVE menyalin informasi dari ArrayDin Information dan List User ke file
         }
         
         // QUIT
-        else if (stringEquals(CurrentWord.TabWord, "QUIT")) {
+        else if (stringEquals(perintah, "QUIT")) {
             printf("\n");
             DeallocateArrayDin(&Information);
             printf("***** | Thank you for visiting PURRMART! | *****\n");
             startup = false;
+            loggedin = false;
             break;
-        }
+        } 
         
-        baris++;
-    }
+        // PROFILE
+        else if (stringEquals(perintah, "PROFILE")) {
+            if (loggedin) {
+                Profile(acc_id); // Menampilkan informasi user dari List User dengan index acc_id
+            } else {
+                printf("ERROR: No account is loaded\n");
+            }
+        }
 
+        // CART
+        else if (stringEquals(perintah, "CART")) {
+            // Masukkan keterangan
+            scanf("%s", keterangan);
+
+            // validasi input
+            if (loggedin) {
+                // CART ADD
+                if (stringEquals(keterangan, "ADD")) {
+                    scanf("%s %d", cartItem, quantity);
+                    AddToCart(User.A[acc_id].keranjang, cartItem, quantity); // Menyimpan barang ke keranjang
+                }
+                // CART REMOVE
+                else if (stringEquals(keterangan, "REMOVE")) {
+                    scanf("%s %d", cartItem, quantity);
+                    RemoveFromCart(User.A[acc_id].keranjang, cartItem, quantity); // Menghapus barang dari keranjang
+                }
+                // CART SHOW
+                else if (stringEquals(keterangan, "SHOW")) {
+                    DisplayCart(User.A[acc_id].keranjang); // Menampilkan keranjang
+                }
+                // CART PAY
+                else if (stringEquals(keterangan, "PAY")) {
+                    PayCart(User.A[acc_id]); // Membayar keranjang, INFO: ini pake User.A[acc_id] soalnya yang dirubah User.A[acc_id].money, User.A[acc_id].keranjang, dan User.A[acc_id].riwayat_pembelian
+                }
+            } 
+            else if (!loggedin) { printf("ERROR: There's no file loaded\n"); } 
+            else { printf("ERROR: Input tidak valid!\n"); }
+        }
+
+        // HISTORY
+        else if (stringEquals(perintah, "HISTORY")) {
+            scanf("%d", quantity);
+
+            if (loggedin) {
+                History(User.A[acc_id].riwayat_pembelian, quantity); // Menampilkan jumlah history
+            } else {
+                printf("ERROR: No account is loaded\n");
+            }
+        }
+
+        // WISHLIST
+        else if (stringEquals(perintah, "WISHLIST")) {
+            // Masukkan keterangan
+            scanf("%s", keterangan);
+
+            // validasi input
+            if (loggedin) {
+                // SWAP
+                if (stringEquals(keterangan, "SWAP")) {
+                    scanf("%s %d", cartItem, quantity);
+                    wishlistSwap(User.A[acc_id].wishlist);
+                }
+                // REMOVE
+                else if (stringEquals(keterangan, "REMOVE")) {
+                    urutan = -1;
+                    scanf("%d", urutan);
+
+                    // REMOVE <i>
+                    if (urutan != -1) {
+                        wishlistRemove(User.A[acc_id].wishlist);
+                    } else {
+                        wishlistRemoveI(User.A[acc_id].wishlist, urutan);
+                    }
+                }
+                // CLEAR
+                else if (stringEquals(keterangan, "CLEAR")) {
+                    wishlistClear(User.A[acc_id].wishlist);
+                }
+            } 
+            else if (!loggedin) { printf("ERROR: No account is loaded\n"); } 
+            else { printf("ERROR: Input tidak valid!\n"); }
+        }
+
+        else {
+            printf("ERROR: Input tidak valid!\n");
+        }
+    }
     return 0;
 }

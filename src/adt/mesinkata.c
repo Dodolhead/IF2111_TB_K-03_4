@@ -15,7 +15,7 @@ void IgnoreBlanks()
     }
 }
 
-void STARTWORD(char* filename)
+void STARTWORD()
 {
     /* I.S. : currentChar sembarang
        F.S. : endWord = true, dan currentChar = MARK;
@@ -29,27 +29,8 @@ void STARTWORD(char* filename)
     }
     else
     {
-        endWord = false;
-        CopyWord();
-    }
-}
-
-void STARTSENTENCE()
-{
-    /* I.S. : currentChar sembarang
-       F.S. : endWord = true, dan currentChar = MARK;
-              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
-              currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
-    IgnoreBlanks();
-    if (currentChar == MARK)
-    {
-        EndWord = true;
-    }
-    else
-    {
         EndWord = false;
-        CopySentence();
+        CopyWord();
     }
 }
 
@@ -69,7 +50,43 @@ void ADVWORD()
     {
         endWord = false;
         CopyWord();
-        IgnoreBlanks();
+        IgnoreBlanks(); 
+    }
+}
+
+void ADVUSER() {
+    IgnoreBlanks(); 
+
+    CurrentWord.Length = 0; 
+
+    while (currentChar != ' ' && currentChar != MARK && CurrentWord.Length < NMax) {
+        CurrentWord.TabWord[CurrentWord.Length] = currentChar;
+        CurrentWord.Length++;
+        ADV();
+    }
+    
+    IgnoreBlanks(); 
+}
+
+void ADVONEWORD() {
+    // Lewati karakter-karakter dalam kata pertama
+    while (currentChar != BLANK && currentChar != MARK) {
+        ADV(); // Pindahkan ke karakter berikutnya
+    }
+
+    // Lewati spasi setelah kata pertama
+    while (currentChar == BLANK && currentChar != MARK) {
+        ADV(); // Pindahkan ke karakter berikutnya
+    }
+
+    // Salin kata berikutnya ke CurrentWord
+    CurrentWord.Length = 0;
+    while (currentChar != BLANK && currentChar != MARK) {
+        if (CurrentWord.Length < NMax) {  // Pastikan tidak melebihi kapasitas
+            CurrentWord.TabWord[CurrentWord.Length] = currentChar;
+            CurrentWord.Length++;
+            ADV();  // Pindahkan ke karakter berikutnya
+        }
     }
 }
 
@@ -81,12 +98,12 @@ void CopyWord()
               currentChar = BLANK atau currentChar = MARK;
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    currentWord.Length = 0;
+    CurrentWord.Length = 0;
     while (currentChar != BLANK && currentChar != MARK)
     {
-        if (CurrentWord.Length < NMax)
+        if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            CurrentWord.TabWord[CurrentWord.Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV();
         }
         else

@@ -3,32 +3,63 @@
 
 char currentChar;
 boolean EOP;
-
 static FILE *pita;
 static int retval;
 
-void START(char *filename) {
+void ADVFILE() {
+    if (fscanf(pita, "%c", &currentChar) == EOF) {
+        EOP = true;
+        fclose(pita);
+    } else {
+        EOP = false;
+    }
+}
+
+void START() {
+    pita = stdin;
+    ADV();
+}
+/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+   Pita baca diambil dari stdin.
+   I.S. : sembarang
+   F.S. : currentChar adalah karakter pertama pada pita
+          Jika currentChar != MARK maka EOP akan padam (false)
+          Jika currentChar = MARK maka EOP akan menyala (true) */
+
+void ADV() {
+    /* Pita dimajukan satu karakter. ... */
+    /* Algoritma */
+    retval = fscanf(pita, "%c", &currentChar);
+    EOP = (currentChar == MARK);
+    if (EOP) {
+        fclose(pita);
+    }
+}
+
+void STARTFILE(char* filename) {
     pita = fopen(filename, "r");
     if (pita == NULL) {
-        printf("File tidak ditemukan: %s\n", filename);
+        printf("Save file tidak ditemukan. PURRMART gagal dijalankan\n");
         EOP = true;
     } else {
         ADV();
     }
 }
 
-void ADV() {
-    retval = fscanf(pita, "%c", &currentChar);
-    EOP = (retval == EOF);
-    if (EOP) {
-        fclose(pita);
-    }
-}
+/* Pita dimajukan satu karakter.
+   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+          currentChar mungkin = MARK
+          Jika currentChar = MARK maka EOP akan menyala (true) */
 
 char GetCC() {
+    /* Mengirimkan currentChar */
+    /* Algoritma */
     return currentChar;
 }
 
 boolean IsEOP() {
-    return EOP;
+    return currentChar == MARK;
 }
+/* Mengirimkan true jika currentChar = MARK */
