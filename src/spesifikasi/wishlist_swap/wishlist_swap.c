@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_swap.h"
-#include "..\..\adt\user2.c"
+#include "../../adt/listuser/listuser.c"
 
 void wishlistSwap(User *U) {
     STARTANGKA();  // Mulai membaca angka pertama

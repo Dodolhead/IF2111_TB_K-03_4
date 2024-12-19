@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_clear.h"
-#include "..\..\adt\user2.c"
+#include "../../adt/listuser/listuser.c"
 
 void wishlistClear(User *U) {
     addressList P = First(U->wishlist);

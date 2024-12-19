@@ -49,6 +49,7 @@ int arrayToInteger(char arr[], int length) {
     }
     return result;
 }
+<<<<<<< HEAD
 /*void STARTANGKA_START() {
     boolean EndAngka;
     IgnoreBlanks();
@@ -67,3 +68,5 @@ int arrayToInteger(char arr[], int length) {
     currentAngka = arrayToInteger(temp, index); // Konversi angka
     EndAngka = IsEOP();
 }*/
+=======
+>>>>>>> 10943e166dd5f6b372eb2d77ba5af50f14ccbcdc

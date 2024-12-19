@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_add.h"
-#include "..\..\adt\user2.c"
+#include "../../adt/listuser/listuser.c"
 
 void wishlistAdd(User *U){
     printf("Masukkan nama barang: ");
@@ -17,8 +17,9 @@ void wishlistAdd(User *U){
 }
 
 int main() {
-    User U;
-    CreateUser(&U, "JohnDoe", "password123", 1000);
+    List U = MakeList();
+    LinkedList wishlist;
+    CreateLinkedListEmpty(&wishlist);
 
     wishlistAdd(&U);
     PrintUserInfo(&U);

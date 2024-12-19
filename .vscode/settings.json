@@ -67,6 +67,12 @@
     "listlinier.h": "c",
     "stdlib.h": "c",
     "map.h": "c",
-    "listuser.h": "c"
+    "listuser.h": "c",
+    "mesinkata.c": "cpp",
+    "mesinkarakter.c": "cpp",
+    "array": "c",
+    "mesinangka.h": "c",
+    "wishlist_clear.h": "c",
+    "listuser.c": "cpp"
   }
 }

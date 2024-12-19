@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "..\..\adt\mesinkata.h"
-#include "..\..\adt\mesinkarakter.h"
-#include "..\..\adt\mesinangka.h"
-#include "..\..\adt\boolean.h"
+#include "../../../utilities.h" 
+#include "../../adt/mesinkata/mesinkata.h" 
+#include "../../adt/mesinkarakter/mesinkarakter.h" 
+#include "../../adt/boolean/boolean.h"
 
 void workDisplay();
 void delay(int n);
