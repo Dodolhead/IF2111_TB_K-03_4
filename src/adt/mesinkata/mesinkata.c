@@ -64,15 +64,23 @@ void ADVWORD()
 }
 
 void CopyWord() {
-    int i = 0;
-    while ( currentChar != MARK ) {
-        currentWord.TabWord[i] = currentChar;
-        ADV();
-        i++;
-    }
-    currentWord.TabWord[i] = '\0'; 
-    currentWord.Length = i;     
-    IgnoreBlanks();             
+    /* Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = MARK;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+    currentWord.Length = 0;
+    while (currentChar != BLANK && currentChar != MARK && currentChar != NEWLINE)
+    {
+        if (currentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length++] = currentChar;
+            ADV();
+        }
+        else
+            break;
+    }            
 }
 
 void CopySentence()
