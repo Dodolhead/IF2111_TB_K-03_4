@@ -1,25 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listuser.h"
+#include "../../adt/map/map.c"
+#include "../../adt/stack/stack.c"
+#include "../../adt/mesinkata/mesinkata.c"
+#include "../../adt/mesinkarakter/mesinkarakter.c"
+#include "../../adt/mesinangka/mesinangka.c"
+#include "../../adt/listlinier/listlinier.c"
+#include "../../../utilities.c"
+
 
 List MakeList() {
     List U;
     for (int i = 0; i < MaxEl; i++) {
-        U.A[i].money = MarkNumber; // Inisialisasi nilai `money` dengan tanda khusus
-        U.A[i].name[0] = '\0';     // Set nama awal menjadi string kosong
-        U.A[i].password[0] = '\0'; // Set password awal menjadi string kosong
+        U.A[i].money = MarkNumber;
+        U.A[i].name[0] = '\0';
+        U.A[i].password[0] = '\0';
 
-        // Inisialisasi elemen-elemen dalam struct User
-        CreateMapEmpty(&U.A[i].keranjang);             // Pastikan Map diinisialisasi dengan benar
-        CreateStackEmpty(&U.A[i].riwayat_pembelian);   // Pastikan Stack diinisialisasi dengan benar
-        CreateLinkedListEmpty(&U.A[i].wishlist);       // Pastikan LinkedList diinisialisasi dengan benar
+        CreateMapEmpty(&U.A[i].keranjang);
+        CreateStackEmpty(&U.A[i].riwayat_pembelian);
+        CreateLinkedListEmpty(&U.A[i].wishlist);
     }
     return U;
 }
 
-boolean isEmptyUser(User U) {
-    return IsLinkedListEmpty(U.wishlist) && IsMapEmpty(U.keranjang) && IsStackEmpty(U.riwayat_pembelian);
-}
 boolean isEmptyUserLinkedList(User U) {
     return IsLinkedListEmpty(U.wishlist);
 }
@@ -49,13 +53,38 @@ void GetPassword(List U, IdxType i, char* buffer) {
     copyString(buffer, U.A[i].password);
 }
 
+
+void SetRiwayat(List *U, IdxType i, Stack riwayat_pembelian) {
+    if (IsIdxEff(*U, i)) {
+        U->A[i].riwayat_pembelian = riwayat_pembelian;  // Mengatur riwayat pembelian di user ke-i
+    }
+}
+
+void SetKeranjang(List *U, IdxType i, Map keranjang) {
+    if (IsIdxEff(*U, i)) {
+        U->A[i].keranjang = keranjang;  // Mengatur keranjang di user ke-i
+    }
+}
+
+
+void SetWishlist(List *U, IdxType i, LinkedList wishlist) {
+    if (IsIdxEff(*U, i)) {
+        U->A[i].wishlist = wishlist;  // Mengatur wishlist di user ke-i
+    }
+}
+
 /* Mengambil elemen pada indeks ke-i */
 
-void Set(List *U, IdxType i, int money, char* name, char* password) {
+
+void Set(List *U, IdxType i, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist){
     U->A[i].money = money;
     copyString(U->A[i].name, name);
     copyString(U->A[i].password, password);
+    SetWishlist(U, i, wishlist);
+    SetKeranjang(U, i, keranjang);
+    SetRiwayat(U, i, riwayat_pembelian);
 }
+
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
 int ListUserLength(List U) {
@@ -97,27 +126,42 @@ boolean ListSearch(List U, char* X) {
 }
 /* Mengecek apakah elemen X terdapat dalam list */
 
-void InsertListFirst(List *U, int money, char* name, char* password) {
-    InsertListAt(U, money, name, password, 0);
+void InsertListFirst(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist) {
+    InsertListAt(U, money, name, password, keranjang, riwayat_pembelian, wishlist, 0);
 }
 /* Menyisipkan elemen di posisi pertama */
 
-void InsertListAt(List *U, int money, char* name, char* password, IdxType i) {
+void InsertListAt(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist,IdxType i) {
     if (ListUserLength(*U) < MaxEl && i >= 0 && i <= ListUserLength(*U)) {
         for (int j = ListUserLength(*U); j > i; j--) {
             U->A[j] = U->A[j - 1];
         }
-        Set(U, i, money, name, password);
+        Set(U, i, money, name, password, keranjang, riwayat_pembelian, wishlist);
     }
 }
 /* Menyisipkan elemen di posisi indeks ke-i */
 
-void InsertListLast(List *U, int money, char* name, char* password) {
+void InsertListLast(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist) {
     if (ListUserLength(*U) < MaxEl) {
-        Set(U, ListUserLength(*U), money, name, password);
+        Set(U, ListUserLength(*U), money, name, password, keranjang, riwayat_pembelian, wishlist);
     }
 }
 /* Menyisipkan elemen di posisi terakhir */
+
+void DeleteRiwayat(List *U, IdxType i) {
+    CreateStackEmpty(&U->A[i].riwayat_pembelian);
+}
+
+void DeleteKeranjang(List *U, IdxType i) {
+    // Mengosongkan seluruh keranjang pengguna
+    CreateMapEmpty(&U->A[i].keranjang);  // Kosongkan map keranjang
+}
+
+
+void DeleteWishlist(List *U, IdxType i) {
+    CreateLinkedListEmpty(&U->A[i].wishlist);
+}
+
 
 void DeleteListFirst(List *U) {
     DeleteListAt(U, 0);
@@ -135,6 +179,9 @@ void DeleteListAt(List *U, IdxType i) {
         U->A[panjang - 1].money = MarkNumber;
         U->A[panjang - 1].name[0] = '\0';
         U->A[panjang - 1].password[0] = '\0';
+        DeleteKeranjang(U, i);
+        DeleteWishlist(U, i);
+        DeleteRiwayat(U, i);
 
         // Update panjang list
         panjang--;  // Pastikan untuk mengurangi jumlah elemen
@@ -215,30 +262,32 @@ void RemoveFromKeranjang(User *U, keytype k) {
 }
 
 // Fungsi untuk menampilkan informasi user
-void PrintUserInfo(User *U) {
-    printf("User: %s\n", U->name);
-    printf("Money: %d\n", U->money);
-
+void PrintUserInfo(List U, IdxType i) {
+    // Menampilkan informasi dasar pengguna
+    printf("User: %s\n", U.A[i].name);
+    printf("Password: %s\n", U.A[i].password); // Perbaiki %S menjadi %s
+    printf("Money: %d\n", U.A[i].money);
+    
     // Menampilkan keranjang
     printf("Keranjang:\n");
-    for (int i = 0; i < U->keranjang.Count; i++) {
-        printf("Key: %d, Value: %d\n", U->keranjang.Elements[i].Key, U->keranjang.Elements[i].Value);
+    for (int j = 0; j < U.A[i].keranjang.Count; j++) {
+        printf("Key: %d, Value: %d\n", 
+               U.A[i].keranjang.Elements[j].Key, 
+               U.A[i].keranjang.Elements[j].Value);
     }
 
     // Menampilkan riwayat pembelian
-// Menampilkan riwayat pembelian
     printf("Riwayat Pembelian:\n");
-    for (int i = 0; i <= U->riwayat_pembelian.TOP; i++) {
+    for (int j = 0; j <= U.A[i].riwayat_pembelian.TOP; j++) {
         printf("Nama Barang: %s, Harga: %d, Jumlah: %d\n",
-            U->riwayat_pembelian.T[i].name,
-            U->riwayat_pembelian.T[i].price,
-            U->riwayat_pembelian.T[i].jumlahBarang);
+               U.A[i].riwayat_pembelian.T[j].name,
+               U.A[i].riwayat_pembelian.T[j].price,
+               U.A[i].riwayat_pembelian.T[j].jumlahBarang);
     }
-
 
     // Menampilkan wishlist
     printf("Wishlist:\n");
-    addressLinkedList P = First(U->wishlist);
+    addressLinkedList P = First(U.A[i].wishlist);
     while (P != Nil) {
         printf("- %s\n", Info(P));
         P = Next(P);
@@ -246,24 +295,21 @@ void PrintUserInfo(User *U) {
     printf("\n");
 }
 
-// int main() {
-//     List U = MakeList();
-//     InsertListFirst(&U, 100000, "admin", "admin");
-//     InsertListAt(&U, 100000, "dapid", "idiot",1);
-//     InsertListLast(&U, 50000, "user", "user");
-//     InsertListLast(&U, 50000, "asu", "user");
 
-//     printf("ListUserLength before DeleteAt: %d\n", ListUserLength(U));
-//     DeleteListAt(&U, 2);
-//     printf("ListUserLength after DeleteAt: %d\n", ListUserLength(U));
+int main() {
+    List U = MakeList();
+    InsertListFirst(&U, 100000, "admin", "admin");
+    InsertListAt(&U, 100000, "dapid", "idiot",1);
+    InsertListLast(&U, 50000, "user", "user");
+    InsertListLast(&U, 50000, "asu", "user");
+
+    printf("ListUserLength before DeleteAt: %d\n", ListUserLength(U));
+    DeleteListAt(&U, 2);
+    printf("ListUserLength after DeleteAt: %d\n", ListUserLength(U));
 
 
-//     char buffer[50];
-//     for (int i = 0; i < ListUserLength(U); i++) {
-//         printf("%d\n", GetMoney(U, i));
-//         GetName(U, i, buffer);
-//         printf("%s\n", buffer);
-//         GetPassword(U, i, buffer);
-//         printf("%s\n", buffer);
-//     }
-// }
+    char buffer[50];
+    for (int i = 0; i < ListUserLength(U); i++) {
+        PrintUserInfo(U,i);
+    }
+}

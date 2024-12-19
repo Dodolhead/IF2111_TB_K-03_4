@@ -1,8 +1,8 @@
 #ifndef LISTUSER_H
 #define LISTUSER_H
 
-#include "../../adt/listlinier/listlinier.h"
 #include "../../adt/boolean/boolean.h"
+#include "../../adt/listlinier/listlinier.h"
 #include "../../adt/map/map.h"
 #include "../../adt/stack/stack.h"
 #include "../../adt/mesinkata/mesinkata.h"
@@ -40,9 +40,12 @@ boolean IsListEmpty(List U);
 int GetMoney(List U, IdxType i);
 void GetName(List U, IdxType i, char* buffer);
 void GetPassword(List U, IdxType i, char* buffer);
+void SetKeranjang(List *U, IdxType i, Map keranjang);
+void SetRiwayat(List *U, IdxType i, Stack riwayat_pembelian);
+void SetWishlist(List *U, IdxType i, LinkedList wishlist);
 /* Mengambil elemen pada indeks ke-i */
 
-void Set(List *U, IdxType i, int money, char* name, char* password);
+void Set(List *U, IdxType i, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist);
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
 int ListUserLength(List U);
@@ -63,14 +66,19 @@ boolean IsIdxEff(List U, IdxType i);
 boolean ListSearch(List U, char* X);
 /* Mengecek apakah elemen X terdapat dalam list */
 
-void InsertListFirst(List *U, int money, char* name, char* password);
+void InsertListFirst(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist);
 /* Menyisipkan elemen di posisi pertama */
 
-void InsertListAt(List *U, int money, char* name, char* password, IdxType i);
+void InsertListAt(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist, IdxType i);
 /* Menyisipkan elemen di posisi indeks ke-i */
 
-void InsertListLast(List *U, int money, char* name, char* password);
+void InsertListLast(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist);
 /* Menyisipkan elemen di posisi terakhir */
+
+void DeleteRiwayat(List *U, IdxType i);
+void DeleteKeranjang(List *U, IdxType i);
+void DeleteWishlist(List *U, IdxType i);
+
 
 void DeleteListFirst(List *U);
 /* Menghapus elemen di posisi pertama */
@@ -81,13 +89,12 @@ void DeleteListAt(List *U, IdxType i);
 void DeleteListLast(List *U);
 /* Menghapus elemen di posisi terakhir */
 
-void CreateUser(User *U, const char *name, const char *password, int money);
 void AddToWishlist(User *U, infoLinkedListtype item);
 addressLinkedList SearchWishList(User *U, infoLinkedListtype item);
 int WishlistCount(User *U);
 void DelPWishList(LinkedList *L, infoLinkedListtype X);
 void AddToKeranjang(User *U, keytype k, valuetype v);
 void RemoveFromKeranjang(User *U, keytype k);
-void PrintUserInfo(User *U);
+void PrintUserInfo(List U, IdxType i);
 
 #endif /* LISTUSER_H */

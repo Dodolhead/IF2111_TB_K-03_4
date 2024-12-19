@@ -1,43 +1,42 @@
 #include <stdio.h>
 #include "listuser.h"
+#include "../../adt/map/map.c"
+#include "../../adt/stack/stack.c"
+#include "../../adt/mesinkata/mesinkata.c"
+#include "../../adt/mesinkarakter/mesinkarakter.c"
+#include "../../adt/mesinangka/mesinangka.c"
+#include "../../adt/listlinier/listlinier.c"
+#include "../../../utilities.c"
 
 int main() {
-    // Membuat List User
-    List userList = MakeList();
+    // Inisialisasi list pengguna
+    List users = MakeList();
 
-    // Menambahkan beberapa pengguna ke dalam list
-    InsertListFirst(&userList, 100000, "admin", "admin");
-    InsertListAt(&userList, 50000, "user1", "pass1", 1);
-    InsertListLast(&userList, 25000, "user2", "pass2");
+    // Membuat pengguna contoh
+    Map keranjang1;
+    CreateMapEmpty(&keranjang1);
+    Stack riwayat1;
+    CreateStackEmpty(&riwayat1);
+    LinkedList wishlist1;
+    CreateLinkedListEmpty(&wishlist1);
 
-    // Menampilkan jumlah pengguna di list
-    printf("Jumlah pengguna: %d\n", ListUserLength(userList));
+    InsertListLast(&users, 1000, "John Doe", "pass123", keranjang1, riwayat1, wishlist1);
 
-    // Menampilkan informasi setiap pengguna
-    char buffer[100];
-    for (int i = 0; i < ListUserLength(userList); i++) {
-        printf("Pengguna %d:\n", i + 1);
-        printf("  Saldo: %d\n", GetMoney(userList, i));
-        GetName(userList, i, buffer);
-        printf("  Nama: %s\n", buffer);
-        GetPassword(userList, i, buffer);
-        printf("  Password: %s\n", buffer);
-    }
+    // Menambahkan item ke keranjang
+    InsertMap(&users.A[0].keranjang, 101, 5000); // Key: 101, Value: 5000
 
-    // Menghapus pengguna
-    DeleteListAt(&userList, 1);
-    printf("\nSetelah menghapus pengguna kedua:\n");
-    printf("Jumlah pengguna: %d\n", ListUserLength(userList));
+    // Menambahkan item ke wishlist
+    AddToWishlist(&users.A[0], "Laptop Gaming");
+    AddToWishlist(&users.A[0], "Headset Wireless");
 
-    // Menampilkan informasi pengguna yang tersisa
-    for (int i = 0; i < ListUserLength(userList); i++) {
-        printf("Pengguna %d:\n", i + 1);
-        printf("  Saldo: %d\n", GetMoney(userList, i));
-        GetName(userList, i, buffer);
-        printf("  Nama: %s\n", buffer);
-        GetPassword(userList, i, buffer);
-        printf("  Password: %s\n", buffer);
-    }
+    // Menambahkan item ke riwayat pembelian
+    Barang purchasedItem = {"Mouse", 200000, 1};
+    Push(&users.A[0].riwayat_pembelian, purchasedItem);
+
+    // Memanggil PrintUserInfo untuk pengguna pertama
+    printf("Informasi Pengguna:\n");
+    PrintUserInfo(users, 0);
 
     return 0;
 }
+
