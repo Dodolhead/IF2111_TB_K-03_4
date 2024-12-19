@@ -31,13 +31,9 @@ void Push (Stack * S, char* name, int X)
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 {
-    int i;
     Top(*S) += 1;
-    (*S).price = X;
-    for (i = 0; name[i] != '\0'; i++) {
-        (*S).name[i] = name[i];
-    }
-    (*S).name[i] = '\0';
+    InfoTop(*S).price = X;
+    copyString(InfoTop(*S).name, name);
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
@@ -46,11 +42,7 @@ void Pop (Stack * S, char* name, int* X)
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 {
-    int i;
-    *X = (*S).price;
-    for (i = 0; (*S).name[i] != '\0'; i++) {
-        name[i] = (*S).name[i];
-    }
-    name[i] = '\0';
+    *X = InfoTop(*S).price;
+    copyString(name, InfoTop(*S).name);
     Top(*S) -= 1;
 }

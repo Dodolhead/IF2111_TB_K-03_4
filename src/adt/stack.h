@@ -7,6 +7,7 @@
 
 #include "boolean.h"
 #include "barang.h"
+#include "utilities.h"
 
 #define NilStack 0
 #define MaxEl 100
