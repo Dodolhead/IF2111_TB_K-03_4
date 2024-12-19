@@ -3,62 +3,65 @@
 #include "../../adt/listuser/listuser.h"
 #include "../../adt/arraydinBarang/arraydinBarang.h"
 #include "../../adt/queue/queue.h"
+#include "../../../utilities.h"
+#include "../../adt/mesinkalimat/linemachine.h"
+#include "start.h"
 
 // Deklarasi global
-ArrayDin barangToko;
-List daftarPengguna;
-Queue antrianPermintaan;
+ArrayDin barangList;
+List userList;
+Queue antrianQueue;
 
 void debugBarang() {
     printf("\nDebug Barang Toko:\n");
-    for (int i = 0; i < ArrLength(barangToko); i++) {
-        printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, barangToko.A[i].name, barangToko.A[i].price);
+    for (int i = 0; i < ArrLength(barangList); i++) {
+        printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, barangList.A[i].name, barangList.A[i].price);
     }
 }
 
 void debugPengguna() {
     printf("\nDebug Daftar Pengguna:\n");
-    for (int i = 0; i < ListUserLength(daftarPengguna); i++) {
+    for (int i = 0; i < ListUserLength(userList); i++) {
         char nama[MAX_LEN], password[MAX_LEN];
-        GetName(daftarPengguna, i, nama);
-        GetPassword(daftarPengguna, i, password);
-        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(daftarPengguna, i));
+        GetName(userList, i, nama);
+        GetPassword(userList, i, password);
+        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(userList, i));
     }
 }
 
 void debugAntrian() {
     printf("\nDebug Antrian Permintaan:\n");
-    displayQueue(antrianPermintaan);
+    displayQueue(antrianQueue);
 }
 
-void START() {
+void START_PURRMART() {
     // Inisialisasi data yang diperlukan
-    barangToko = MakeArrayDin();
-    daftarPengguna = MakeList();
-    CreateQueue(&antrianPermintaan);
+    ArrayDin barangList = MakeArrayDin();
+    List userList = MakeList();
+    Queue antrianQueue;
+    CreateQueue(&antrianQueue);
 
     // Membaca file konfigurasi default
     printf("Membaca file konfigurasi default...\n");
-    STARTWORD("default.txt");
-
-    // Membaca jumlah barang
-    int jumlahBarang = 0;
-    if (!isEndWord()) {
-        jumlahBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
-        ADVWORD();
-    }
-
+    STARTFILE("config.txt");
+    ADVANGKA(); // Mengabaikan jumlah barang
+    int jumlahBarang = currentAngka;
+    printf("Jumlah barang: %d\n", jumlahBarang);
+    ADVWORD(); // Mengabaikan newline
     // Membaca detail barang
     for (int i = 0; i < jumlahBarang; i++) {
         if (!isEndWord()) {
             int hargaBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
             ADVWORD();
+            printf("Harga barang: %d\n", hargaBarang);
 
             char namaBarang[MAX_LEN];
-            copyString(namaBarang, currentWord.TabWord);
+            CopySentence();
+            copyString(namaBarang, currentWord);
             ADVWORD();
+            printf("Nama barang: %s\n", namaBarang);
 
-            ArrInsertLast(&barangToko, namaBarang, hargaBarang);
+            ArrInsertLast(&barangList, namaBarang, hargaBarang);
         }
     }
 
@@ -98,20 +101,20 @@ void START() {
         CreateStackEmpty(&riwayatPembelian);
         CreateLinkedListEmpty(&wishlist);
 
-        InsertListLast(&daftarPengguna, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
+        InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
     }
 
     printf("Konfigurasi aplikasi berhasil dibaca. PURRMART siap digunakan.\n");
     
     // Debugging output
-    debugBarang();
-    debugPengguna();
-    debugAntrian();
+    // debugBarang();
+    // debugPengguna();
+    // debugAntrian();
 }
 
 int main() {
     printf("Memulai program PURRMART...\n");
-    START();
+    START_PURRMART();
     printf("Program selesai.\n");
     return 0;
 }

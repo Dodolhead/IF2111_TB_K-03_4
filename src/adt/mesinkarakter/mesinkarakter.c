@@ -37,3 +37,18 @@ boolean IsEOP() {
     /* Algoritma */
     return EOP;
 }
+
+void STARTFILE(char filename[]) {
+    pita = fopen(filename, "r");
+    if (pita != NULL) {
+        ADVFILE();
+    } else {
+        printf("\nERROR: File tidak ditemukan!\n\n");
+    }
+}
+void ADVFILE() {
+    retval = fscanf(pita,"%c",&currentChar);
+    if (feof(pita)) {
+       fclose(pita);
+    }
+}

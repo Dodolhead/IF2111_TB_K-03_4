@@ -53,4 +53,5 @@ void CopyWord();
 
 void CopySentence();
 
+boolean isEndWord();
 #endif
