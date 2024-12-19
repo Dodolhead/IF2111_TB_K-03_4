@@ -8,7 +8,7 @@
  * I.S. sembarang
  * F.S. Terbentuk ArrayDin kosong dengan ukuran InitialSize
  */
-boolean IsEmpty(ArrayDin array) {
+boolean IsArrDinEmpty(ArrayDin array) {
     return (array.Neff == 0);
 }
 
@@ -24,16 +24,6 @@ void DeallocateArrayDin(ArrayDin *array) {
     free(array->A);
     array->Capacity = 0;
     array->Neff = 0;
-}
-
-/**
- * Fungsi untuk mengetahui apakah suatu array kosong.
- * Prekondisi: array terdefinisi
- */
-boolean IsEmpty(ArrayDin array) {
-    // KAMUS LOKAL
-    // ALGORITMA
-    return (array.Neff == 0);
 }
 
 boolean IsArrFull(ArrayDin array) {

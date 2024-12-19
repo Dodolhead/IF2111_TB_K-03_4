@@ -4,7 +4,7 @@
 #include "../../adt/mesinkarakter/mesinkarakter.h"
 #include "../../adt/mesinkata/mesinkata.h"
 #include "../../adt/barang/barang.h"
-#include "../../utilities.h"
+#include "../../../utilities.h"
 
 // Boolean
 #define boolean unsigned char

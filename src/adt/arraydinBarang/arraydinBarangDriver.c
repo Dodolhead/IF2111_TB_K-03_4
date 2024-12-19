@@ -8,7 +8,7 @@ int main() {
 
     // Membuat ArrayDin
     array = MakeArrayDin();
-    printf("ArrayDin berhasil dibuat dengan kapasitas awal: %d\n", GetCapacityArrDin(array));
+    printf("ArrayDin berhasil dibuat dengan kapasitas awal: %d\n", GetCapacity(array));
 
     // Menambahkan elemen secara langsung
     printf("\nMenambahkan elemen ke dalam array:\n");
