@@ -63,17 +63,17 @@ void ADVWORD()
     }
 }
 
-// void CopyWord() {
-//     int i = 0;
-//     while ( currentChar != MARK ) {
-//         currentWord.TabWord[i] = currentChar;
-//         ADV();
-//         i++;
-//     }
-//     currentWord.TabWord[i] = '\0'; 
-//     currentWord.Length = i;     
-//     IgnoreBlanks();             
-// }
+void CopyWord() {
+    int i = 0;
+    while ( currentChar != MARK ) {
+        currentWord.TabWord[i] = currentChar;
+        ADV();
+        i++;
+    }
+    currentWord.TabWord[i] = '\0'; 
+    currentWord.Length = i;     
+    IgnoreBlanks();             
+}
 
 void CopySentence()
 {
