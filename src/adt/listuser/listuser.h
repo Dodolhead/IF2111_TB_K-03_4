@@ -96,5 +96,6 @@ void DelPWishList(LinkedList *L, infoLinkedListtype X);
 void AddToKeranjang(User *U, keytype k, valuetype v);
 void RemoveFromKeranjang(User *U, keytype k);
 void PrintUserInfo(List U, IdxType i);
+void RemoveFromWishlist(User *U, infoLinkedListtype item);
 
 #endif /* LISTUSER_H */

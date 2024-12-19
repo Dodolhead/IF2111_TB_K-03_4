@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listuser.h"
-#include "../../adt/map/map.c"
-#include "../../adt/stack/stack.c"
-#include "../../adt/mesinkata/mesinkata.c"
-#include "../../adt/mesinkarakter/mesinkarakter.c"
-#include "../../adt/mesinangka/mesinangka.c"
-#include "../../adt/listlinier/listlinier.c"
-#include "../../../utilities.c"
+#include "../../adt/map/map.h"
+#include "../../adt/stack/stack.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../adt/mesinangka/mesinangka.h"
+#include "../../adt/listlinier/listlinier.h"
+#include "../../../utilities.h"
 
 
 List MakeList() {
@@ -55,22 +55,18 @@ void GetPassword(List U, IdxType i, char* buffer) {
 
 
 void SetRiwayat(List *U, IdxType i, Stack riwayat_pembelian) {
-    if (IsIdxEff(*U, i)) {
-        U->A[i].riwayat_pembelian = riwayat_pembelian;  // Mengatur riwayat pembelian di user ke-i
-    }
+    U->A[i].riwayat_pembelian = riwayat_pembelian;  // Mengatur riwayat pembelian di user ke-i
+
 }
 
 void SetKeranjang(List *U, IdxType i, Map keranjang) {
-    if (IsIdxEff(*U, i)) {
-        U->A[i].keranjang = keranjang;  // Mengatur keranjang di user ke-i
-    }
+    U->A[i].keranjang = keranjang;  // Mengatur keranjang di user ke-i
 }
 
 
 void SetWishlist(List *U, IdxType i, LinkedList wishlist) {
-    if (IsIdxEff(*U, i)) {
-        U->A[i].wishlist = wishlist;  // Mengatur wishlist di user ke-i
-    }
+    U->A[i].wishlist = wishlist;  // Mengatur wishlist di user ke-i
+    
 }
 
 /* Mengambil elemen pada indeks ke-i */
@@ -91,7 +87,7 @@ int ListUserLength(List U) {
     int count = 0;
     while (count < MaxEl && U.A[count].money != MarkNumber) {
         count++;
-    }
+    } printf("count: %d\n", count);
     return count;
 }
 /* Mengembalikan jumlah elemen efektif dalam list */
@@ -153,7 +149,6 @@ void DeleteRiwayat(List *U, IdxType i) {
 }
 
 void DeleteKeranjang(List *U, IdxType i) {
-    // Mengosongkan seluruh keranjang pengguna
     CreateMapEmpty(&U->A[i].keranjang);  // Kosongkan map keranjang
 }
 
@@ -263,12 +258,12 @@ void RemoveFromKeranjang(User *U, keytype k) {
 
 // Fungsi untuk menampilkan informasi user
 void PrintUserInfo(List U, IdxType i) {
-    // Menampilkan informasi dasar pengguna
+
     printf("User: %s\n", U.A[i].name);
     printf("Password: %s\n", U.A[i].password); // Perbaiki %S menjadi %s
     printf("Money: %d\n", U.A[i].money);
     
-    // Menampilkan keranjang
+
     printf("Keranjang:\n");
     for (int j = 0; j < U.A[i].keranjang.Count; j++) {
         printf("Key: %d, Value: %d\n", 
@@ -276,7 +271,7 @@ void PrintUserInfo(List U, IdxType i) {
                U.A[i].keranjang.Elements[j].Value);
     }
 
-    // Menampilkan riwayat pembelian
+
     printf("Riwayat Pembelian:\n");
     for (int j = 0; j <= U.A[i].riwayat_pembelian.TOP; j++) {
         printf("Nama Barang: %s, Harga: %d, Jumlah: %d\n",
@@ -285,7 +280,7 @@ void PrintUserInfo(List U, IdxType i) {
                U.A[i].riwayat_pembelian.T[j].jumlahBarang);
     }
 
-    // Menampilkan wishlist
+
     printf("Wishlist:\n");
     addressLinkedList P = First(U.A[i].wishlist);
     while (P != Nil) {
@@ -293,23 +288,4 @@ void PrintUserInfo(List U, IdxType i) {
         P = Next(P);
     }
     printf("\n");
-}
-
-
-int main() {
-    List U = MakeList();
-    InsertListFirst(&U, 100000, "admin", "admin");
-    InsertListAt(&U, 100000, "dapid", "idiot",1);
-    InsertListLast(&U, 50000, "user", "user");
-    InsertListLast(&U, 50000, "asu", "user");
-
-    printf("ListUserLength before DeleteAt: %d\n", ListUserLength(U));
-    DeleteListAt(&U, 2);
-    printf("ListUserLength after DeleteAt: %d\n", ListUserLength(U));
-
-
-    char buffer[50];
-    for (int i = 0; i < ListUserLength(U); i++) {
-        PrintUserInfo(U,i);
-    }
 }
