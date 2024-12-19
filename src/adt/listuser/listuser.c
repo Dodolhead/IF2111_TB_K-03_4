@@ -258,38 +258,19 @@ void RemoveFromKeranjang(User *U, keytype k) {
 
 // Fungsi untuk menampilkan informasi user
 void PrintUserInfo(List U, IdxType i) {
-    // Memanggil fungsi kecil untuk menampilkan informasi
-    PrintName(U, i);
-    PrintPassword(U, i);
-    PrintMoney(U, i);
-    PrintKeranjang(U, i);
-    PrintRiwayatPembelian(U, i);
-    PrintWishlist(U, i);
-}
-
-// Implementasi fungsi
-void PrintName(List U, IdxType i) {
     printf("User: %s\n", U.A[i].name);
-}
-
-void PrintPassword(List U, IdxType i) {
-    printf("Password: %s\n", U.A[i].password);
-}
-
-void PrintMoney(List U, IdxType i) {
+    printf("Password: %s\n", U.A[i].password); // Perbaiki %S menjadi %s
     printf("Money: %d\n", U.A[i].money);
-}
+    
 
-void PrintKeranjang(List U, IdxType i) {
     printf("Keranjang:\n");
     for (int j = 0; j < U.A[i].keranjang.Count; j++) {
-        printf("Key: %d, Value: %d\n",
-               U.A[i].keranjang.Elements[j].Key,
+        printf("Key: %d, Value: %d\n", 
+               U.A[i].keranjang.Elements[j].Key, 
                U.A[i].keranjang.Elements[j].Value);
     }
-}
 
-void PrintRiwayatPembelian(List U, IdxType i) {
+
     printf("Riwayat Pembelian:\n");
     for (int j = 0; j <= U.A[i].riwayat_pembelian.TOP; j++) {
         printf("Nama Barang: %s, Harga: %d, Jumlah: %d\n",
@@ -297,9 +278,8 @@ void PrintRiwayatPembelian(List U, IdxType i) {
                U.A[i].riwayat_pembelian.T[j].price,
                U.A[i].riwayat_pembelian.T[j].jumlahBarang);
     }
-}
 
-void PrintWishlist(List U, IdxType i) {
+
     printf("Wishlist:\n");
     addressLinkedList P = First(U.A[i].wishlist);
     while (P != Nil) {
