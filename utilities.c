@@ -57,7 +57,6 @@ int arrayToInteger(char arr[], int length) {
         currentAngka = 0;
         return;
     }
-
     char temp[20]; // Buffer untuk angka
     int index = 0;
 
@@ -65,7 +64,6 @@ int arrayToInteger(char arr[], int length) {
         temp[index++] = currentChar;
         ADV();
     }
-
     currentAngka = arrayToInteger(temp, index); // Konversi angka
     EndAngka = IsEOP();
 }*/
