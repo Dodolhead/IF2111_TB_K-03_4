@@ -49,7 +49,7 @@ int arrayToInteger(char arr[], int length) {
     }
     return result;
 }
-void STARTANGKA_START() {
+/*void STARTANGKA_START() {
     boolean EndAngka;
     IgnoreBlanks();
     if (IsEOP()) {
@@ -68,4 +68,4 @@ void STARTANGKA_START() {
 
     currentAngka = arrayToInteger(temp, index); // Konversi angka
     EndAngka = IsEOP();
-}
+}*/

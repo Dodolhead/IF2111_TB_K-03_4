@@ -1,7 +1,9 @@
 #ifndef __MESIN_ANGKA_H_
 #define __MESIN_ANGKA_H_
 
-#include "boolean.h"
+#include "../../adt/boolean/boolean.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
 
 /* State Mesin */
 extern int currentAngka;

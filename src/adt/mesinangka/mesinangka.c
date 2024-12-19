@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "mesinangka.h"
-#include "mesinkarakter.h"
 
 int currentAngka;
 boolean EOPAngka;

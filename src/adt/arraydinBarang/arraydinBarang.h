@@ -1,9 +1,9 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
-#include "mesinkarakter.h"
-#include "mesinkata.h"
-#include "barang.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/barang/barang.h"
 #include "../../utilities.h"
 
 // Boolean

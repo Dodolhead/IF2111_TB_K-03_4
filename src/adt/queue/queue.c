@@ -34,7 +34,7 @@ int QueueLength(Queue q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
     // KAMUS
     // ALGORITMA
-    if (isEmpty(q)) {
+    if (isQueueEmpty(q)) {
         return 0;
     } else {
         return q.idxTail - q.idxHead + 1;
@@ -49,7 +49,7 @@ void enqueue(Queue *q, char* name) {
     // KAMUS
     int i = 0;
     // ALGORITMA
-    if (isEmpty(*q)) {
+    if (isQueueEmpty(*q)) {
         (*q).idxHead = 0;
         (*q).idxTail = 0;
     } else {
@@ -90,7 +90,7 @@ void displayQueue(Queue q) {
     // KAMUS
     int i, j;
     // ALGORITMA
-    if (isEmpty(q)) {
+    if (isQueueEmpty(q)) {
         printf("[]\n");
     } else {
         printf("[\n");
