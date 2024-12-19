@@ -6,13 +6,13 @@
 void wishlistAdd(User *U){
     printf("Masukkan nama barang: ");
     STARTWORD();
-    addressList P = SearchWishList(U, CurrentWord.TabWord);
+    addressList P = SearchWishList(U, currentWord.TabWord);
     if (P == Nil || isEmptyUserList(U)) {
-        AddToWishlist(U, CurrentWord.TabWord);
-        printf("Berhasil menambahkan %s ke wishlist!\n",CurrentWord.TabWord);
+        AddToWishlist(U, currentWord.TabWord);
+        printf("Berhasil menambahkan %s ke wishlist!\n",currentWord.TabWord);
     }
     else{
-        printf("%s sudah ada di wishlist!\n",CurrentWord.TabWord);
+        printf("%s sudah ada di wishlist!\n",currentWord.TabWord);
     }
 }
 

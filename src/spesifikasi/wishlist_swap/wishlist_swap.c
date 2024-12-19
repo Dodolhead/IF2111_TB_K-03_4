@@ -9,7 +9,7 @@ void wishlistSwap(User *U) {
     int firstPos = GetAngka();  // Posisi pertama
     firstPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
 
-    char* temp = CurrentWord.TabWord;
+    char* temp = currentWord.TabWord;
     int secondPos = *temp - '0';  // Posisi kedua
     secondPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
 
