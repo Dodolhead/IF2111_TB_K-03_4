@@ -5,7 +5,7 @@
 
 
 void wishlistRemoveI(User *U) {
-    addressLinkedLis P = First(U->wishlist);
+    addressLinkedList P = First(U->wishlist);
     int n;
     STARTANGKA();
     n = bacaAngka()-1;

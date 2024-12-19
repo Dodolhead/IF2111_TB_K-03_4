@@ -49,24 +49,3 @@ int arrayToInteger(char arr[], int length) {
     }
     return result;
 }
-<<<<<<< HEAD
-/*void STARTANGKA_START() {
-    boolean EndAngka;
-    IgnoreBlanks();
-    if (IsEOP()) {
-        EndAngka = true;
-        currentAngka = 0;
-        return;
-    }
-    char temp[20]; // Buffer untuk angka
-    int index = 0;
-
-    while ((currentChar >= '0' && currentChar <= '9') && !IsEOP() && index < 20) {
-        temp[index++] = currentChar;
-        ADV();
-    }
-    currentAngka = arrayToInteger(temp, index); // Konversi angka
-    EndAngka = IsEOP();
-}*/
-=======
->>>>>>> 10943e166dd5f6b372eb2d77ba5af50f14ccbcdc
