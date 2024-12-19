@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "work.h"
-#include "..\..\adt\mesinangka.c"
-#include "..\..\..\utilities.c" 
+#include "../../../utilities.c" 
 #include "..\..\adt\mesinkata.c" 
 #include "..\..\adt\mesinkarakter.c"  
 
