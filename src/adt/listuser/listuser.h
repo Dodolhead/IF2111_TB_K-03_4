@@ -93,9 +93,15 @@ void AddToWishlist(User *U, infoLinkedListtype item);
 addressLinkedList SearchWishList(User *U, infoLinkedListtype item);
 int WishlistCount(User *U);
 void DelPWishList(LinkedList *L, infoLinkedListtype X);
+void RemoveFromWishlist(User *U, infoLinkedListtype item);
 void AddToKeranjang(User *U, keytype k, valuetype v);
 void RemoveFromKeranjang(User *U, keytype k);
+void PrintName(List U, IdxType i);
+void PrintPassword(List U, IdxType i);
+void PrintMoney(List U, IdxType i);
+void PrintKeranjang(List U, IdxType i);
+void PrintRiwayatPembelian(List U, IdxType i);
+void PrintWishlist(List U, IdxType i);
 void PrintUserInfo(List U, IdxType i);
-void RemoveFromWishlist(User *U, infoLinkedListtype item);
 
 #endif /* LISTUSER_H */
