@@ -6,7 +6,8 @@
 #include "mesinangka.c"
 
 int main(){
-    STARTWORD();
+    char filename[] = "config.txt";
+    STARTWORD(filename);
     while (!EndWord)
     {
         ADVWORD();
