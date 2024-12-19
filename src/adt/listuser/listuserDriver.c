@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include "listuser.h"
-#include "listuser.c"
+/*#include "listuser.c"
 #include "../../adt/map/map.c"
 #include "../../adt/stack/stack.c"
 #include "../../adt/mesinkata/mesinkata.c"
 #include "../../adt/mesinkarakter/mesinkarakter.c"
 #include "../../adt/mesinangka/mesinangka.c"
 #include "../../adt/listlinier/listlinier.c"
-#include "../../../utilities.c"
+#include "../../../utilities.c"*/
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include "listuser.h"
 #include "../../adt/map/map.h"
 #include "../../adt/stack/stack.h"
 #include "../../adt/mesinkata/mesinkata.h"
 #include "../../adt/mesinkarakter/mesinkarakter.h"
 #include "../../adt/mesinangka/mesinangka.h"
-#include "../../adt/listlinier/listlinier.h"*/
+#include "../../adt/listlinier/listlinier.h"
 
 int main() {
     // Membuat list kosong
@@ -60,7 +60,6 @@ int main() {
     AddToWishlist(&userList.A[0], "Barang 1");
     AddToWishlist(&userList.A[0], "Barang 2");
     printf("Wishlist pengguna pertama setelah penambahan:\n");
-    PrintUserInfo(userList, 0);
 
 
 }
