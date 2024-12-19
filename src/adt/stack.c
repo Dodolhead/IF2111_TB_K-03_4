@@ -26,21 +26,31 @@ boolean IsStackFull (Stack S)
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, infoStacktype X)
+void Push (Stack * S, char* name, int X)
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 {
+    int i;
     Top(*S) += 1;
-    InfoTop(*S) = X;
+    (*S).price = X;
+    for (i = 0; name[i] != '\0'; i++) {
+        (*S).name[i] = name[i];
+    }
+    (*S).name[i] = '\0';
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, infoStacktype* X)
+void Pop (Stack * S, char* name, int* X)
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 {
-    *X = InfoTop(*S);
+    int i;
+    *X = (*S).price;
+    for (i = 0; (*S).name[i] != '\0'; i++) {
+        name[i] = (*S).name[i];
+    }
+    name[i] = '\0';
     Top(*S) -= 1;
 }
