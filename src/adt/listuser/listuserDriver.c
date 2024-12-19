@@ -35,18 +35,16 @@ int main() {
 
     InsertListAt(&userList, 100000, "admin", "admin123", keranjang, riwayat, wishlist, 0);
     printf("Menambahkan pengguna pertama.\n");
-
+    PrintUserInfo(userList, 0);
 
     InsertListAt(&userList, 50000, "user1", "password1", keranjang, riwayat, wishlist, 1);
     printf("Menambahkan pengguna kedua.\n");
-    PrintUserInfo(userList, 1);
     
     InsertListAt(&userList, 75000, "user2", "password2", keranjang, riwayat, wishlist, 2);
     printf("Menambahkan pengguna ketiga di posisi tengah.\n");
-    //PrintUserInfo(userList, 2);
     
     ListUserLength(userList);
-    PrintUserInfo(userList, 0);
+ 
 
 
     DeleteListLast(&userList);
@@ -60,6 +58,7 @@ int main() {
     AddToWishlist(&userList.A[0], "Barang 1");
     AddToWishlist(&userList.A[0], "Barang 2");
     printf("Wishlist pengguna pertama setelah penambahan:\n");
+    PrintWishlist(userList, 0);
 
 
 }
