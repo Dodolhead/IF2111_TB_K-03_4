@@ -2,30 +2,21 @@
 #include <stdlib.h>
 #include "save.h"
 
-void Save(ArrayDin Info, User* User, int jumlahUser) {
+void Save(ArrayDin Info, List ListUser, char* filename) {
     // KAMUS
     int i, j;
-    FILE *file;
-    char folder[] = "../../data/";
-    char filename[100] = "";
-    char fullpath[150] = "";
-    char txt[] = ".txt";
+    FILE* file;
+    char fullpath[] = "src/data/";
+    Stack temp;
+
+    char tempname[50]; 
+    int tempprice;
+
+    addressLinkedList p;
 
     // ALGORITMA
-    STARTWORD();
-
-    // Membaca nama file dari CurrentWord
-    i = 0;
-    while (CurrentWord.TabWord[i] != '\0') {
-        filename[i] = CurrentWord.TabWord[i];
-        i++;
-    }
-    filename[i] = '\0';
-
-    // Membuat fullpath
-    copyString(fullpath, folder);
+    CreateStackEmpty(&temp);
     stringConcat(fullpath, filename);
-    stringConcat(fullpath, txt);
 
     // Membuka file untuk penulisan
     file = fopen(fullpath, "w");
@@ -35,33 +26,42 @@ void Save(ArrayDin Info, User* User, int jumlahUser) {
     }
 
     // Menulis data barang
-    fprintf(file, "%d\n", Info.Neff); 
-    for (i = 0; i < Info.Neff; i++) {
+    fprintf(file, "%d\n", ArrLength(Info)); 
+    for (i = 0; i < ArrLength(Info); i++) {
         fprintf(file, "%d ", HargaBarang(Info.A[i]));
-        j = 0;
-        while (NamaBarang(&(Info.A[i]))[j] != '\0') {
+        for (j = 0; NamaBarang(&(Info.A[i]))[j] != '\0'; j++) {
             fprintf(file, "%c", NamaBarang(&(Info.A[i]))[j]); 
-            j++;
         }
         fprintf(file, "\n"); 
     }
 
     // Menulis data user
-    fprintf(file, "%d\n", jumlahUser);
-    for (i = 0; i < jumlahUser; i++) {
-        fprintf(file, "%d ", User[i].money);
-        j = 0;
-        while (User[i].name[j] != '\0') {
-            fprintf(file, "%c", User[i].name[j]);
+    fprintf(file, "%d\n", ListUserLength(ListUser));
+    for (i = 0; i < ListUserLength(ListUser); i++) {
+        fprintf(file, "%d %s %s\n", ListUser.A[i].money, ListUser.A[i].name, ListUser.A[i].password);
+
+        // Menulis riwayat pembelian user
+        j = 0; // Push ke temp
+        while (!IsStackEmpty(ListUser.A[i].riwayat_pembelian)) {
+            Pop(&ListUser.A[i].riwayat_pembelian, &tempname, &tempprice);
+            Push(&temp, tempname, tempprice);
             j++;
         }
-        fprintf(file, " ");
-        j = 0;
-        while (User[i].password[j] != '\0') {
-            fprintf(file, "%c", User[i].password[j]); 
-            j++;
+        fprintf(file, "%d\n", j);
+        // Push ke stack user
+        while (!IsStackEmpty(ListUser.A[i].riwayat_pembelian)) {
+            Pop(&temp, &tempname, &tempprice);
+            Push(&ListUser.A[i].riwayat_pembelian, tempname, tempprice);
+            fprintf(file, "%d %s\n", InfoTop(ListUser.A[i].riwayat_pembelian).price, InfoTop(ListUser.A[i].riwayat_pembelian).name);
         }
-        fprintf(file, "\n"); 
+
+        // Menulis wishlist user
+        fprintf(file, "%d\n", WishlistCount(&(ListUser.A[i])));
+        p = First(ListUser.A[i].wishlist);
+        for (j = 0; j < WishlistCount(&(ListUser.A[i])); j++) {
+            fprintf(file, "%s\n", Info(p));
+            p = Next(p);
+        }
     }
 
     // Menutup file
