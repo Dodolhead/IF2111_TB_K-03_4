@@ -36,7 +36,7 @@ void debugAntrian() {
 }
 
 
-void START_PURRMART() {
+void START_READ() {
     // Inisialisasi data yang diperlukan
     barangList = MakeArrayDin();
     userList = MakeList();
@@ -55,11 +55,11 @@ void START_PURRMART() {
         int hargaBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
         ADV(); // Skip spasi
         SalinKalimat(); // Membaca nama barang
-        char namaBarang[NMax + 1];
-        copyKalimat(currentLine, namaBarang);
-        printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, namaBarang, hargaBarang);
+        Kalimat namaBarang;
+        copyKalimat(currentLine, &namaBarang);
+        //printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, &namaBarang, hargaBarang);
         ADVWORD(); // Skip newline atau spasi
-        ArrInsertLast(&barangList, namaBarang, hargaBarang);
+        ArrInsertLast(&barangList, &namaBarang, hargaBarang);
     }
 
     int jumlahPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
@@ -71,13 +71,13 @@ void START_PURRMART() {
          // Membaca saldo pengguna
         int saldoPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
         ADVSATUKATA(); // Skip spasi// Membaca nama pengguna
-        char namaPengguna[NMax + 1];
-        copyKalimat(currentLine, namaPengguna);
+        Kalimat namaPengguna;
+        copyKalimat(currentLine, &namaPengguna);
         ADV(); // Skip spasi
         SalinKalimat(); // Membaca password pengguna
-        char passwordPengguna[NMax + 1];
-        copyKalimat(currentLine, passwordPengguna);
-        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, namaPengguna, passwordPengguna, saldoPengguna);
+        Kalimat passwordPengguna;
+        copyKalimat(currentLine, &passwordPengguna);
+        //printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, namaPengguna, passwordPengguna, saldoPengguna);
     
         // Inisialisasi ADT lainnya
         Map keranjang;
@@ -95,39 +95,38 @@ void START_PURRMART() {
             int totalBiaya = arrayToInteger(currentWord.TabWord, currentWord.Length);
             ADV();
             SalinKalimat(); // Nama barang
-            char namaBarang[NMax + 1];
-            copyKalimat(currentLine, namaBarang);
-            printf("Riwayat %d: Nama=%s, Harga=%d\n", j + 1, namaBarang, totalBiaya);
+            Kalimat namaBarang;
+            copyKalimat(currentLine, &namaBarang);
+            //printf("Riwayat %d: Nama=%s, Harga=%d\n", j + 1, namaBarang, totalBiaya);
             ADVWORD(); // Skip newline atau spasi
-            Push(&riwayatPembelian, namaBarang, totalBiaya);
+            // Push(&riwayatPembelian, namaBarang, totalBiaya);
         }
 
         int jumlahWishlist = arrayToInteger(currentWord.TabWord, currentWord.Length);
         for (int j = 0; j < jumlahWishlist; j++) {
             ADV();
             SalinKalimat(); // Nama barang di wishlist
-            char namaWishlist[NMax + 1];
-            copyKalimat(currentLine, namaWishlist);
-            printf("Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
+            Kalimat namaWishlist;
+            copyKalimat(currentLine, &namaWishlist);
+            //printf("Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
 
-            AddToWishlist(&wishlist, namaWishlist); 
+            // AddToWishlist(&wishlist, namaWishlist); 
         }
-
-        InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
         ADVWORD(); // Skip newline atau spasi
+        //InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
     }
 
     printf("Konfigurasi aplikasi berhasil dibaca. PURRMART siap digunakan.\n");
 
-    debugBarang();
-    debugPengguna();
-    debugAntrian();
-}
+//     debugBarang();
+//     debugPengguna();
+//     debugAntrian();
+ }
 
 
 int main() {
     printf("Memulai program PURRMART...\n");
-    START_PURRMART();
+    START_READ();
     printf("Program selesai.\n");
     return 0;
 }
