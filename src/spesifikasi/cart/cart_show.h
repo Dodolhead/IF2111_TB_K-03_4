@@ -10,9 +10,8 @@
  * If the cart has items, displays:
  * - A list of items with their quantity, name, and total price
  * - The total cost of all items in the cart
- * 
- * @param cart The shopping cart to display
+ *  The shopping cart to display
  */
-void CartShow(Cart cart);
+void CartShow(Map cart, ArrayDin Info);
 
 #endif /* CART_SHOW_H */

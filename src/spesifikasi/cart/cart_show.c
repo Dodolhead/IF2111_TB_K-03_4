@@ -1,6 +1,7 @@
 #include "cart_show.h"
 #include <stdio.h>
 
+
 void CartShow(Map cart, ArrayDin Info) {
     int total = 0;
 

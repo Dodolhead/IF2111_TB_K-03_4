@@ -4,17 +4,17 @@
 #include <time.h>
 #include <math.h>
 #include "utilities.h"
-#include "src/adt/boolean.h"
-#include "src/adt/mesinangka.h"
-#include "src/adt/mesinkarakter.h"
-#include "src/adt/mesinkata.h"  
-#include "src/adt/queue.h"
-#include "src/adt/arraydinBarang.h"
-#include "src/adt/barang.h"
-#include "src/adt/stack.h"
-#include "src/adt/listlinier.h"
-#include "src/adt/map.h"
-#include "src/adt/barang.h"
+#include "src/adt/boolean/boolean.h"
+#include "src/adt/mesinangka/mesinangka.h"
+#include "src/adt/mesinkarakter/mesinkarakter.h"
+#include "src/adt/mesinkata/mesinkata.h"  
+#include "src/adt/queue/queue.h"
+#include "src/adt/arraydinBarang/arraydinBarang.h"
+#include "src/adt/barang/barang.h"
+#include "src/adt/stack/stack.h"
+#include "src/adt/listlinier/listlinier.h"
+#include "src/adt/map/map.h"
+#include "src/adt/barang/barang.h"
 
 #include "src/spesifikasi/start/start.h"
 #include "src/spesifikasi/load/load.h"
@@ -113,7 +113,8 @@ int main(){
             // Membuat list barang dan antrian
             Information = MakeArrayDin();
             CreateQueue(&request);
-            User = MakeList();
+            List User;
+            MakeList(&User);
 
             START_PURRMART(Information, User); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
             
@@ -126,8 +127,8 @@ int main(){
             // Membuat penyimpanan sistem
             Information = MakeArrayDin();
             CreateQueue(&request);
-            User = MakeList();
-
+            List User;
+            MakeList(&User);
             // Masukkan nama file
             scanf("%s", keterangan); // 'keterangan' -> nama file yang ingin di load
 

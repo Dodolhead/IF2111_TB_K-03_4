@@ -31,7 +31,7 @@ typedef struct {
 } List;                   
 
 /* Primitif List */
-List MakeList();
+void MakeList(List *U);
 /* Membentuk list kosong dengan elemen yang diisi MarkNumber/MarkName */
 
 boolean IsListEmpty(List U);

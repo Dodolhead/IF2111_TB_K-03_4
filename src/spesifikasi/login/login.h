@@ -1,9 +1,9 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include "../../adt/mesinkata.h"
-#include "../../adt/mesinkarakter.h"
-#include "../../adt/mesinangka.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../adt/mesinangka/mesinangka.h"
 #include <stdio.h>
 #include "../../spesifikasi/start/start.h"
 #include "../../../utilities.h"

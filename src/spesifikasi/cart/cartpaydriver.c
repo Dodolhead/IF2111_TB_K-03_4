@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "cart_pay.h"
-#include "../../adt/user2.h"
-#include "../../adt/map.h"
-#include "../../adt/stack.h"
+#include "../../adt/listuser/listuser.h"
+#include "../../adt/map/map.h"
+#include "../../adt/stack/stack.h"
 
 int main() {
     // Deklarasi variabel
@@ -31,10 +31,9 @@ int main() {
     PrintUserInfo(&user);
 
     // Proses pembayaran
-    CART_PAY(&user);
+    CartPay(&user);
 
     // Informasi user setelah transaksi
     PrintUserInfo(&user);
 
-    return 0;
 }

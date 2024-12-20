@@ -1,8 +1,6 @@
 #include "cart.h"
 #include <stdio.h>
-#include <string.h>
-#include "arraydinBarang.h"
-
+#include "../../../utilities.c"
 // Konstruktor Cart
 Cart MakeCart() {
     Cart newCart;
@@ -20,7 +18,7 @@ void AddToCart(Cart *cart, char* name, int n) {
     int found = 0;
     for (int i = 0; i < ArrLength(cart->Cart); i++) {
         Barang currentBarang = Get(cart->Cart, i);
-        if (strcmp(currentBarang.name, name) == 0) {
+        if (stringEquals(currentBarang.name, name) == 0) {
             currentBarang.jumlahBarang += n;
             ArrInsertAt(&cart->Cart, currentBarang.name, currentBarang.price, i); // Update barang
             printf("Berhasil menambahkan %d %s ke keranjang belanja!\n", n, name);
@@ -39,7 +37,7 @@ void RemoveFromCart(Cart *cart, char* name, int n) {
     int found = 0;
     for (int i = 0; i < ArrLength(cart->Cart); i++) {
         Barang currentBarang = Get(cart->Cart, i);
-        if (strcmp(currentBarang.name, name) == 0) {
+        if (stringEquals(currentBarang.name, name) == 0) {
             if (currentBarang.jumlahBarang >= n) {
                 // Barang ada dan cukup banyak untuk dikurangi
                 currentBarang.jumlahBarang -= n;

@@ -2,13 +2,15 @@
 #define CART_H
 
 #include <stdio.h>
-#include "../adt/barang.h"
-#include "../adt/arraydinBarang.h"
+#include "../adt/barang/barang.h"
+#include "../adt/arraydinBarang/arraydinBarang.h"
+#include "../adt/map/map.h"
+#include "../../../utilities.h"
 
 // ADT Cart
 typedef struct
 {
-    ArrayDin Cart;
+    Map Cart;
 } Cart;
 
 // Fungsi untuk membuat Cart baru

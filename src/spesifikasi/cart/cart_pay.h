@@ -1,10 +1,11 @@
 #ifndef CARTPAY_H
 #define CARTPAY_H
 
-#include "../../adt/user2.h"
-#include "../../adt/map.h"
-#include "../../adt/stack.h"
-#include "../../adt/mesinkata.h"
+#include "../../adt/listuser/listuser.h"
+#include "../../adt/map/map.h"
+#include "../../adt/stack/stack.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../../utilities.h"
 
 /* *** Fungsi dan Prosedur untuk CART PAY *** */
 
@@ -16,6 +17,6 @@ int TotalBiayaKeranjang(Map keranjang);
 keytype BarangTermahal(Map keranjang);
 
 /* Prosedur untuk memproses pembelian barang dalam keranjang */
-void CART_PAY(User *U);
+void CartPay(User *U);
 
 #endif /* CARTPAY_H */

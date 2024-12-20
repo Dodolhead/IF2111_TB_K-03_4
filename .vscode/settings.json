@@ -68,11 +68,12 @@
     "stdlib.h": "c",
     "map.h": "c",
     "listuser.h": "c",
-    "mesinkata.c": "cpp",
-    "mesinkarakter.c": "cpp",
+    "mesinkata.c": "c",
+    "mesinkarakter.c": "c",
     "array": "c",
     "mesinangka.h": "c",
     "wishlist_clear.h": "c",
-    "listuser.c": "cpp"
+    "listuser.c": "c",
+    "history.h": "c"
   }
 }

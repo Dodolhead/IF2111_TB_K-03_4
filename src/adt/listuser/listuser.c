@@ -10,18 +10,16 @@
 #include "../../../utilities.h"
 
 
-List MakeList() {
-    List U;
+void MakeList(List *U) {
     for (int i = 0; i < MaxEl; i++) {
-        U.A[i].money = MarkNumber;
-        U.A[i].name[0] = '\0';
-        U.A[i].password[0] = '\0';
+        U->A[i].money = MarkNumber;
+        U->A[i].name[0] = '\0';
+        U->A[i].password[0] = '\0';
 
-        CreateMapEmpty(&U.A[i].keranjang);
-        CreateStackEmpty(&U.A[i].riwayat_pembelian);
-        CreateLinkedListEmpty(&U.A[i].wishlist);
+        CreateMapEmpty(&U->A[i].keranjang);
+        CreateStackEmpty(&U->A[i].riwayat_pembelian);
+        CreateLinkedListEmpty(&U->A[i].wishlist);
     }
-    return U;
 }
 
 boolean isEmptyUserLinkedList(User U) {

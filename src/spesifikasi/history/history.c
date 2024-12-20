@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "history.h"
+#include "../../adt/stack/stack.c"
 
 void History(Stack history, int N) {
     /* Input berupa Stack history dengan tipe elemen barang (nama dan harga) dan
@@ -21,13 +22,13 @@ void History(Stack history, int N) {
                 printf("%c", (history).T[(history).TOP].name[j]);
             }
 
-            printf(" %d\n", HargaBarang(history.price));
-            Pop(&history, &name, &cost);
+            printf(" %d\n", HargaBarang(history.T[i]));
+            Pop(&history, name, &cost);
             Push(&temp, name, cost);
         }
 
         for (i = 1; i <= N && !IsStackEmpty(temp); i++) {
-            Pop(&temp, &name, &cost);
+            Pop(&temp, name, &cost);
             Push(&history, name, cost);
         }
     } else {

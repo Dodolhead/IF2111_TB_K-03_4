@@ -1,4 +1,5 @@
-#include "cartpay.h"
+#include "cart_pay.h"
+#include "../../../utilities.c"
 
 int TotalBiayaKeranjang(Map keranjang) {
     int total = 0;
@@ -19,7 +20,7 @@ keytype BarangTermahal(Map keranjang) {
     for (int i = 1; i < keranjang.Count; i++) {
         if (keranjang.Elements[i].Value > hargaMax ||
            (keranjang.Elements[i].Value == hargaMax &&
-            strcmp(keranjang.Elements[i].Key, barangMax) > 0)) {
+            stringEquals(keranjang.Elements[i].Key, barangMax) != 0)) {
             barangMax = keranjang.Elements[i].Key;
             hargaMax = keranjang.Elements[i].Value;
         }
@@ -27,7 +28,7 @@ keytype BarangTermahal(Map keranjang) {
     return barangMax;
 }
 
-void CART_PAY(User *U) {
+void CartPay(User *U) {
     if (IsMapEmpty(U->keranjang)) {
         printf("Error: Keranjang kamu kosong!\n");
         return;
@@ -47,7 +48,7 @@ void CART_PAY(User *U) {
     printf("Apakah jadi dibeli? (Ya/Tidak): ");
 
     STARTWORD();
-    if (stringEquals(CurrentWord.TabWord, "Ya")) {
+    if (stringEquals(currentWord.TabWord, "Ya")) {
         if (U->money >= totalBiaya) {
             U->money -= totalBiaya;
             keytype barangMax = BarangTermahal(U->keranjang);
@@ -57,7 +58,7 @@ void CART_PAY(User *U) {
         } else {
             printf("Error: Uang kamu hanya %d, tidak cukup untuk membeli keranjang!\n", U->money);
         }
-    } else if (stringEquals(CurrentWord.TabWord, "Tidak")) {
+    } else if (stringEquals(currentWord.TabWord, "Tidak")) {
         printf("Pembelian dibatalkan!\n");
     } else {
         printf("Error: Input tidak valid! Harap masukkan 'Ya' atau 'Tidak'.\n");

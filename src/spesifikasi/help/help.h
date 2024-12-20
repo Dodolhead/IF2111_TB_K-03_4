@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "..\..\..\utilities.h"
-#include "..\..\adt\mesinangka.h"
-#include "..\..\adt\mesinkarakter.h"
+#include "../../../utilities.h"
+#include "../../adt/mesinangka/mesinangka.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
 
 int welcomeMenu();
 
