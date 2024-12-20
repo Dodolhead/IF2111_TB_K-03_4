@@ -5,6 +5,7 @@
 #include "../../adt/queue/queue.h"
 #include "../../../utilities.h"
 #include "../../adt/mesinkalimat/linemachine.h"
+
 #include "start.h"
 
 // Deklarasi global
@@ -34,87 +35,98 @@ void debugAntrian() {
     displayQueue(antrianQueue);
 }
 
-void START_PURRMART() {
+
+void START_READ() {
     // Inisialisasi data yang diperlukan
-    ArrayDin barangList = MakeArrayDin();
-    List userList = MakeList();
-    Queue antrianQueue;
+    barangList = MakeArrayDin();
+    userList = MakeList();
     CreateQueue(&antrianQueue);
 
     // Membaca file konfigurasi default
     printf("Membaca file konfigurasi default...\n");
     STARTFILE("config.txt");
-    ADVANGKA(); // Mengabaikan jumlah barang
-    int jumlahBarang = currentAngka;
+    ADVWORD(); // Membaca kata "Barang"
+    int jumlahBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
     printf("Jumlah barang: %d\n", jumlahBarang);
-    ADVWORD(); // Mengabaikan newline
-    // Membaca detail barang
-    for (int i = 0; i < jumlahBarang; i++) {
-        if (!isEndWord()) {
-            int hargaBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
-            ADVWORD();
-            printf("Harga barang: %d\n", hargaBarang);
+    ADVWORD(); // Skip newline atau spasi
 
-            char namaBarang[MAX_LEN];
-            CopySentence();
-            copyString(namaBarang, currentWord);
-            ADVWORD();
-            printf("Nama barang: %s\n", namaBarang);
-
-            ArrInsertLast(&barangList, namaBarang, hargaBarang);
-        }
+    // Membaca data barang
+    for (int i = 0; i < jumlahBarang; i++) { // Membaca harga barang
+        int hargaBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
+        ADV(); // Skip spasi
+        SalinKalimat(); // Membaca nama barang
+        Kalimat namaBarang;
+        copyKalimat(currentLine, &namaBarang);
+        //printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, &namaBarang, hargaBarang);
+        ADVWORD(); // Skip newline atau spasi
+        ArrInsertLast(&barangList, &namaBarang, hargaBarang);
     }
 
-    // Membaca jumlah pengguna
-    int jumlahPengguna = 0;
-    if (!isEndWord()) {
-        jumlahPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
-        ADVWORD();
-    }
+    int jumlahPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
+    printf("Jumlah pengguna: %d\n", jumlahPengguna);
+    ADVWORD(); // Skip newline atau spasi
 
-    // Membaca detail pengguna
+    // Membaca data pengguna
     for (int i = 0; i < jumlahPengguna; i++) {
-        char namaPengguna[MAX_LEN];
-        char passwordPengguna[MAX_LEN];
-        int saldoPengguna = 0;
-
-        if (!isEndWord()) {
-            saldoPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
-            ADVWORD();
-        }
-
-        if (!isEndWord()) {
-            copyString(namaPengguna, currentWord.TabWord);
-            ADVWORD();
-        }
-
-        if (!isEndWord()) {
-            copyString(passwordPengguna, currentWord.TabWord);
-            ADVWORD();
-        }
-
+         // Membaca saldo pengguna
+        int saldoPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
+        ADVSATUKATA(); // Skip spasi// Membaca nama pengguna
+        Kalimat namaPengguna;
+        copyKalimat(currentLine, &namaPengguna);
+        ADV(); // Skip spasi
+        SalinKalimat(); // Membaca password pengguna
+        Kalimat passwordPengguna;
+        copyKalimat(currentLine, &passwordPengguna);
+        //printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, namaPengguna, passwordPengguna, saldoPengguna);
+    
+        // Inisialisasi ADT lainnya
         Map keranjang;
         Stack riwayatPembelian;
         LinkedList wishlist;
-        
         CreateMapEmpty(&keranjang);
         CreateStackEmpty(&riwayatPembelian);
         CreateLinkedListEmpty(&wishlist);
 
-        InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
+        ADVWORD(); // Banyaknya riwayat pembelian
+        int jumlahRiwayat = arrayToInteger(currentWord.TabWord, currentWord.Length);
+        ADVWORD();
+
+        for (int j = 0; j < jumlahRiwayat; j++) {
+            int totalBiaya = arrayToInteger(currentWord.TabWord, currentWord.Length);
+            ADV();
+            SalinKalimat(); // Nama barang
+            Kalimat namaBarang;
+            copyKalimat(currentLine, &namaBarang);
+            //printf("Riwayat %d: Nama=%s, Harga=%d\n", j + 1, namaBarang, totalBiaya);
+            ADVWORD(); // Skip newline atau spasi
+            // Push(&riwayatPembelian, namaBarang, totalBiaya);
+        }
+
+        int jumlahWishlist = arrayToInteger(currentWord.TabWord, currentWord.Length);
+        for (int j = 0; j < jumlahWishlist; j++) {
+            ADV();
+            SalinKalimat(); // Nama barang di wishlist
+            Kalimat namaWishlist;
+            copyKalimat(currentLine, &namaWishlist);
+            //printf("Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
+
+            // AddToWishlist(&wishlist, namaWishlist); 
+        }
+        ADVWORD(); // Skip newline atau spasi
+        //InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
     }
 
     printf("Konfigurasi aplikasi berhasil dibaca. PURRMART siap digunakan.\n");
-    
-    // Debugging output
-    // debugBarang();
-    // debugPengguna();
-    // debugAntrian();
-}
+
+//     debugBarang();
+//     debugPengguna();
+//     debugAntrian();
+ }
+
 
 int main() {
     printf("Memulai program PURRMART...\n");
-    START_PURRMART();
+    START_READ();
     printf("Program selesai.\n");
     return 0;
 }

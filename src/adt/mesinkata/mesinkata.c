@@ -63,6 +63,16 @@ void ADVWORD()
     }
 }
 
+void ADVONEWORD() {
+    IgnoreBlanks();
+    if (currentChar == ' ') {
+        endWord = true;
+    } else {
+        endWord = false;
+        CopyWord();
+    }
+}
+
 // void CopyWord() {
 //     int i = 0;
 //     while ( currentChar != MARK ) {
