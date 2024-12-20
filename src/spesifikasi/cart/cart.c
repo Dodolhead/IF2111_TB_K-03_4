@@ -1,83 +1,53 @@
 #include "cart.h"
 #include <stdio.h>
-#include "../../../utilities.c"
-// Konstruktor Cart
-Cart MakeCart() {
-    Cart newCart;
-    newCart.Cart = MakeArrayDin();  // Membuat array dinamis kosong untuk Cart
-    return newCart;
-}
+#include "../../adt/map/map.c"
 
-// Destruktor Cart
-void DeallocateCart(Cart *cart) {
-    DeallocateArrayDin(&cart->Cart);  
+
+void MakeCart(Map *cart) {
+    CreateMapEmpty(cart);
 }
 
 // Menambahkan barang ke dalam Cart (CARD ADD)
-void AddToCart(Cart *cart, char* name, int n) {
-    int found = 0;
-    for (int i = 0; i < ArrLength(cart->Cart); i++) {
-        Barang currentBarang = Get(cart->Cart, i);
-        if (stringEquals(currentBarang.name, name) == 0) {
-            currentBarang.jumlahBarang += n;
-            ArrInsertAt(&cart->Cart, currentBarang.name, currentBarang.price, i); // Update barang
-            printf("Berhasil menambahkan %d %s ke keranjang belanja!\n", n, name);
-            found = 1;
-            break;
+void AddToCart(Map *cart, keytype name, int n) {
+    if (IsMember(*cart, name)) {
+        // Jika barang sudah ada di cart, tambahkan jumlahnya
+        for (int i = 0; i <= cart->Count; i++) {
+            if (cart->Elements[i].Key == name) {
+                cart->Elements[i].Value += n;
+            }
         }
-    }
-    if (!found) {
-        // Barang tidak ditemukan, tambahkan sebagai barang baru
-        printf("Barang tidak ada di toko!\n");
+    } else {
+        // Jika barang belum ada, tambahkan sebagai item baru
+        Insert(cart, name, n);
     }
 }
 
 // Mengurangi barang dari Cart (CARD REMOVE)
-void RemoveFromCart(Cart *cart, char* name, int n) {
-    int found = 0;
-    for (int i = 0; i < ArrLength(cart->Cart); i++) {
-        Barang currentBarang = Get(cart->Cart, i);
-        if (stringEquals(currentBarang.name, name) == 0) {
-            if (currentBarang.jumlahBarang >= n) {
-                // Barang ada dan cukup banyak untuk dikurangi
-                currentBarang.jumlahBarang -= n;
-                if (currentBarang.jumlahBarang > 0) {
-                    ArrInsertAt(&cart->Cart, currentBarang.name, currentBarang.price, i);
-                    printf("Berhasil mengurangi %d barang dari keranjang!\n", n);
-                } else if (currentBarang.jumlahBarang == 0) {
-                    printf("Berhasil mengurangi %d barang dari keranjang!\n", n);
-                }
-            } else {
-                // Kuantitas barang di keranjang lebih sedikit dari yang diminta
-                printf("Tidak berhasil mengurangi, hanya terdapat %d %s di keranjang!\n", currentBarang.jumlahBarang, name);
-            }
-            found = 1;
-            break;
-        }
-    }
-    if (!found) {
-        printf("Barang tidak ada di keranjang belanja!\n");
+void RemoveFromCart(Map *cart, char* name) {
+    if (IsMember(*cart, name)) {
+        // Hapus barang berdasarkan nama
+        Delete(cart, name);
+    } else {
+        printf("Barang dengan nama %s tidak ada di dalam cart.\n", name);
     }
 }
 
 // Menampilkan semua barang dalam Cart
-void DisplayCart(Cart cart) {
-    printf("Daftar barang dalam keranjang:\n");
-    for (int i = 0; i < ArrLength(cart.Cart); i++) {
-        Barang currentBarang = Get(cart.Cart, i);
-        printf("Nama: %s, Harga: %d, Kuantitas: %d\n", currentBarang.name, currentBarang.price, currentBarang.jumlahBarang);
+void DisplayCart(Map cart) {
+    if (IsMapEmpty(cart)) {
+        printf("Cart kosong.\n");
+    } else {
+        printf("Isi Cart:\n");
+        for (int i = 0; i <= cart.Count; i++) {
+            printf("- %s: %d\n", cart.Elements[i].Key, cart.Elements[i].Value);
+        }
     }
 }
-
 // ini untuk ngetes (driver)
-// int main() {
-//     Barang B;
-//     B.price = 100000;
-//     int jumlah;
-//     char nama;
-//     scanf("Masukkan nama barang: %c", &nama);
-//     scanf("Masukkan jumlah barang yang ingin dimasukkan ke cart: %d", &jumlah);
-//     Cart keranjang;
-//     AddToCart(&keranjang, &nama, jumlah);
-//     DisplayCart(keranjang);
-// }
+int main() {
+    Map cart;
+    MakeCart(&cart);
+
+    AddToCart(&cart, "Baju", 2);
+    DisplayCart(cart);
+}

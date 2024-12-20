@@ -2,30 +2,20 @@
 #define CART_H
 
 #include <stdio.h>
-#include "../adt/barang/barang.h"
-#include "../adt/arraydinBarang/arraydinBarang.h"
-#include "../adt/map/map.h"
+#include "../../adt/map/map.h"
 #include "../../../utilities.h"
 
 // ADT Cart
-typedef struct
-{
-    Map Cart;
-} Cart;
-
 // Fungsi untuk membuat Cart baru
-Cart MakeCart();
-
-// Fungsi untuk menghapus Cart
-void DeallocateCart(Cart *cart);
+void MakeCart(Map *cart);
 
 // Fungsi untuk menambahkan barang ke dalam Cart
-void AddToCart(Cart *cart, char* name, int n);
+void AddToCart(Map *cart, keytype name, int n);
 
 // Fungsi untuk mengurangi barang dari Cart
-void RemoveFromCart(Cart *cart, char* name, int n);
+void RemoveFromCart(Map *cart, char* name);
 
 // Fungsi untuk menampilkan semua barang dalam Cart
-void DisplayCart(Cart cart);
+void DisplayCart(Map cart);
 
 #endif

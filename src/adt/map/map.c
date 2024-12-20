@@ -1,4 +1,5 @@
 #include "map.h"
+#include "../../../utilities.c"
 #include <stdio.h>
 
 /* *** Konstruktor/Kreator *** */
@@ -18,7 +19,7 @@ boolean IsMapFull(Map M) {
 /* *** Operator Dasar Map *** */
 valuetype Value(Map M, keytype k) {
     for (int i = 0; i < M.Count; i++) {
-        if (M.Elements[i].Key == k) {
+        if (stringEquals(M.Elements[i].Key, k)) {
             return M.Elements[i].Value;
         }
     }
@@ -27,7 +28,7 @@ valuetype Value(Map M, keytype k) {
 
 void Insert(Map *M, keytype k, valuetype v) {
     if (!IsMapFull(*M) && !IsMember(*M, k)) {
-        M->Elements[M->Count].Key = k;
+        copyString(M->Elements[M->Count].Key, k);
         M->Elements[M->Count].Value = v;
         M->Count++;
     }
@@ -37,7 +38,7 @@ void Delete(Map *M, keytype k) {
     if (!IsMapEmpty(*M)) {
         int idx = -1;
         for (int i = 0; i < M->Count; i++) {
-            if (M->Elements[i].Key == k) {
+            if (stringEquals(M->Elements[i].Key, k)) {
                 idx = i;
                 break;
             }
@@ -53,7 +54,7 @@ void Delete(Map *M, keytype k) {
 
 boolean IsMember(Map M, keytype k) {
     for (int i = 0; i < M.Count; i++) {
-        if (M.Elements[i].Key == k) {
+        if (stringEquals(M.Elements[i].Key, k)) {
             return true;
         }
     }

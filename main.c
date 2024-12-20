@@ -29,7 +29,6 @@
 #include "src/spesifikasi/store_supply/store_supply.h"
 #include "src/spesifikasi/help/help.h"
 #include "src/spesifikasi/save/save.h"
-#include "src/spesifikasi/quit/quit.h"
 
 #include "src/spesifikasi/profile/profile.h"
 #include "src/spesifikasi/cart/cart.h"

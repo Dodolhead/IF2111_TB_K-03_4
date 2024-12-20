@@ -4,6 +4,6 @@
 void displayProfile(User user) {
 
     printf("\n=== PROFILE ===\n");
-    printf("Nama : %s\n", users.name);
-    printf("Saldo: %d\n", users.money);
+    printf("Nama : %s\n", user.name);
+    printf("Saldo: %d\n", user.money);
 }

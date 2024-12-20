@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listuser.h"
-#include "../../adt/map/map.h"
-#include "../../adt/stack/stack.h"
-#include "../../adt/mesinkata/mesinkata.h"
-#include "../../adt/mesinkarakter/mesinkarakter.h"
-#include "../../adt/mesinangka/mesinangka.h"
-#include "../../adt/listlinier/listlinier.h"
-#include "../../../utilities.h"
-
 
 void MakeList(List *U) {
     for (int i = 0; i < MaxEl; i++) {

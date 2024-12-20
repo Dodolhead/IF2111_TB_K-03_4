@@ -28,7 +28,7 @@ typedef struct {
 
 typedef struct {
     User A[MaxEl];       
-} List;                   
+} List;           
 
 /* Primitif List */
 void MakeList(List *U);

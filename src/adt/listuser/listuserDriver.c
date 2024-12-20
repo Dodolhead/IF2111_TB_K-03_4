@@ -7,7 +7,7 @@
 #include "../../adt/mesinkarakter/mesinkarakter.c"
 #include "../../adt/mesinangka/mesinangka.c"
 #include "../../adt/listlinier/listlinier.c"
-#include "../../../utilities.c"
+// #include "../../../utilities.c"
 
 // #include <stdio.h>
 // #include "listuser.h"
@@ -25,20 +25,20 @@ void testAllFunctions() {
 
     // Menambahkan user baru ke list
     printf("Menambahkan User ke List:\n");
-    // Map keranjang;
-    // Stack riwayat;
-    // LinkedList wishlist;
-    // CreateMapEmpty(&keranjang);
-    // CreateStackEmpty(&riwayat);
-    // CreateLinkedListEmpty(&wishlist);
+    Map keranjang;
+    Stack riwayat;
+    LinkedList wishlist;
+    CreateMapEmpty(&keranjang);
+    CreateStackEmpty(&riwayat);
+    CreateLinkedListEmpty(&wishlist);
 
-    // InsertListLast(&userList, 1000, "User1", "password1", keranjang, riwayat, wishlist);
+    InsertListLast(&userList, 1000, "User1", "password1", keranjang, riwayat, wishlist);
     // InsertListLast(&userList, 500, "User2", "password2", keranjang, riwayat, wishlist);
     // PrintUserLengkap(&userList, 0);
     // PrintUserLengkap(&userList, 1);
 
     // // Mengakses atribut user
-    // printf("\nMengakses atribut user:\n");
+    printf("\nMengakses atribut user:\n");
     // char buffer[50];
     // GetName(userList, 0, buffer);
     // printf("Nama user pertama: %s\n", buffer);
