@@ -71,7 +71,7 @@ int main(){
     // Masukkan program utama
     char perintah[50] = "";
     char keterangan[50] = "";
-
+    char filename[50];
     // ALGORTIMA
     printf("  _____  _    _ _____  _____  __  __          _____ _______ \n");
     printf(" |  __ \\| |  | |  __ \\|  __ \\|  \\/  |   /\\   |  __ \\__   __|\n");
@@ -105,14 +105,14 @@ int main(){
             List User;
             MakeList(&User);
 
-            START_PURRMART(Information, User); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
+            START_PURRMART(); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
             
             // Mengubah tampilan HELP
             help_menu = 2;
         }
 
         // LOAD
-        else if (stringEquals(currentWord.TabWord, "LOAD")) {
+        else if (stringEquals(currentWord.TabWord, "LOAD")){
             // Membuat penyimpanan sistem
             Information = MakeArrayDin();
             CreateQueue(&request);
@@ -120,9 +120,10 @@ int main(){
             MakeList(&User);
             // Masukkan nama file
             ADVWORD(); // 'keterangan' -> nama file yang ingin di load
+            copyString(filename, currentWord.TabWord);
 
             // Membuka dan membaca file
-            LOAD(currentWord.TabWord, Information, User); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
+            LOAD(filename); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
 
             printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
             
@@ -133,7 +134,7 @@ int main(){
         // LOGIN
         else if (stringEquals(currentWord.TabWord, "LOGIN")) {
             if (startup) {
-                acc_id = LOGIN(User.A[acc_id],); // LOGIN bakal mengembalikan index user dari List User
+                LOGIN(User, &acc_id); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
             } else {
                 printf("ERROR: There's no file loaded\n");
@@ -143,7 +144,7 @@ int main(){
         // LOGOUT
         else if (stringEquals(currentWord.TabWord, "LOGOUT")) {
             if (loggedin) {
-                acc_id = LOGOUT(); // LOGOUT bakal mengubah acc_id = -1
+                LOGOUT(&acc_id); // LOGOUT bakal mengubah acc_id = -1
                 loggedin = false;
             } else {
                 printf("ERROR: There's no account loaded\n");
@@ -213,7 +214,7 @@ int main(){
         
         // SAVE
         else if(stringEquals(currentWord.TabWord, "SAVE")) {
-            Save(Information, User); // SAVE menyalin informasi dari ArrayDin Information dan List User ke file
+            Save(Information, User, filename); // SAVE menyalin informasi dari ArrayDin Information dan List User ke file
         }
         
         // QUIT
