@@ -3,7 +3,7 @@
 
 #include "../../spesifikasi/start/start.h"
 
-void REGISTER(User users);
+void REGISTER(List *users);
 /* Fungsi untuk mendaftarkan pengguna baru
    I.S. : Array `users` dan jumlah pengguna `jumlahUsers` terdefinisi
    F.S. : Jika username belum terdaftar dan kapasitas belum penuh,

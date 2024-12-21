@@ -136,22 +136,22 @@ void START_READ(char filename[]) {
 
         // Membaca wishlist
         int jumlahWishlist = arrayToInteger(currentWord.TabWord, currentWord.Length);
-        ADVWORD(); // Skip newline atau spasi
+        ADV(); // Skip newline atau spasi
         printf("[DEBUG] Jumlah wishlist pengguna ke-%d: %d\n", i + 1, jumlahWishlist);
 
         // Initialize wishlist
         CreateLinkedListEmpty(&wishlist);
 
         for (int j = 0; j < jumlahWishlist; j++) {
-            ADV();
-
+            ClearBuffer();
             // Membaca nama wishlist
             char namaWishlist[101];
             SalinKalimat();
+            printf ("[DEBUG] Wishlist: %s\n", currentLine.TabLine);
             copyString(namaWishlist, currentLine.TabLine);
 
             printf("[DEBUG] Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
-
+            ADV();
             // Tambahkan ke wishlist
             AddToWishlist(&userList.A[i], namaWishlist);
             printf("[DEBUG] Wishlist ke-%d berhasil ditambahkan.\n", j + 1);
@@ -171,9 +171,9 @@ void START_PURRMART() {
     START_READ("config.txt");
 }
 
-// int main() {
-//     printf("[DEBUG] Memulai program PURRMART...\n");
-//     START_PURRMART();
-//     printf("[DEBUG] Program selesai.\n");
-//     return 0;
-// }
+int main() {
+    printf("[DEBUG] Memulai program PURRMART...\n");
+    START_PURRMART();
+    printf("[DEBUG] Program selesai.\n");
+    return 0;
+}
