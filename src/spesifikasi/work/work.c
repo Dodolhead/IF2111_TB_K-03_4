@@ -149,9 +149,9 @@ void doWork(int* money) {
 }
 
 
-int main() {
-    int money = 0;
-    doWork(&money);
-    printf("%d",money);
-}
+// int main() {
+//     int money = 0;
+//     doWork(&money);
+//     printf("%d",money);
+// }
 

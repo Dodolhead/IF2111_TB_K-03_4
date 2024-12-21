@@ -77,6 +77,8 @@
     "history.h": "c",
     "stdio.h": "c",
     "cart.h": "c",
-    "cart_show.h": "c"
+    "cart_show.h": "c",
+    "load.h": "c",
+    "wishlist_swap.h": "c"
   }
 }

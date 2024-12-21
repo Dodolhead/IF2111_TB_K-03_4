@@ -1,6 +1,7 @@
 #include "../../adt/boolean/boolean.h"
 #include "../../../utilities.h"
 #include "../../adt/listuser/listuser.h"
+#include "../../adt/arraydinBarang/arraydinBarang.h"
 
 void Save(ArrayDin Info, List ListUser, char* filename);
 /*

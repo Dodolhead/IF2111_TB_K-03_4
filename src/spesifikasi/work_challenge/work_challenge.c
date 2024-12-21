@@ -271,8 +271,8 @@ void workChallenge(int* money) {
 }
 
 
-int main(){
-    int money = 5001;
-    workChallenge(&money);
-    printf("%d",money);
-}
+// int main(){
+//     int money = 5001;
+//     workChallenge(&money);
+//     printf("%d",money);
+// }

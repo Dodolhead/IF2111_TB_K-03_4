@@ -2,6 +2,9 @@
 #define REGISTER_H
 
 #include "../../spesifikasi/start/start.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../adt/listuser/listuser.h"
 
 void REGISTER(User users);
 /* Fungsi untuk mendaftarkan pengguna baru

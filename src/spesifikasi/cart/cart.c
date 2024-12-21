@@ -56,10 +56,10 @@ void DisplayCart(Map cart) {
     }
 }
 // ini untuk ngetes (driver)
-int main() {
-    Map cart;
-    MakeCart(&cart);
+// int main() {
+//     Map cart;
+//     MakeCart(&cart);
 
-    AddToCart(&cart, "Baju", 2);
-    DisplayCart(cart);
-}
+//     AddToCart(&cart, "Baju", 2);
+//     DisplayCart(cart);
+// }

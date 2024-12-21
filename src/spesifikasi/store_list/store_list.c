@@ -19,7 +19,7 @@ void StoreList(ArrayDin Info) {
             }
 
             printf(" - ");
-            printf("Harga: %d", HargaBarang(Info.A[i]))
+            printf("Harga: %d", HargaBarang(Info.A[i]));
 
             printf("\n");
         }

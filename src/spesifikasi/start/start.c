@@ -1,11 +1,4 @@
 #include <stdio.h>
-#include "../../adt/mesinkata/mesinkata.h"
-#include "../../adt/listuser/listuser.h"
-#include "../../adt/arraydinBarang/arraydinBarang.h"
-#include "../../adt/queue/queue.h"
-#include "../../../utilities.h"
-#include "../../adt/mesinkalimat/linemachine.h"
-
 #include "start.h"
 
 // Deklarasi global
@@ -171,9 +164,9 @@ void START_PURRMART() {
     START_READ("config.txt");
 }
 
-int main() {
-    printf("[DEBUG] Memulai program PURRMART...\n");
-    START_PURRMART();
-    printf("[DEBUG] Program selesai.\n");
-    return 0;
-}
+// int main() {
+//     printf("[DEBUG] Memulai program PURRMART...\n");
+//     START_PURRMART();
+//     printf("[DEBUG] Program selesai.\n");
+//     return 0;
+// }

@@ -4,8 +4,8 @@
 #include "../../adt/listuser/listuser.c"
 
 void wishlistClear(User *U) {
-    addressLinkedLis P = First(U->wishlist);
-    addressLinkedLis temp;
+    addressLinkedList P = First(U->wishlist);
+    addressLinkedList temp;
 
     while (P != Nil) {
         temp = P;            // Simpan elemen saat ini
