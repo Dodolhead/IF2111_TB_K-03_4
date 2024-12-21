@@ -1,7 +1,7 @@
 #include "login.h"
 
 // Fungsi untuk login
-int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex) {
+int LOGIN(User users, int *loggedInUserIndex) {
     if (*loggedInUserIndex != -1) {
         printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", users[*loggedInUserIndex].name);
         return *loggedInUserIndex; // Tetap login dengan user yang sebelumnya

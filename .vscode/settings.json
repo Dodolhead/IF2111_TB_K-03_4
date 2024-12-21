@@ -74,6 +74,9 @@
     "mesinangka.h": "c",
     "wishlist_clear.h": "c",
     "listuser.c": "c",
-    "history.h": "c"
+    "history.h": "c",
+    "stdio.h": "c",
+    "cart.h": "c",
+    "cart_show.h": "c"
   }
 }

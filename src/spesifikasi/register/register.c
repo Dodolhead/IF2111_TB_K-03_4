@@ -3,12 +3,7 @@
 #include "../../adt/mesinkata.h"
 #include "../../adt/mesinkarakter.h"
 
-void REGISTER(User users[], int *jumlahUsers) {
-    if (*jumlahUsers >= 100) {
-        printf("Gagal mendaftarkan pengguna baru. Kapasitas maksimum pengguna telah tercapai.\n");
-        return;
-    }
-
+void REGISTER(User users) {
     printf(">> REGISTER\n");
 
     // Input username
