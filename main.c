@@ -87,12 +87,12 @@ int main(){
         // Mencetak command
         i = 0;
         while (i < currentWord.Length) {
-            printf("%c", CurrentWord.TabWord[i]);
+            printf("%c", currentWord.TabWord[i]);
             i++;
         }        
 
         // START
-        if (stringEquals(CurrentWord.TabWord, "START")) {
+        if (stringEquals(currentWord.TabWord, "START")) {
             printf("\n");
             // Mengubah state
             startup = true;
@@ -161,7 +161,7 @@ int main(){
         else if (stringEquals(currentWord.TabWord, "WORK")) {
             // validasi input
             if (loggedin) {
-                if (GetCC() != \n) {
+                if (GetCC() != '\n') {
                     ADVWORD();
                     if (stringEquals(currentWord.TabWord, "CHALLENGE")) {
                         workChallenge(User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user

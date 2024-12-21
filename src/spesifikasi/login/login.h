@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "../../spesifikasi/start/start.h"
 #include "../../../utilities.h"
+#include "../../adt/listuser/listuser.h"
 
 // Fungsi untuk login
 int LOGIN(User users[], int jumlahUsers, int *loggedInUserIndex);
