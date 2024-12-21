@@ -31,7 +31,9 @@
 #include "src/spesifikasi/save/save.h"
 
 #include "src/spesifikasi/profile/profile.h"
+#include "src/spesifikasi/cart/cart_pay.h"
 #include "src/spesifikasi/cart/cart.h"
+#include "src/spesifikasi/cart/cart_show.h"
 #include "src/spesifikasi/history/history.h"
 #include "src/spesifikasi/wishlist_swap/wishlist_swap.h"
 #include "src/spesifikasi/wishlist_remove/wishlist_remove.h"
@@ -131,7 +133,7 @@ int main(){
         // LOGIN
         else if (stringEquals(currentWord.TabWord, "LOGIN")) {
             if (startup) {
-                acc_id = LOGIN(); // LOGIN bakal mengembalikan index user dari List User
+                acc_id = LOGIN(User.A[acc_id],); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
             } else {
                 printf("ERROR: There's no file loaded\n");
@@ -151,7 +153,7 @@ int main(){
         // REGISTER
         else if (stringEquals(currentWord.TabWord, "REGISTER")) {
             if (startup) {
-                REGISTER(User); // REGISTER bakal insert nama dan password ke List User 
+                REGISTER(User.A[acc_id]); // REGISTER bakal insert nama dan password ke List User 
             } else {
                 printf("ERROR: There's no file loaded\n");
             }
@@ -164,7 +166,7 @@ int main(){
                 if (GetCC() != '\n') {
                     ADVWORD();
                     if (stringEquals(currentWord.TabWord, "CHALLENGE")) {
-                        workChallenge(User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user
+                        workChallenge(&User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user
                     }
                 } else {
                     doWork(User.A[acc_id].money); // WORK bakal menambah uang user
@@ -227,7 +229,7 @@ int main(){
         // PROFILE
         else if (stringEquals(currentWord.TabWord, "PROFILE")) {
             if (loggedin) {
-                Profile(acc_id); // Menampilkan informasi user dari List User dengan index acc_id
+                displayProfile(User.A[acc_id]); // Menampilkan informasi user dari List User dengan index acc_id
             } else {
                 printf("ERROR: No account is loaded\n");
             }
@@ -247,7 +249,7 @@ int main(){
                     copyString(keterangan, currentWord.TabWord);
                     while (GetCC() != '\n') {
                         ADVWORD();
-                        stringConcat(keterangan, ' ');
+                        stringConcat(keterangan, " ");
                         stringConcat(keterangan, currentWord.TabWord);
                     }
 
@@ -256,7 +258,7 @@ int main(){
                         quantity = quantity * 10 + (currentWord.TabWord[i] - '0');
                     }
 
-                    AddToCart(User.A[acc_id].keranjang, keterangan, quantity); // Menyimpan barang ke keranjang
+                    AddToCart(&User.A[acc_id].keranjang, keterangan, quantity); // Menyimpan barang ke keranjang
                 }
                 // CART REMOVE
                 else if (stringEquals(currentWord.TabWord, "REMOVE")) {
@@ -265,7 +267,7 @@ int main(){
                     copyString(keterangan, currentWord.TabWord);
                     while (GetCC() != '\n') {
                         ADVWORD();
-                        stringConcat(keterangan, ' ');
+                        stringConcat(keterangan, " ");
                         stringConcat(keterangan, currentWord.TabWord);
                     }
 
@@ -274,7 +276,7 @@ int main(){
                         quantity = quantity * 10 + (currentWord.TabWord[i] - '0');
                     }
 
-                    RemoveFromCart(User.A[acc_id].keranjang, keterangan, quantity); // Menghapus barang dari keranjang
+                    RemoveFromCart(&User.A[acc_id].keranjang, keterangan, quantity); // Menghapus barang dari keranjang
                 }
                 // CART SHOW
                 else if (stringEquals(currentWord.TabWord, "SHOW")) {
@@ -282,7 +284,7 @@ int main(){
                 }
                 // CART PAY
                 else if (stringEquals(currentWord.TabWord, "PAY")) {
-                    PayCart(User.A[acc_id]); // Membayar keranjang, INFO: ini pake User.A[acc_id] soalnya yang dirubah User.A[acc_id].money, User.A[acc_id].keranjang, dan User.A[acc_id].riwayat_pembelian
+                    CartPay(&User.A[acc_id]); // Membayar keranjang, INFO: ini pake User.A[acc_id] soalnya yang dirubah User.A[acc_id].money, User.A[acc_id].keranjang, dan User.A[acc_id].riwayat_pembelian
                 }
             } 
             else if (!loggedin) { printf("ERROR: There's no file loaded\n"); } 

@@ -13,7 +13,7 @@ void MakeCart(Map *cart);
 void AddToCart(Map *cart, keytype name, int n);
 
 // Fungsi untuk mengurangi barang dari Cart
-void RemoveFromCart(Map *cart, char* name);
+void RemoveFromCart(Map *cart, char* name, int n);
 
 // Fungsi untuk menampilkan semua barang dalam Cart
 void DisplayCart(Map cart);
