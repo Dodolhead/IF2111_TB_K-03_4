@@ -43,14 +43,14 @@ void Save(ArrayDin Info, List ListUser, char* filename) {
         // Menulis riwayat pembelian user
         j = 0; // Push ke temp
         while (!IsStackEmpty(ListUser.A[i].riwayat_pembelian)) {
-            Pop(&ListUser.A[i].riwayat_pembelian, &tempname, &tempprice);
+            Pop(&ListUser.A[i].riwayat_pembelian, tempname, &tempprice);
             Push(&temp, tempname, tempprice);
             j++;
         }
         fprintf(file, "%d\n", j);
         // Push ke stack user
         while (!IsStackEmpty(ListUser.A[i].riwayat_pembelian)) {
-            Pop(&temp, &tempname, &tempprice);
+            Pop(&temp, tempname, &tempprice);
             Push(&ListUser.A[i].riwayat_pembelian, tempname, tempprice);
             fprintf(file, "%d %s\n", InfoTop(ListUser.A[i].riwayat_pembelian).price, InfoTop(ListUser.A[i].riwayat_pembelian).name);
         }

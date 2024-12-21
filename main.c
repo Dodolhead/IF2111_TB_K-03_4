@@ -161,7 +161,7 @@ int main(){
         // REGISTER
         else if (stringEquals(currentWord.TabWord, "REGISTER")) {
             if (startup) {
-                REGISTER(User.A[acc_id]); // REGISTER bakal insert nama dan password ke List User 
+                REGISTER(&User); // REGISTER bakal insert nama dan password ke List User 
             } else {
                 printf("ERROR: There's no file loaded\n");
             }

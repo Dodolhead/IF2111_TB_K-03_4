@@ -1,7 +1,3 @@
-#include "../../spesifikasi/start/start.h"
-#include "../../adt/mesinkata.h"
-#include "../../adt/mesinkarakter.h"
-#include "../../adt/mesinangka.h"
 #include <stdio.h>
 #include "load.h"
 
@@ -9,7 +5,7 @@ void LOAD(char filename[]) {
     char fullPath[150];
     sprintf(fullPath, "../../data/%s", filename);    
     //printf("\nDEBUG: Mulai membaca file '%s'...\n", fullPath);
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, fullPath);
+    START_READ(filename);
 
     /*if (jumlahBarang > 0) {
         //printf("\nDEBUG: Total barang ditemukan: %d\n", jumlahBarang);

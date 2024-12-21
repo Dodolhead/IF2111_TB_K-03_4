@@ -18,14 +18,14 @@ void CartShow(Map cart, ArrayDin Info) {
         printf("%d ", cart.Elements[i].Value);
 
         // Mencetak nama barang
-        for (int j = 0; cart.Elements[i].keytype[j] != '\0'; j++) {
-            printf("%c", cart.Elements[i].keytype[j]);
+        for (int j = 0; cart.Elements[i].Key[j] != '\0'; j++) {
+            printf("%c", cart.Elements[i].Key[j]);
         }
 
         // Menghitung subtotal harga barang
         int k = 0;
         while (k < ArrLength(Info)) {
-            if (stringEquals(cart.Elements[i].keytype, Info.A[k].name)) {
+            if (stringEquals(cart.Elements[i].Key, Info.A[k].name)) {
                 break;
             } else {
                 k++;

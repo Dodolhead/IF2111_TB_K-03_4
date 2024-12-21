@@ -52,7 +52,7 @@ void CartPay(User *U) {
         if (U->money >= totalBiaya) {
             U->money -= totalBiaya;
             keytype barangMax = BarangTermahal(U->keranjang);
-            Push(&(U->riwayat_pembelian), barangMax);
+            Push(&(U->riwayat_pembelian), barangMax, U->keranjang.Count);
             CreateMapEmpty(&(U->keranjang));
             printf("Selamat! Kamu telah membeli barang-barang tersebut!\n");
         } else {

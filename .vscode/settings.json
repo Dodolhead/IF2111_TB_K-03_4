@@ -79,6 +79,7 @@
     "cart.h": "c",
     "cart_show.h": "c",
     "load.h": "c",
-    "wishlist_swap.h": "c"
+    "wishlist_swap.h": "c",
+    "arraydinbarang.h": "c"
   }
 }
