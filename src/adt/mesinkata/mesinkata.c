@@ -121,3 +121,10 @@ void CopyWord()
 boolean isEndWord() {
     return endWord;
 }
+void ClearBuffer() {
+    for (int i = 0; i < sizeof(currentWord.TabWord); i++) {
+        currentWord.TabWord[i] = '\0'; // Mengisi dengan karakter null
+    }
+    currentWord.Length = 0; // Mengatur panjang menjadi 0
+}
+

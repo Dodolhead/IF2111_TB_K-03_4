@@ -56,4 +56,5 @@ void CopySentence();
 
 void ADVONEWORD();
 boolean isEndWord();
+void ClearBuffer();
 #endif
