@@ -3,20 +3,19 @@
 #include "wishlist_swap.h"
 #include "../../adt/listuser/listuser.c"
 
-void wishlistSwap(User *U) {
-    STARTANGKA();  // Mulai membaca angka pertama
-    STARTWORD();   // Mulai membaca kata kedua (untuk posisi kedua)
-    int firstPos = GetAngka();  // Posisi pertama
-    firstPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
+void wishlistSwap(User *U, int firstPos, int secondPos) {
+    // STARTANGKA();  // Mulai membaca angka pertama
+    // STARTWORD();   // Mulai membaca kata kedua (untuk posisi kedua)
+    // int firstPos = GetAngka();  // Posisi pertama
+    // firstPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
 
-    char* temp = currentWord.TabWord;
-    int secondPos = *temp - '0';  // Posisi kedua
-    secondPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
+    // char* temp = currentWord.TabWord;
+    // int secondPos = *temp - '0';  // Posisi kedua
+    // secondPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
 
     // Validasi posisi agar tidak keluar dari ukuran wishlist
     if (firstPos < 0 || secondPos < 0 || firstPos == secondPos) {
         printf("Posisi tidak valid!\n");
-        return;
     }
 
     // Menemukan node pertama
@@ -76,9 +75,7 @@ int main(){
 
     // // Menampilkan informasi user setelah penghapusan
     // printf("\nInformasi User Setelah Penghapusan Item:\n");
-    PrintUserInfo(&U);
 
 
-    wishlistSwap(&U);
-    PrintUserInfo(&U);
+    wishlistSwap(&U,1,2);
 }

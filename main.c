@@ -325,7 +325,7 @@ int main(){
                         position2 = position2 * 10 + (currentWord.TabWord[i] - '0');
                     }
 
-                    wishlistSwap(User.A[acc_id].wishlist, position1, position2);
+                    wishlistSwap(&User.A[acc_id], position1, position2);
                 }
                 // REMOVE
                 else if (stringEquals(currentWord.TabWord, "REMOVE")) {
@@ -340,14 +340,14 @@ int main(){
 
                     // REMOVE <i>
                     if (urutan != -1) {
-                        wishlistRemove(User.A[acc_id].wishlist);
+                        wishlistRemove(&User.A[acc_id]);
                     } else {
-                        wishlistRemoveI(User.A[acc_id].wishlist, urutan);
+                        wishlistRemoveI(&User.A[acc_id]);
                     }
                 }
                 // CLEAR
                 else if (stringEquals(currentWord.TabWord, "CLEAR")) {
-                    wishlistClear(User.A[acc_id].wishlist);
+                    wishlistClear(&User.A[acc_id]);
                 }
             } 
             else if (!loggedin) { printf("ERROR: No account is loaded\n"); } 
