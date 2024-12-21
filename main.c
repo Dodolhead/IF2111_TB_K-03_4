@@ -134,7 +134,7 @@ int main(){
         // LOGIN
         else if (stringEquals(currentWord.TabWord, "LOGIN")) {
             if (startup) {
-                acc_id = LOGIN(User,); // LOGIN bakal mengembalikan index user dari List User
+                LOGIN(User, &acc_id); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
             } else {
                 printf("ERROR: There's no file loaded\n");
@@ -144,7 +144,7 @@ int main(){
         // LOGOUT
         else if (stringEquals(currentWord.TabWord, "LOGOUT")) {
             if (loggedin) {
-                acc_id = LOGOUT(); // LOGOUT bakal mengubah acc_id = -1
+                LOGOUT(&acc_id); // LOGOUT bakal mengubah acc_id = -1
                 loggedin = false;
             } else {
                 printf("ERROR: There's no account loaded\n");
