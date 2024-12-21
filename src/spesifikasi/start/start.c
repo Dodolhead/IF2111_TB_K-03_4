@@ -136,10 +136,12 @@ void START_READ(char filename[]) {
         CreateLinkedListEmpty(&wishlist);
 
         for (int j = 0; j < jumlahWishlist; j++) {
+            
             ClearBuffer();
             // Membaca nama wishlist
             char namaWishlist[101];
             SalinKalimat();
+            
             printf ("[DEBUG] Wishlist: %s\n", currentLine.TabLine);
             copyString(namaWishlist, currentLine.TabLine);
 
@@ -148,6 +150,8 @@ void START_READ(char filename[]) {
             // Tambahkan ke wishlist
             AddToWishlist(&userList.A[i], namaWishlist);
             printf("[DEBUG] Wishlist ke-%d berhasil ditambahkan.\n", j + 1);
+
+
         }
 
         // Tambahkan pengguna ke list
