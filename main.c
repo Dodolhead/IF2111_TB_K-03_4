@@ -78,7 +78,7 @@ int main(){
     // Masukkan program utama
     char perintah[50] = "";
     char keterangan[50] = "";
-    char filename[50];
+    char filename[50] = "config.txt";
     // ALGORTIMA
     printf("  _____  _    _ _____  _____  __  __          _____ _______ \n");
     printf(" |  __ \\| |  | |  __ \\|  __ \\|  \\/  |   /\\   |  __ \\__   __|\n");
@@ -112,7 +112,7 @@ int main(){
             List User;
             MakeList(&User);
 
-            START_PURRMART(); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
+            START_PURRMART(filename); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
             
             // Mengubah tampilan HELP
             help_menu = 2;
