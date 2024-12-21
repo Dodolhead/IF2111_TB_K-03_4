@@ -171,9 +171,9 @@ void START_PURRMART() {
     START_READ("config.txt");
 }
 
-int main() {
-    printf("[DEBUG] Memulai program PURRMART...\n");
-    START_PURRMART();
-    printf("[DEBUG] Program selesai.\n");
-    return 0;
-}
+// int main() {
+//     printf("[DEBUG] Memulai program PURRMART...\n");
+//     START_PURRMART();
+//     printf("[DEBUG] Program selesai.\n");
+//     return 0;
+// }

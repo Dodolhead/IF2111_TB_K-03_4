@@ -1,19 +1,15 @@
 #include "../../spesifikasi/start/start.h"
-#include "../../adt/mesinkata.h"
-#include "../../adt/mesinkarakter.h"
-#include "../../adt/mesinangka.h"
+#include "../../adt/mesinkata/mesinkata.h"
+#include "../../adt/mesinkarakter/mesinkarakter.h"
+#include "../../adt/mesinangka/mesinangka.h"
 #include <stdio.h>
 #include "../../spesifikasi/load/load.h"
 
 void LOAD(char filename[]) {
-    Barang barang[100];
-    User users[100];
-    int jumlahBarang, jumlahUsers;
-
     char fullPath[150];
     sprintf(fullPath, "../../data/%s", filename);    
     //printf("\nDEBUG: Mulai membaca file '%s'...\n", fullPath);
-    STARTREAD(barang, &jumlahBarang, users, &jumlahUsers, fullPath);
+    START_READ(fullPath);
 
     /*if (jumlahBarang > 0) {
         //printf("\nDEBUG: Total barang ditemukan: %d\n", jumlahBarang);
@@ -63,3 +59,8 @@ void LOAD(char filename[]) {
 
     return 0;
 }*/
+
+int main(){
+    char filename[] = "config.txt";
+    LOAD(filename);
+}
