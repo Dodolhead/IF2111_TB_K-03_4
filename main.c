@@ -53,14 +53,13 @@ KALO ADA YANG INGIN DITANYAKAN BILANG DI GRUP PLIZ!!
 int main(){
     // KAMUS
     // System state
-    boolean startup = false; // Kondisi sistem dibuka
-    IdxType i, acc_id; // i untuk looping, acc_id untuk index akun user
-    int help_menu = 1; // 1 untuk welcome, 2 untuk login, 3 untuk main menu
-    Barang barang[100]; // deklarasi awal biar bisa manggil fungsi
-    User users[100];
-    int jumlahBarang = 0, jumlahUsers = 0;
-    int loggedInUserIndex = -1; //buat ngecek user yang lagi login
-    int baris = 1, currBaris;
+    boolean startup = false;
+    boolean loggedin = false;
+    int quantity = 0;
+    int urutan = 0;
+    int help_menu = 1;
+    int acc_id = -1;
+    int i;
 
     // Penyimpanan
     ArrayDin Information;
@@ -81,19 +80,8 @@ int main(){
     printf("                                                            \n");
     printf("***** | (START) Start shopping | (LOAD) Load your file | (HELP) Help | (QUIT) | *****\n");
     
-    while (baris < 5) {
-        STARTFILE("command.txt");
-
-        // Meletakkan posisi baris
-        currBaris = 1;
-        while (currBaris < baris) {
-            ADVWORD();
-            currBaris++;
-            while (GetCC() != '\n') {
-                ADVWORD();
-            }
-        }
-
+    STARTFILE("command.txt");
+    while (1) {
         printf("\n>> ");
         ADVWORD();
         // Mencetak command
@@ -122,17 +110,17 @@ int main(){
         }
 
         // LOAD
-        else if (stringEquals(perintah, "LOAD")) {
+        else if (stringEquals(currentWord.TabWord, "LOAD")) {
             // Membuat penyimpanan sistem
             Information = MakeArrayDin();
             CreateQueue(&request);
             List User;
             MakeList(&User);
             // Masukkan nama file
-            scanf("%s", keterangan); // 'keterangan' -> nama file yang ingin di load
+            ADVWORD(); // 'keterangan' -> nama file yang ingin di load
 
             // Membuka dan membaca file
-            LOAD(keterangan, Information, User); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
+            LOAD(currentWord.TabWord, Information, User); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
 
             printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
             
@@ -141,7 +129,7 @@ int main(){
         }
 
         // LOGIN
-        else if (stringEquals(perintah, "LOGIN")) {
+        else if (stringEquals(currentWord.TabWord, "LOGIN")) {
             if (startup) {
                 acc_id = LOGIN(); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
@@ -151,7 +139,7 @@ int main(){
         }
         
         // LOGOUT
-        else if (stringEquals(perintah, "LOGOUT")) {
+        else if (stringEquals(currentWord.TabWord, "LOGOUT")) {
             if (loggedin) {
                 acc_id = LOGOUT(); // LOGOUT bakal mengubah acc_id = -1
                 loggedin = false;
@@ -161,7 +149,7 @@ int main(){
         }
 
         // REGISTER
-        else if (stringEquals(perintah, "REGISTER")) {
+        else if (stringEquals(currentWord.TabWord, "REGISTER")) {
             if (startup) {
                 REGISTER(User); // REGISTER bakal insert nama dan password ke List User 
             } else {
@@ -170,43 +158,43 @@ int main(){
         }
 
         // WORK
-        else if (stringEquals(perintah, "WORK")) {
-            // Masukkan keterangan
-            scanf("%s", keterangan);
-
+        else if (stringEquals(currentWord.TabWord, "WORK")) {
             // validasi input
             if (loggedin) {
-                if (stringEquals(keterangan, "CHALLENGE")) {
-                    workChallenge(User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user
+                if (GetCC() != \n) {
+                    ADVWORD();
+                    if (stringEquals(currentWord.TabWord, "CHALLENGE")) {
+                        workChallenge(User.A[acc_id].money); // WORK CHALLENGE bakal menambah uang user
+                    }
+                } else {
+                    doWork(User.A[acc_id].money); // WORK bakal menambah uang user
                 }
-            } else if (!loggedin) {
-                printf("ERROR: No account is loaded\n");
             } else {
                 doWork(User.A[acc_id].money); // WORK bakal menambah uang user
             }
         }
 
         // STORE
-        else if (stringEquals(perintah, "STORE")) {
+        else if (stringEquals(currentWord.TabWord, "STORE")) {
             // Masukkan keterangan
-            scanf("%s", keterangan); // Masukkan perintah tambahan
+            ADVWORD(); // Masukkan perintah tambahan
 
             // validasi input
             if (loggedin) {
                 // STORE LIST
-                if (stringEquals(keterangan, "LIST")) {
+                if (stringEquals(currentWord.TabWord, "LIST")) {
                     StoreList(Information); // Menampilkan isi ArrayDin Information
                 }
                 // STORE REQUEST
-                else if (stringEquals(keterangan, "REQUEST")) {
+                else if (stringEquals(currentWord.TabWord, "REQUEST")) {
                     StoreRequest(request, Information); // Meminta barang baru
                 }
                 // STORE SUPPLY
-                else if (stringEquals(keterangan, "SUPPLY")) {
+                else if (stringEquals(currentWord.TabWord, "SUPPLY")) {
                     StoreSupply(request, Information); // Masukkan harga barang
                 }
                 // STORE REMOVE
-                else if (stringEquals(keterangan, "REMOVE")) {
+                else if (stringEquals(currentWord.TabWord, "REMOVE")) {
                     StoreRemove(Information); // Menghapus barang di Information
                 }
             } 
@@ -215,19 +203,19 @@ int main(){
         }
         
         // HELP
-        else if(stringEquals(perintah, "HELP")) {
+        else if(stringEquals(currentWord.TabWord, "HELP")) {
             if (help_menu == 1) welcomeMenu();
             else if (help_menu == 2) loginMenu();
             else if (help_menu == 3) mainMenu();
         }
         
         // SAVE
-        else if(stringEquals(perintah, "SAVE")) {
+        else if(stringEquals(currentWord.TabWord, "SAVE")) {
             Save(Information, User); // SAVE menyalin informasi dari ArrayDin Information dan List User ke file
         }
         
         // QUIT
-        else if (stringEquals(perintah, "QUIT")) {
+        else if (stringEquals(currentWord.TabWord, "QUIT")) {
             printf("\n");
             DeallocateArrayDin(&Information);
             printf("***** | Thank you for visiting PURRMART! | *****\n");
@@ -237,7 +225,7 @@ int main(){
         } 
         
         // PROFILE
-        else if (stringEquals(perintah, "PROFILE")) {
+        else if (stringEquals(currentWord.TabWord, "PROFILE")) {
             if (loggedin) {
                 Profile(acc_id); // Menampilkan informasi user dari List User dengan index acc_id
             } else {
@@ -246,28 +234,54 @@ int main(){
         }
 
         // CART
-        else if (stringEquals(perintah, "CART")) {
+        else if (stringEquals(currentWord.TabWord, "CART")) {
             // Masukkan keterangan
-            scanf("%s", keterangan);
+            ADVWORD();
 
             // validasi input
             if (loggedin) {
                 // CART ADD
-                if (stringEquals(keterangan, "ADD")) {
-                    scanf("%s %d", cartItem, quantity);
-                    AddToCart(User.A[acc_id].keranjang, cartItem, quantity); // Menyimpan barang ke keranjang
+                if (stringEquals(currentWord.TabWord, "ADD")) {
+                    ADVWORD();
+
+                    copyString(keterangan, currentWord.TabWord);
+                    while (GetCC() != '\n') {
+                        ADVWORD();
+                        stringConcat(keterangan, ' ');
+                        stringConcat(keterangan, currentWord.TabWord);
+                    }
+
+                    ADVWORD();
+                    for (i = 0; i < currentWord.Length; i++) {
+                        quantity = quantity * 10 + (currentWord.TabWord[i] - '0');
+                    }
+
+                    AddToCart(User.A[acc_id].keranjang, keterangan, quantity); // Menyimpan barang ke keranjang
                 }
                 // CART REMOVE
-                else if (stringEquals(keterangan, "REMOVE")) {
-                    scanf("%s %d", cartItem, quantity);
-                    RemoveFromCart(User.A[acc_id].keranjang, cartItem, quantity); // Menghapus barang dari keranjang
+                else if (stringEquals(currentWord.TabWord, "REMOVE")) {
+                    ADVWORD();
+
+                    copyString(keterangan, currentWord.TabWord);
+                    while (GetCC() != '\n') {
+                        ADVWORD();
+                        stringConcat(keterangan, ' ');
+                        stringConcat(keterangan, currentWord.TabWord);
+                    }
+
+                    ADVWORD();
+                    for (i = 0; i < currentWord.Length; i++) {
+                        quantity = quantity * 10 + (currentWord.TabWord[i] - '0');
+                    }
+
+                    RemoveFromCart(User.A[acc_id].keranjang, keterangan, quantity); // Menghapus barang dari keranjang
                 }
                 // CART SHOW
-                else if (stringEquals(keterangan, "SHOW")) {
+                else if (stringEquals(currentWord.TabWord, "SHOW")) {
                     DisplayCart(User.A[acc_id].keranjang); // Menampilkan keranjang
                 }
                 // CART PAY
-                else if (stringEquals(keterangan, "PAY")) {
+                else if (stringEquals(currentWord.TabWord, "PAY")) {
                     PayCart(User.A[acc_id]); // Membayar keranjang, INFO: ini pake User.A[acc_id] soalnya yang dirubah User.A[acc_id].money, User.A[acc_id].keranjang, dan User.A[acc_id].riwayat_pembelian
                 }
             } 
@@ -276,8 +290,12 @@ int main(){
         }
 
         // HISTORY
-        else if (stringEquals(perintah, "HISTORY")) {
-            scanf("%d", quantity);
+        else if (stringEquals(currentWord.TabWord, "HISTORY")) {
+            ADVWORD();
+
+            for (i = 0; i < currentWord.Length; i++) {
+                quantity = quantity * 10 + (currentWord.TabWord[i] - '0');
+            }
 
             if (loggedin) {
                 History(User.A[acc_id].riwayat_pembelian, quantity); // Menampilkan jumlah history
@@ -287,21 +305,38 @@ int main(){
         }
 
         // WISHLIST
-        else if (stringEquals(perintah, "WISHLIST")) {
+        else if (stringEquals(currentWord.TabWord, "WISHLIST")) {
             // Masukkan keterangan
-            scanf("%s", keterangan);
+            ADVWORD();
 
             // validasi input
             if (loggedin) {
                 // SWAP
-                if (stringEquals(keterangan, "SWAP")) {
-                    scanf("%s %d", cartItem, quantity);
-                    wishlistSwap(User.A[acc_id].wishlist);
+                if (stringEquals(currentWord.TabWord, "SWAP")) {
+                    ADVWORD();
+                    int position1 = 0;
+                    for (i = 0; i < currentWord.Length; i++) {
+                        position1 = position1 * 10 + (currentWord.TabWord[i] - '0');
+                    }
+
+                    ADVWORD();
+                    int position2 = 0;
+                    for (i = 0; i < currentWord.Length; i++) {
+                        position2 = position2 * 10 + (currentWord.TabWord[i] - '0');
+                    }
+
+                    wishlistSwap(User.A[acc_id].wishlist, position1, position2);
                 }
                 // REMOVE
-                else if (stringEquals(keterangan, "REMOVE")) {
+                else if (stringEquals(currentWord.TabWord, "REMOVE")) {
                     urutan = -1;
-                    scanf("%d", urutan);
+
+                    if (GetCC() != '\n') {
+                        ADVWORD();
+                        for (i = 0; i < currentWord.Length; i++) {
+                            urutan = urutan * 10 + (currentWord.TabWord[i] - '0');
+                        }
+                    }
 
                     // REMOVE <i>
                     if (urutan != -1) {
@@ -311,7 +346,7 @@ int main(){
                     }
                 }
                 // CLEAR
-                else if (stringEquals(keterangan, "CLEAR")) {
+                else if (stringEquals(currentWord.TabWord, "CLEAR")) {
                     wishlistClear(User.A[acc_id].wishlist);
                 }
             } 
