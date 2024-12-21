@@ -86,7 +86,7 @@ int main(){
         ADVWORD();
         // Mencetak command
         i = 0;
-        while (i < CurrentWord.Length) {
+        while (i < currentWord.Length) {
             printf("%c", CurrentWord.TabWord[i]);
             i++;
         }        
