@@ -26,15 +26,16 @@ valuetype Value(Map *M, keytype k) {
     return Undefined;
 }
 
-
 void Insert(Map *M, keytype k, valuetype v) {
-    // Pastikan kita tidak melebihi kapasitas dan key belum ada
-    if (!IsMapFull(M) && !IsMember(M, k)) {
-        M->Elements[M->Count].Key = k;  
+    if (M->Count < MaxEl) {
+        int length = stringLength(k); // Hitung panjang string
+        M->Elements[M->Count].Key = (char *)malloc((length + 1) * sizeof(char));
+        copyString(M->Elements[M->Count].Key, k); // Salin string
         M->Elements[M->Count].Value = v;
-        M->Count++; 
+        M->Count++;
     }
 }
+
 
 
 void Delete(Map *M, keytype k) {

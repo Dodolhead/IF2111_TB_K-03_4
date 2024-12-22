@@ -239,14 +239,12 @@ int WishlistCount(User *U) {
 // Fungsi untuk menambahkan item ke keranjang
 void AddToKeranjang(User *U, keytype k, valuetype v) {
     if (IsMember(&U->keranjang, k)) {
-        for (int i = 0; i < MaxEl; i++) {
-            if (U->keranjang.Elements[i].Key == k) {
+        for (int i = 0; i < U->keranjang.Count; i++) {
+            if (stringEquals(U->keranjang.Elements[i].Key, k) == 0) {
                 U->keranjang.Elements[i].Value += v;
-                break;
             }
         }
-    }
-    else {
+    } else {
         Insert(&U->keranjang, k, v);
     }
 }
