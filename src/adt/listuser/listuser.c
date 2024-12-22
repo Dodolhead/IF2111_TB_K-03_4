@@ -18,7 +18,7 @@ boolean isEmptyUserLinkedList(User U) {
     return IsLinkedListEmpty(U.wishlist);
 }
 boolean isEmptyUserMap(User U) {
-    return IsMapEmpty(U.keranjang);
+    return IsMapEmpty(&U.keranjang);
 }
 boolean isEmptyUserStack(User U) {
     return IsStackEmpty(U.riwayat_pembelian);
@@ -27,7 +27,7 @@ boolean isEmptyUserStack(User U) {
 /* Membentuk list kosong dengan elemen yang diisi MarkNumber/MarkName */
 
 boolean IsListEmpty(List *U) {
-    return (U->A[0].money == MarkNumber && U->A[0].name[0] == '\0' && U->A[0].password[0] == '\0' && IsLinkedListEmpty(U->A[0].wishlist) && IsMapEmpty(U->A[0].keranjang) && IsStackEmpty(U->A[0].riwayat_pembelian));
+    return (U->A[0].money == MarkNumber && U->A[0].name[0] == '\0' && U->A[0].password[0] == '\0' && IsLinkedListEmpty(U->A[0].wishlist) && IsMapEmpty(&U->A[0].keranjang) && IsStackEmpty(U->A[0].riwayat_pembelian));
 }
 /* Mengembalikan true jika list kosong */
 
@@ -238,16 +238,15 @@ int WishlistCount(User *U) {
 
 // Fungsi untuk menambahkan item ke keranjang
 void AddToKeranjang(User *U, keytype k, valuetype v) {
-    if (IsMember(U->keranjang, k)) {
-        // If the item is already in the cart, update the quantity
-        for (int i = 0; i < U->keranjang.Count; i++) {
-            if (U->keranjang.Elements[i].Key == k) {
+    if (IsMember(&U->keranjang, k)) {
+        for (int i = 0; i < MaxEl; i++) {
+            if (stringEquals(U->keranjang.Elements[i].Key, k)) {
                 U->keranjang.Elements[i].Value += v;
-                break; 
+                break;
             }
         }
-    } else {
-        // If the item is not in the cart, insert it as a new item
+    } 
+    else {
         Insert(&U->keranjang, k, v);
     }
 }

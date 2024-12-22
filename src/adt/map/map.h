@@ -42,16 +42,16 @@ void CreateMapEmpty(Map *M);
 /* Ciri Map kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsMapEmpty(Map M);
+boolean IsMapEmpty(Map *M);
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 
-boolean IsMapFull(Map M);
+boolean IsMapFull(Map *M);
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Map ********* */
-valuetype Value(Map M, keytype k);
+valuetype Value(Map *M, keytype k);
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
@@ -67,7 +67,7 @@ void Delete(Map *M, keytype k);
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 
-boolean IsMember(Map M, keytype k);
+boolean IsMember(Map *M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
 #endif

@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_add.h"
+// #include "../../adt/listuser/listuser.c"
+// #include "../../adt/mesinkata/mesinkata.c"
+// #include "../../adt/map/map.c"
+// #include "../../adt/listlinier/listlinier.c"
+// #include "../../adt/mesinkarakter/mesinkarakter.c"
+// #include "../../adt/stack/stack.c"
+// #include "../../../utilities.c"
 
 void wishlistAdd(User *U){
     printf("Masukkan nama barang: ");
@@ -16,10 +23,11 @@ void wishlistAdd(User *U){
 }
 
 // int main() {
-//     List U = MakeList();
+//     List U;
+//     MakeList(&U);
 //     LinkedList wishlist;
 //     CreateLinkedListEmpty(&wishlist);
 
 //     wishlistAdd(&U.A[0]);
-//     PrintUserInfo(U,0);
+//     PrintWishlist(&U,0);
 // }

@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_swap.h"
+#include "../../spesifikasi/wishlist_add/wishlist_add.c"
+#include "../../adt/listuser/listuser.c"
+#include "../../adt/mesinkata/mesinkata.c"
+#include "../../adt/map/map.c"
+#include "../../adt/listlinier/listlinier.c"
+#include "../../adt/mesinkarakter/mesinkarakter.c"
+#include "../../adt/stack/stack.c"
+#include "../../../utilities.c"
+
 void wishlistSwap(User *U, int firstPos, int secondPos) {
     // STARTANGKA();  // Mulai membaca angka pertama
     // STARTWORD();   // Mulai membaca kata kedua (untuk posisi kedua)
@@ -10,7 +19,8 @@ void wishlistSwap(User *U, int firstPos, int secondPos) {
     // char* temp = currentWord.TabWord;
     // int secondPos = *temp - '0';  // Posisi kedua
     // secondPos--;  // Mengubahnya menjadi indeks array yang dimulai dari 0
-
+    firstPos -= 1;
+    secondPos -=1;
     // Validasi posisi agar tidak keluar dari ukuran wishlist
     if (firstPos < 0 || secondPos < 0 || firstPos == secondPos) {
         printf("Posisi tidak valid!\n");
@@ -48,32 +58,13 @@ void wishlistSwap(User *U, int firstPos, int secondPos) {
     }
 }
 
-// int main(){
-//     User U;
-//     CreateUser(&U, "JohnDoe", "password123", 1000);
-
-//     // Menambah item ke keranjang
-//     // AddToKeranjang(&U, 1, 10);  // Misal item dengan key=1, value=10
-//     // AddToKeranjang(&U, 2, 20);  // Misal item dengan key=2, value=20
-
-//     // // Menambah item ke wishlist
-//     AddToWishlist(&U, "Item 0");
-//     AddToWishlist(&U, "Item 1");
-//     AddToWishlist(&U, "Item 2");
-
-//     // // Menampilkan informasi user setelah pembaruan
-//     // printf("\nInformasi User Setelah Pembuatan dan Menambah Item:\n");
-//     // PrintUserInfo(&U);
-
-//     // // Menghapus item dari wishlist
-//     // RemoveFromWishlist(&U, "Item 0");
-
-//     // // Menghapus item dari keranjang
-//     // RemoveFromKeranjang(&U, 2);
-
-//     // // Menampilkan informasi user setelah penghapusan
-//     // printf("\nInformasi User Setelah Penghapusan Item:\n");
-
-
-//     wishlistSwap(&U,1,2);
-// }
+int main() {
+    List U;
+    MakeList(&U);
+    LinkedList wishlist;
+    CreateLinkedListEmpty(&wishlist);
+    wishlistAdd(&U.A[0]);
+    wishlistAdd(&U.A[0]);
+    wishlistSwap(&U.A[0],1,2);
+    PrintWishlist(&U,0);
+}
