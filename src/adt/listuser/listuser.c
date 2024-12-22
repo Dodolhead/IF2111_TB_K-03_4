@@ -240,17 +240,16 @@ int WishlistCount(User *U) {
 void AddToKeranjang(User *U, keytype k, valuetype v) {
     if (IsMember(&U->keranjang, k)) {
         for (int i = 0; i < MaxEl; i++) {
-            if (stringEquals(U->keranjang.Elements[i].Key, k)) {
+            if (U->keranjang.Elements[i].Key == k) {
                 U->keranjang.Elements[i].Value += v;
                 break;
             }
         }
-    } 
+    }
     else {
         Insert(&U->keranjang, k, v);
     }
 }
-
 
 // Fungsi untuk menghapus item dari keranjang
 void RemoveFromKeranjang(User *U, keytype k) {

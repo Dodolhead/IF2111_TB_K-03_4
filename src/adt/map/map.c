@@ -30,19 +30,13 @@ valuetype Value(Map *M, keytype k) {
 void Insert(Map *M, keytype k, valuetype v) {
     // Pastikan kita tidak melebihi kapasitas dan key belum ada
     if (!IsMapFull(M) && !IsMember(M, k)) {
-        // Menyalin kunci ke dalam array menggunakan copyString
-        copyString(M->Elements[M->Count].Key, k);  // Salin kunci ke M->Elements[M->Count].Key
-        
-        // Menetapkan nilai ke elemen yang sesuai
+        M->Elements[M->Count].Key = k;  
         M->Elements[M->Count].Value = v;
-        
-        // Menambah jumlah elemen
-        M->Count++;
+        M->Count++; 
     }
 }
 
 
-        // Increment the count
 void Delete(Map *M, keytype k) {
     if (!IsMapEmpty(M)) {
         int idx = -1;
@@ -63,7 +57,7 @@ void Delete(Map *M, keytype k) {
 
 boolean IsMember(Map *M, keytype k) {
     for (int i = 0; i < M->Count; i++) {
-        if (stringEquals(M->Elements[i].Key, k)) {
+        if (M->Elements[i].Key == k) {
             return true;
         }
     }

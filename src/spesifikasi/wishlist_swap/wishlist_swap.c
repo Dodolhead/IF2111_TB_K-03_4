@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_swap.h"
-#include "../../spesifikasi/wishlist_add/wishlist_add.c"
-#include "../../adt/listuser/listuser.c"
-#include "../../adt/mesinkata/mesinkata.c"
-#include "../../adt/map/map.c"
-#include "../../adt/listlinier/listlinier.c"
-#include "../../adt/mesinkarakter/mesinkarakter.c"
-#include "../../adt/stack/stack.c"
-#include "../../../utilities.c"
+// #include "../../spesifikasi/wishlist_add/wishlist_add.c"
+// #include "../../adt/listuser/listuser.c"
+// #include "../../adt/mesinkata/mesinkata.c"
+// #include "../../adt/map/map.c"
+// #include "../../adt/listlinier/listlinier.c"
+// #include "../../adt/mesinkarakter/mesinkarakter.c"
+// #include "../../adt/stack/stack.c"
+// #include "../../../utilities.c"
 
 void wishlistSwap(User *U, int firstPos, int secondPos) {
     // STARTANGKA();  // Mulai membaca angka pertama
@@ -58,13 +58,13 @@ void wishlistSwap(User *U, int firstPos, int secondPos) {
     }
 }
 
-int main() {
-    List U;
-    MakeList(&U);
-    LinkedList wishlist;
-    CreateLinkedListEmpty(&wishlist);
-    wishlistAdd(&U.A[0]);
-    wishlistAdd(&U.A[0]);
-    wishlistSwap(&U.A[0],1,2);
-    PrintWishlist(&U,0);
-}
+// int main() {
+//     List U;
+//     MakeList(&U);
+//     LinkedList wishlist;
+//     CreateLinkedListEmpty(&wishlist);
+//     wishlistAdd(&U.A[0]);
+//     wishlistAdd(&U.A[0]);
+//     wishlistSwap(&U.A[0],1,2);
+//     PrintWishlist(&U,0);
+// }

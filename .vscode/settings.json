@@ -82,6 +82,8 @@
     "wishlist_swap.h": "c",
     "arraydinbarang.h": "c",
     "system_error": "c",
-    "xlocale": "c"
+    "xlocale": "c",
+    "iterator": "c",
+    "xmemory": "c"
   }
 }
