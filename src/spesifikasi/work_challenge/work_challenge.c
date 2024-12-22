@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "work_challenge.h"
-#include "../../../utilities.c" 
-#include "../../adt/mesinkata/mesinkata.c" 
-#include "../../adt/mesinkarakter/mesinkarakter.c" 
-
 
 int random(int lower, int upper){
     srand(time(0));

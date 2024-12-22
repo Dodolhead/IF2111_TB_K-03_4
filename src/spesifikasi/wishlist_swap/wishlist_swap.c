@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_swap.h"
-#include "../../adt/listuser/listuser.c"
-
 void wishlistSwap(User *U, int firstPos, int secondPos) {
     // STARTANGKA();  // Mulai membaca angka pertama
     // STARTWORD();   // Mulai membaca kata kedua (untuk posisi kedua)

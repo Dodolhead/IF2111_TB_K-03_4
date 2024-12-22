@@ -1,9 +1,5 @@
 #include <stdio.h>
 #include "work.h"
-#include "../../../utilities.c" 
-#include "../../adt/mesinkata/mesinkata.c" 
-#include "../../adt/mesinkarakter/mesinkarakter.c" 
-
 void workDisplay() {
     printf("Daftar Pekerjaan:\n");
     printf("    1. Evil Lab Assistant (pendapatan=100, durasi=14s)\n");

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "history.h"
-#include "../../adt/stack/stack.c"
 
 void History(Stack history, int N) {
     /* Input berupa Stack history dengan tipe elemen barang (nama dan harga) dan

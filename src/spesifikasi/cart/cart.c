@@ -1,7 +1,5 @@
 #include "cart.h"
 #include <stdio.h>
-#include "../../adt/map/map.c"
-
 
 void MakeCart(Map *cart) {
     CreateMapEmpty(cart);

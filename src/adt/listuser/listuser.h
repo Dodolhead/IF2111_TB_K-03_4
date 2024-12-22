@@ -36,7 +36,9 @@ void MakeList(List *U);
 
 boolean IsListEmpty(List U);
 /* Mengembalikan true jika list kosong */
-
+boolean isEmptyUserLinkedList(User U);
+boolean isEmptyUserMap(User U); 
+boolean isEmptyUserStack(User U); 
 int GetMoney(List U, IdxType i);
 void GetName(List U, IdxType i, char* buffer);
 void GetPassword(List U, IdxType i, char* buffer);

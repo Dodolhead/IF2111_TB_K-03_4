@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_show.h"
-#include "../../adt/listuser/listuser.c"
-
 void wishlistShow(User U){
     printf("Wishlist:\n");
     addressLinkedList P = First(U.wishlist);

@@ -163,10 +163,6 @@ void START_READ(char filename[]) {
     printf("[DEBUG] Konfigurasi aplikasi berhasil dibaca.\n");
 }
 
-void START_PURRMART() {
-    printf("[DEBUG] Memulai START_PURRMART...\n");
-    START_READ("config.txt");
-}
 void START_PURRMART(char filename[]) {
     START_READ(filename);
 }

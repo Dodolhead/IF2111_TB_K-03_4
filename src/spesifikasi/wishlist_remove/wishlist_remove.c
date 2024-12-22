@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_remove.h"
-#include "../../adt/listuser/listuser.c"
 
 void wishlistRemove(User *U){
     printf("Masukkan nama barang yang akan dihapus: ");

@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include "cart_pay.h"
-#include "../../adt/listuser/listuser.h"
-#include "../../adt/map/map.h"
-#include "../../adt/stack/stack.h"
 
 int main() {
     // Deklarasi variabel

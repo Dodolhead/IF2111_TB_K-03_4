@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wishlist_remove_i.h"
-#include "../../adt/listuser/listuser.c"
 
 
 void wishlistRemoveI(User *U) {

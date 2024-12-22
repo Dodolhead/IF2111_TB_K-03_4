@@ -1,6 +1,5 @@
 #include "cart_pay.h"
-#include "../../../utilities.c"
-
+#include <stdio.h>
 int TotalBiayaKeranjang(Map keranjang) {
     int total = 0;
     for (int i = 0; i < keranjang.Count; i++) {
