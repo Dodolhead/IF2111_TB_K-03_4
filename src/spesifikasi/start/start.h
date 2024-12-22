@@ -19,6 +19,6 @@ void debugAntrian();
 
 // Fungsi utama untuk membaca konfigurasi
 void START_READ(char filename[]);
-void START_PURRMART(char filename[]);
+void START_PURRMART();
 
 #endif

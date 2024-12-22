@@ -5,7 +5,7 @@ void LOAD(char filename[]) {
     char fullPath[150];
     sprintf(fullPath, "../../data/%s", filename);    
     //printf("\nDEBUG: Mulai membaca file '%s'...\n", fullPath);
-    START_READ(filename);
+    START_READ(fullPath);
 
     /*if (jumlahBarang > 0) {
         //printf("\nDEBUG: Total barang ditemukan: %d\n", jumlahBarang);
@@ -56,7 +56,7 @@ void LOAD(char filename[]) {
     return 0;
 }*/
 
-// int main(){
-//     char filename[] = "config.txt";
-//     LOAD(filename);
-// }
+int main(){
+    char filename[] = "config.txt";
+    LOAD(filename);
+}

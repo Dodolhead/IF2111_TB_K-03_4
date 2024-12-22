@@ -5,7 +5,7 @@
 void CartShow(Map cart, ArrayDin Info) {
     int total = 0;
 
-    if (IsMapEmpty(cart)) {
+    if (IsMapEmpty(&cart)) {
         printf("Keranjang kamu kosong!\n");
         return;
     }
