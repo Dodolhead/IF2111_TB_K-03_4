@@ -157,7 +157,9 @@ void START_READ(char filename[]) {
         // Tambahkan pengguna ke list
         InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
         printf("[DEBUG] Pengguna ke-%d berhasil ditambahkan ke userList.\n", i + 1);
-        ADVWORD(); // Skip newline atau spasi
+        if (i!=jumlahPengguna-1){
+        ADVWORD();
+        } // Skip newline atau spasi
     }
 
     printf("[DEBUG] Konfigurasi aplikasi berhasil dibaca.\n");
@@ -167,9 +169,9 @@ void START_PURRMART(char filename[]) {
     START_READ(filename);
 }
 
-// int main() {
-//     printf("[DEBUG] Memulai program PURRMART...\n");
-//     START_PURRMART();
-//     printf("[DEBUG] Program selesai.\n");
-//     return 0;
-// }
+int main() {
+    printf("[DEBUG] Memulai program PURRMART...\n");
+    START_PURRMART("config.txt");
+    printf("[DEBUG] Program selesai.\n");
+    return 0;
+}

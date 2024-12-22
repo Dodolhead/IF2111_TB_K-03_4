@@ -1,6 +1,7 @@
 #ifndef map_H
 #define map_H
 #include <stdio.h>
+#include <stdlib.h>
 #include "../../adt/boolean/boolean.h"
 #include "../../../utilities.h"
 
