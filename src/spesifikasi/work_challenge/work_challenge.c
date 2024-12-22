@@ -3,7 +3,7 @@
 #include <time.h>
 #include "work_challenge.h"
 
-int random(int lower, int upper){
+int randomgen(int lower, int upper){
     srand(time(0));
     int randomNumber = (rand() % (upper - lower + 1)) + lower;
     return randomNumber;
@@ -15,7 +15,7 @@ void tebakAngka(int* money) {
     int multiplier = 1;
     int getMoney = 500;
     int loss = 0;
-    int angka_random = random(0,100);
+    int angka_random = randomgen(0,100);
     for (int i =0;i<10;i++){
         printf("Tebak Angka:\n");
         printf(">> ");
@@ -62,7 +62,7 @@ void wordl3(int* money) {
         {' ', ' ', ' ', ' ', ' '}
     };
 
-    int random_number = random(0, 9);
+    int random_number = randomgen(0, 9);
     char koleksi[10][5] = {
         "HELLO", "WORLD", "LUCKY", "GRAIN", "LUNCH", "BERRY", "VOLVO", "TRULY", "STORY", "APPLE"
     };
@@ -139,7 +139,7 @@ void quantumWordl3(int* money) {
         {'_', '_', '_', '_', '_'},
         {'_', '_', '_', '_', '_'}
     };
-    int random_number = random(0, 9);
+    int random_number = randomgen(0, 9);
 
     char koleksi1[10][5] = {
         "HELLO", "WORLD", "LUCKY", "GRAIN", "LUNCH", "BERRY", "VOLVO", "TRULY", "STORY", "APPLE"
