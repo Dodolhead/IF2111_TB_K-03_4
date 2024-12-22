@@ -56,7 +56,7 @@ void LOAD(char filename[]) {
     return 0;
 }*/
 
-int main(){
-    char filename[] = "config.txt";
-    LOAD(filename);
-}
+// int main(){
+//     char filename[] = "config.txt";
+//     LOAD(filename);
+// }
