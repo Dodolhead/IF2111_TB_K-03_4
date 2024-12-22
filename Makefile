@@ -2,8 +2,11 @@ CC = gcc
 CFLAGS = -o program
 SRC = \
 	main.c \
+	src/adt/mesinkalimat/linemachine.c \
 	src/adt/mesinangka/mesinangka.c \
+	src/adt/listuser/listuser.c \
 	src/adt/mesinkarakter/mesinkarakter.c \
+	utilities.c \
 	src/adt/mesinkata/mesinkata.c \
 	src/adt/queue/queue.c \
 	src/adt/arraydinBarang/arraydinBarang.c \

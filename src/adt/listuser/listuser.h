@@ -39,9 +39,9 @@ boolean IsListEmpty(List U);
 boolean isEmptyUserLinkedList(User U);
 boolean isEmptyUserMap(User U); 
 boolean isEmptyUserStack(User U); 
-int GetMoney(List U, IdxType i);
-void GetName(List U, IdxType i, char* buffer);
-void GetPassword(List U, IdxType i, char* buffer);
+int GetMoney(List *U, IdxType i);
+void GetName(List *U, IdxType i, char* buffer);
+void GetPassword(List *U, IdxType i, char* buffer);
 void SetKeranjang(List *U, IdxType i, Map keranjang);
 void SetRiwayat(List *U, IdxType i, Stack riwayat_pembelian);
 void SetWishlist(List *U, IdxType i, LinkedList wishlist);
@@ -50,7 +50,7 @@ void SetWishlist(List *U, IdxType i, LinkedList wishlist);
 void Set(List *U, IdxType i, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist);
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
-int ListUserLength(List U);
+int ListUserLength(List *U);
 /* Mengembalikan jumlah elemen efektif dalam list */
 
 IdxType FirstIdx(List U);

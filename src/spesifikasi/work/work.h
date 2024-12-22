@@ -6,4 +6,4 @@
 
 void workDisplay();
 void delay(int n);
-void doWork();
+void doWork(int* money);

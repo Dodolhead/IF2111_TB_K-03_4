@@ -31,16 +31,16 @@ boolean IsListEmpty(List U) {
 }
 /* Mengembalikan true jika list kosong */
 
-int GetMoney(List U, IdxType i) {
-    return U.A[i].money;
+int GetMoney(List *U, IdxType i) {
+    return U->A[i].money;
 }
 
-void GetName(List U, IdxType i, char* buffer) {
-    copyString(buffer, U.A[i].name);
+void GetName(List *U, IdxType i, char* buffer) {
+    copyString(buffer, U->A[i].name);
 }
 
-void GetPassword(List U, IdxType i, char* buffer) {
-    copyString(buffer, U.A[i].password);
+void GetPassword(List *U, IdxType i, char* buffer) {
+    copyString(buffer, U->A[i].password);
 }
 
 
@@ -73,9 +73,9 @@ void Set(List *U, IdxType i, int money, char* name, char* password, Map keranjan
 
 /* Mengubah elemen pada indeks ke-i dengan nilai baru */
 
-int ListUserLength(List U) {
+int ListUserLength(List *U) {
     int count = 0;
-    while (count < MaxEl && U.A[count].money != MarkNumber) {
+    while (count < MaxEl && U->A[count].money != MarkNumber) {
         count++;
     }
     return count;
@@ -88,7 +88,7 @@ IdxType FirstIdx(List U) {
 /* Mengembalikan indeks elemen pertama */
 
 IdxType LastIdx(List U) {
-    return ListUserLength(U) - 1;
+    return ListUserLength(&U) - 1;
 }
 /* Mengembalikan indeks elemen terakhir */
 
@@ -103,7 +103,7 @@ boolean IsIdxEff(List U, IdxType i) {
 /* Mengecek apakah indeks efektif (elemen diisi) dalam list */
 
 boolean ListSearch(List U, char* X) {
-    for (int i = 0; i < ListUserLength(U); i++) {
+    for (int i = 0; i < ListUserLength(&U); i++) {
         if (stringEquals(U.A[i].name, X)) {
             return true;
         }
@@ -118,8 +118,8 @@ void InsertListFirst(List *U, int money, char* name, char* password, Map keranja
 /* Menyisipkan elemen di posisi pertama */
 
 void InsertListAt(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist,IdxType i) {
-    if (ListUserLength(*U) < MaxEl && i >= 0 && i <= ListUserLength(*U)) {
-        for (int j = ListUserLength(*U); j > i; j--) {
+    if (ListUserLength(&U) < MaxEl && i >= 0 && i <= ListUserLength(&U)) {
+        for (int j = ListUserLength(&U); j > i; j--) {
             U->A[j] = U->A[j - 1];
         }
         Set(U, i, money, name, password, keranjang, riwayat_pembelian, wishlist);
@@ -128,8 +128,8 @@ void InsertListAt(List *U, int money, char* name, char* password, Map keranjang,
 /* Menyisipkan elemen di posisi indeks ke-i */
 
 void InsertListLast(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist) {
-    if (ListUserLength(*U) < MaxEl) {
-        Set(U, ListUserLength(*U), money, name, password, keranjang, riwayat_pembelian, wishlist);
+    if (ListUserLength(&U) < MaxEl) {
+        Set(U, ListUserLength(&U), money, name, password, keranjang, riwayat_pembelian, wishlist);
     }
 }
 /* Menyisipkan elemen di posisi terakhir */
@@ -154,7 +154,7 @@ void DeleteListFirst(List *U) {
 /* Menghapus elemen di posisi pertama */
 
 void DeleteListAt(List *U, IdxType i) {
-    int panjang = ListUserLength(*U);
+    int panjang = ListUserLength(&U);
     if (panjang > 0 && i >= 0 && i < panjang) {
         // Geser elemen dari indeks i ke depan
         for (IdxType j = i; j < panjang - 1; j++) {
