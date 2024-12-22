@@ -7,7 +7,7 @@ void MakeCart(Map *cart) {
 
 // Menambahkan barang ke dalam Cart (CARD ADD)
 void AddToCart(Map *cart, keytype name, int n) {
-    if (IsMember(*cart, name)) {
+    if (IsMember(cart, name)) {
         // Jika barang sudah ada di cart, tambahkan jumlahnya
         for (int i = 0; i <= cart->Count; i++) {
             if (cart->Elements[i].Key == name) {
@@ -22,7 +22,7 @@ void AddToCart(Map *cart, keytype name, int n) {
 
 // Mengurangi barang dari Cart (CARD REMOVE)
 void RemoveFromCart(Map *cart, char* name, int n) {
-    if (IsMember(*cart, name)) {
+    if (IsMember(cart, name)) {
         for (int i = 0; i <= cart->Count; i++) {
             if (stringEquals(cart->Elements[i].Key, name) == 0) {  // Periksa nama barang
                 if (cart->Elements[i].Value > n) {
@@ -44,7 +44,7 @@ void RemoveFromCart(Map *cart, char* name, int n) {
 
 // Menampilkan semua barang dalam Cart
 void DisplayCart(Map cart) {
-    if (IsMapEmpty(cart)) {
+    if (IsMapEmpty(&cart)) {
         printf("Cart kosong.\n");
     } else {
         printf("Isi Cart:\n");

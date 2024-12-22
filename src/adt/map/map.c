@@ -1,6 +1,7 @@
 #include "map.h"
 #include "../../../utilities.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /* *** Konstruktor/Kreator *** */
 void CreateMapEmpty(Map *M) {

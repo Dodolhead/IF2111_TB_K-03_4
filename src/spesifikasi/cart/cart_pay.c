@@ -28,7 +28,7 @@ keytype BarangTermahal(Map keranjang) {
 }
 
 void CartPay(User *U) {
-    if (IsMapEmpty(U->keranjang)) {
+    if (IsMapEmpty(&((*U).keranjang))) {
         printf("Error: Keranjang kamu kosong!\n");
         return;
     }
