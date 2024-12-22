@@ -26,8 +26,8 @@ boolean isEmptyUserStack(User U) {
 
 /* Membentuk list kosong dengan elemen yang diisi MarkNumber/MarkName */
 
-boolean IsListEmpty(List U) {
-    return (U.A[0].money == MarkNumber && U.A[0].name[0] == '\0' && U.A[0].password[0] == '\0' && IsLinkedListEmpty(U.A[0].wishlist) && IsMapEmpty(U.A[0].keranjang) && IsStackEmpty(U.A[0].riwayat_pembelian));
+boolean IsListEmpty(List *U) {
+    return (U->A[0].money == MarkNumber && U->A[0].name[0] == '\0' && U->A[0].password[0] == '\0' && IsLinkedListEmpty(U->A[0].wishlist) && IsMapEmpty(U->A[0].keranjang) && IsStackEmpty(U->A[0].riwayat_pembelian));
 }
 /* Mengembalikan true jika list kosong */
 
@@ -118,8 +118,8 @@ void InsertListFirst(List *U, int money, char* name, char* password, Map keranja
 /* Menyisipkan elemen di posisi pertama */
 
 void InsertListAt(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist,IdxType i) {
-    if (ListUserLength(&U) < MaxEl && i >= 0 && i <= ListUserLength(&U)) {
-        for (int j = ListUserLength(&U); j > i; j--) {
+    if (ListUserLength(U) < MaxEl && i >= 0 && i <= ListUserLength(U)) {
+        for (int j = ListUserLength(U); j > i; j--) {
             U->A[j] = U->A[j - 1];
         }
         Set(U, i, money, name, password, keranjang, riwayat_pembelian, wishlist);
@@ -128,8 +128,8 @@ void InsertListAt(List *U, int money, char* name, char* password, Map keranjang,
 /* Menyisipkan elemen di posisi indeks ke-i */
 
 void InsertListLast(List *U, int money, char* name, char* password, Map keranjang, Stack riwayat_pembelian, LinkedList wishlist) {
-    if (ListUserLength(&U) < MaxEl) {
-        Set(U, ListUserLength(&U), money, name, password, keranjang, riwayat_pembelian, wishlist);
+    if (ListUserLength(U) < MaxEl) {
+        Set(U, ListUserLength(U), money, name, password, keranjang, riwayat_pembelian, wishlist);
     }
 }
 /* Menyisipkan elemen di posisi terakhir */
@@ -154,7 +154,7 @@ void DeleteListFirst(List *U) {
 /* Menghapus elemen di posisi pertama */
 
 void DeleteListAt(List *U, IdxType i) {
-    int panjang = ListUserLength(&U);
+    int panjang = ListUserLength(U);
     if (panjang > 0 && i >= 0 && i < panjang) {
         // Geser elemen dari indeks i ke depan
         for (IdxType j = i; j < panjang - 1; j++) {
@@ -176,7 +176,7 @@ void DeleteListAt(List *U, IdxType i) {
 /* Menghapus elemen di posisi indeks ke-i */
 
 void DeleteListLast(List *U) {
-    DeleteListAt(U, LastIdx(*U));
+    DeleteListAt(U, ListUserLength(U) - 1);
 }
 /* Menghapus elemen di posisi terakhir */
 
@@ -238,8 +238,20 @@ int WishlistCount(User *U) {
 
 // Fungsi untuk menambahkan item ke keranjang
 void AddToKeranjang(User *U, keytype k, valuetype v) {
-    Insert(&U->keranjang, k, v);  // Menambahkan item ke Map keranjang
+    if (IsMember(U->keranjang, k)) {
+        // If the item is already in the cart, update the quantity
+        for (int i = 0; i < U->keranjang.Count; i++) {
+            if (U->keranjang.Elements[i].Key == k) {
+                U->keranjang.Elements[i].Value += v;
+                break; 
+            }
+        }
+    } else {
+        // If the item is not in the cart, insert it as a new item
+        Insert(&U->keranjang, k, v);
+    }
 }
+
 
 // Fungsi untuk menghapus item dari keranjang
 void RemoveFromKeranjang(User *U, keytype k) {

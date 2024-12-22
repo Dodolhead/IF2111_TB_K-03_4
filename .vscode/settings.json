@@ -80,6 +80,8 @@
     "cart_show.h": "c",
     "load.h": "c",
     "wishlist_swap.h": "c",
-    "arraydinbarang.h": "c"
+    "arraydinbarang.h": "c",
+    "system_error": "c",
+    "xlocale": "c"
   }
 }

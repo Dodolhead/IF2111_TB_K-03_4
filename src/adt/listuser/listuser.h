@@ -9,6 +9,7 @@
 #include "../../adt/mesinkarakter/mesinkarakter.h"
 #include "../../adt/mesinangka/mesinangka.h"
 #include "../../../utilities.h"
+#include <stdio.h>
 
 #define MaxEl 100
 #define MarkNumber -9999   
@@ -34,7 +35,7 @@ typedef struct {
 void MakeList(List *U);
 /* Membentuk list kosong dengan elemen yang diisi MarkNumber/MarkName */
 
-boolean IsListEmpty(List U);
+boolean IsListEmpty(List *U);
 /* Mengembalikan true jika list kosong */
 boolean isEmptyUserLinkedList(User U);
 boolean isEmptyUserMap(User U); 
@@ -99,7 +100,6 @@ void AddToKeranjang(User *U, keytype k, valuetype v);
 void RemoveFromKeranjang(User *U, keytype k);
 void RemoveFromWishlist(User *U, infoLinkedListtype item);
 void PrintUserInfo(List U, IdxType i);
-#include <stdio.h>
 
 
 void PrintName(List U, IdxType i);

@@ -27,7 +27,7 @@ int main() {
     printf("=== TEST LISTUSER ===\n");
 
     // Test IsListEmpty
-    if (IsListEmpty(userList)) {
+    if (IsListEmpty(&userList)) {
         printf("[PASSED] IsListEmpty: List pengguna kosong.\n");
     } else {
         printf("[FAILED] IsListEmpty: List pengguna tidak kosong.\n");
@@ -68,8 +68,8 @@ int main() {
     PrintWishlist(&userList, 0);
 
     // Test AddToKeranjang
-    // AddToKeranjang(&userList.A[0], "Barang A", 10);
-    // AddToKeranjang(&userList.A[0], "Barang B", 20);
+    AddToKeranjang(&userList.A[0], "Barang A", 10);
+    AddToKeranjang(&userList.A[0], "Barang B", 20);
     PrintKeranjang(&userList, 0);
 
     // // Test RemoveFromKeranjang

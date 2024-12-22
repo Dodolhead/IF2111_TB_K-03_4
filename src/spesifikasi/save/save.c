@@ -36,8 +36,8 @@ void Save(ArrayDin Info, List ListUser, char* filename) {
     }
 
     // Menulis data user
-    fprintf(file, "%d\n", ListUserLength(ListUser));
-    for (i = 0; i < ListUserLength(ListUser); i++) {
+    fprintf(file, "%d\n", ListUserLength(&ListUser));
+    for (i = 0; i < ListUserLength(&ListUser); i++) {
         fprintf(file, "%d %s %s\n", ListUser.A[i].money, ListUser.A[i].name, ListUser.A[i].password);
 
         // Menulis riwayat pembelian user

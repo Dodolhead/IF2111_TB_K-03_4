@@ -15,11 +15,11 @@ void debugBarang() {
 
 void debugPengguna() {
     printf("\nDebug Daftar Pengguna:\n");
-    for (int i = 0; i < ListUserLength(userList); i++) {
+    for (int i = 0; i < ListUserLength(&userList); i++) {
         char nama[MAX_LEN], password[MAX_LEN];
-        GetName(userList, i, nama);
-        GetPassword(userList, i, password);
-        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(userList, i));
+        GetName(&userList, i, nama);
+        GetPassword(&userList, i, password);
+        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(&userList, i));
     }
 }
 
