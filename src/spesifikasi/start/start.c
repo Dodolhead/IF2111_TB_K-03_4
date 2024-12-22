@@ -166,8 +166,12 @@ void START_READ(char filename[]) {
     printf("File sudah terload !! Selamat memakai PURRMAT ^________^\n");
 }
 
-void START_PURRMART(char filename[]) {
-    START_READ(filename);
+void START_PURRMART() {
+    START_READ("../../data/config.txt");
+}
+
+int main(){
+    START_PURRMART();
 }
 
 // int main() {
