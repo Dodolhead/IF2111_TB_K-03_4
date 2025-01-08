@@ -170,9 +170,9 @@ void START_PURRMART() {
     START_READ("../../data/config.txt");
 }
 
-int main(){
-    START_PURRMART();
-}
+// int main(){
+//     START_PURRMART();
+// }
 
 // int main() {
 //     // printf("[DEBUG] Memulai program START_DRIVER...\n");

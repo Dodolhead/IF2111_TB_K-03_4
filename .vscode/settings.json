@@ -84,6 +84,7 @@
     "system_error": "c",
     "xlocale": "c",
     "iterator": "c",
-    "xmemory": "c"
+    "xmemory": "c",
+    "mesinkarakter.h": "c"
   }
 }

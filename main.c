@@ -69,6 +69,7 @@ int main(){
     int help_menu = 1;
     int acc_id = -1;
     int i;
+    char filename[50] = "command.txt"
 
     // Penyimpanan
     ArrayDin Information;
