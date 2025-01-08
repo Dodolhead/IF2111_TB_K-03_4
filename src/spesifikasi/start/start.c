@@ -167,12 +167,12 @@ void START_READ(char filename[]) {
 }
 
 void START_PURRMART() {
-    START_READ("../../data/config.txt");
+    START_READ("src/data/config.txt");
 }
 
-int main(){
-    START_PURRMART();
-}
+// int main(){
+//     START_PURRMART();
+// }
 
 // int main() {
 //     // printf("[DEBUG] Memulai program START_DRIVER...\n");
@@ -190,8 +190,8 @@ int main(){
 
 //     // // Debug data antrian permintaan
 //     // // printf("\n=== DEBUG ANTRIAN ===\n");
-//     // debugAntrian();
+//     debugAntrian();
 
-//     // printf("\n[DEBUG] Program START_DRIVER selesai.\n");
+//     printf("\n[DEBUG] Program START_DRIVER selesai.\n");
 //     return 0;
 // }

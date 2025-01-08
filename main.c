@@ -78,6 +78,7 @@ int main(){
     // Masukkan program utama
     char perintah[50] = "";
     char keterangan[50] = "";
+    char filename[50] = "config.txt";
     // ALGORTIMA
     printf("  _____  _    _ _____  _____  __  __          _____ _______ \n");
     printf(" |  __ \\| |  | |  __ \\|  __ \\|  \\/  |   /\\   |  __ \\__   __|\n");
@@ -88,10 +89,11 @@ int main(){
     printf("                                                            \n");
     printf("***** | (START) Start shopping | (LOAD) Load your file | (HELP) Help | (QUIT) | *****\n");
     
-    STARTFILE("command.txt");
+    // STARTFILE("command.txt");
     while (1) {
+
         printf("\n>> ");
-        ADVWORD();
+        STARTWORD();
         // Mencetak command
         i = 0;
         while (i < currentWord.Length) {
@@ -103,14 +105,6 @@ int main(){
         if (stringEquals(currentWord.TabWord, "START")) {
             printf("\n");
             // Mengubah state
-            startup = true;
-
-            // Membuat list barang dan antrian
-            Information = MakeArrayDin();
-            CreateQueue(&request);
-            List User;
-            MakeList(&User);
-
             START_PURRMART(); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
             
             // Mengubah tampilan HELP
