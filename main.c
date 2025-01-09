@@ -106,7 +106,7 @@ int main(){
         if (stringEquals(currentWord.TabWord, "START")) {
             printf("\n");
             // Mengubah state
-            START_PURRMART(); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
+            START_PURRMART(Information, User, request); // START bakal import data barang ke Information dan data pengguna ke user dari config.txt
             
             // Mengubah tampilan HELP
             help_menu = 2;
@@ -114,17 +114,12 @@ int main(){
 
         // LOAD
         else if (stringEquals(currentWord.TabWord, "LOAD")){
-            // Membuat penyimpanan sistem
-            Information = MakeArrayDin();
-            CreateQueue(&request);
-            List User;
-            MakeList(&User);
             // Masukkan nama file
             ADVWORD(); // 'keterangan' -> nama file yang ingin di load
             copyString(filename, currentWord.TabWord);
 
             // Membuka dan membaca file
-            LOAD(filename); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
+            LOAD(filename, Information, User, request); // LOAD bakal import data barang ke Information dan data pengguna ke user dari 'keterangan'
 
             printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
             

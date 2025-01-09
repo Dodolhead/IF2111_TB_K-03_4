@@ -11,7 +11,7 @@
 #define MAX_USERS 100
 
 
-void LOAD(char filename[]);
+void LOAD(char filename[], ArrayDin barangList, List userList, Queue antrianQueue);
 
 
 #endif

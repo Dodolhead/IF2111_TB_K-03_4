@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "load.h"
 
-void LOAD(char filename[]) {
+void LOAD(char filename[], ArrayDin barangList, List userList, Queue antrianQueue) {
     char fullPath[150];
     sprintf(fullPath, "../../data/%s", filename);    
     //printf("\nDEBUG: Mulai membaca file '%s'...\n", fullPath);
-    START_READ(fullPath);
+    START_READ(fullPath, barangList, userList, antrianQueue);
 
     /*if (jumlahBarang > 0) {
         //printf("\nDEBUG: Total barang ditemukan: %d\n", jumlahBarang);

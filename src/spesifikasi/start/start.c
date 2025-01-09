@@ -28,7 +28,7 @@ void debugAntrian() {
     displayQueue(antrianQueue);
 }
 
-void START_READ(char filename[]) {
+void START_READ(char filename[], ArrayDin barangList, List userList, Queue antrianQueue) {
     // printf("[DEBUG] Memulai START_READ dengan file: %s\n", filename);
 
     // Inisialisasi data yang diperlukan
@@ -166,8 +166,8 @@ void START_READ(char filename[]) {
     printf("File sudah terload !! Selamat memakai PURRMAT ^________^\n");
 }
 
-void START_PURRMART() {
-    START_READ("src/data/config.txt");
+void START_PURRMART(ArrayDin barangList, List userList, Queue antrianQueue) {
+    START_READ("src/data/config.txt", ArrayDin barangList, List userList, Queue antrianQueue);
 }
 
 // int main(){
