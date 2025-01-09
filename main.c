@@ -69,7 +69,7 @@ int main(){
     int help_menu = 1;
     int acc_id = -1;
     int i;
-    char filename[50] = "command.txt";
+    char filename[50] = "config.txt";
 
     // Penyimpanan
     ArrayDin Information;
@@ -111,11 +111,13 @@ int main(){
             
             // Mengubah tampilan HELP
             help_menu = 2;
+            
             if (IsListuserEmpty(User)) {
                 printf("***** | (REGISTER) Register account | (HELP) Help | *****\n");
             } else {
                 printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
             }
+            startup = true;
         }
 
         // LOAD
@@ -135,12 +137,10 @@ int main(){
 
         // LOGIN
         else if (stringEquals(currentWord.TabWord, "LOGIN")) {
-            if (startup) {
+
                 LOGIN(User, &acc_id); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
-            } else {
-                printf("ERROR: There's no file loaded\n");
-            }
+
         }
         
         // LOGOUT
@@ -157,9 +157,9 @@ int main(){
         else if (stringEquals(currentWord.TabWord, "REGISTER")) {
             if (startup) {
                 REGISTER(&User); // REGISTER bakal insert nama dan password ke List User 
-            } else {
-                printf("ERROR: There's no file loaded\n");
-            }
+            // } else {
+            //     printf("ERROR: There's no file loaded\n");
+            // }
         }
 
         // WORK
@@ -203,7 +203,7 @@ int main(){
                     StoreRemove(Information); // Menghapus barang di Information
                 }
             } 
-            else if (!loggedin) { printf("ERROR: There's no file loaded\n"); } 
+            else if (!loggedin) { printf("ERROR: nigga\n"); } 
             else { printf("ERROR: Input tidak valid!\n"); }
         }
         
@@ -290,7 +290,7 @@ int main(){
                     CartPay(&User.A[acc_id]); // Membayar keranjang, INFO: ini pake User.A[acc_id] soalnya yang dirubah User.A[acc_id].money, User.A[acc_id].keranjang, dan User.A[acc_id].riwayat_pembelian
                 }
             } 
-            else if (!loggedin) { printf("ERROR: There's no file loaded\n"); } 
+            else if (!loggedin) { printf("ERROR: There's  loadno fileed\n"); } 
             else { printf("ERROR: Input tidak valid!\n"); }
         }
 
