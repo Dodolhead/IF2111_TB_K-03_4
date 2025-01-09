@@ -26,12 +26,11 @@ void StoreList(ArrayDin Info) {
     }
 }
 
-/*
+
 int main() {
     ArrayDin Info = MakeArrayDin();
-    ListBarang(&Info);
 
+    ArrInsertLast(&Info, "AK47", 100);
     StoreList(Info);
     return 0;
 }
-*/

@@ -39,3 +39,11 @@ void CartShow(Map cart, ArrayDin Info) {
     
     printf("Total biaya yang harus dikeluarkan adalah %d.\n", total);
 }
+
+int main() {
+    Map cart;
+    ArrayDin Info = MakeArrayDin();
+    MakeCart(&cart);
+    CartShow(cart, Info);
+
+}

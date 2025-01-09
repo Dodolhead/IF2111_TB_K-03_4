@@ -47,16 +47,16 @@ void REGISTER(List *users) {
 //     REGISTER(&users);
 
 //     printf("\n--- DEBUG LIST USERS ---\n");
-//     for (int i = 0; i < ListUserLength(users); i++) {
+//     for (int i = 0; i < ListUserLength(&users); i++) {
 //         char bufferName[MAX_LEN];
 //         char bufferPassword[MAX_LEN];
-//         GetName(users, i, bufferName);
-//         GetPassword(users, i, bufferPassword);
+//         GetName(&users, i, bufferName);
+//         GetPassword(&users, i, bufferPassword);
 
 //         printf("User %d:\n", i + 1);
 //         printf("- Username: %s\n", bufferName);
 //         printf("- Password: %s\n", bufferPassword);
-//         printf("- Saldo: %d\n", GetMoney(users, i));
+//         printf("- Saldo: %d\n", GetMoney(&users, i));
 //     }
 
 //     return 0;

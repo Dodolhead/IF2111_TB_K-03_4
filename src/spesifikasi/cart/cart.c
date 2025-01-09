@@ -1,6 +1,6 @@
 #include "cart.h"
 #include <stdio.h>
-
+Map cart;
 void MakeCart(Map *cart) {
     CreateMapEmpty(cart);
 }
@@ -58,6 +58,5 @@ void DisplayCart(Map cart) {
 //     Map cart;
 //     MakeCart(&cart);
 
-//     AddToCart(&cart, "Baju", 2);
 //     DisplayCart(cart);
 // }

@@ -61,16 +61,17 @@ void StoreRequest(Queue q, ArrayDin Info) {
     }
 }
 
-/*
+
 int main() {
     Queue request;
     ArrayDin Info = MakeArrayDin();
     CreateQueue(&request);
-    ListBarang(&Info);
     char item[] = "Kata";
 
     enqueue(&request, item);
+    displayQueue(request);
     StoreRequest(request, Info);
+    displayQueue(request);
     return 0;
 }
-*/
+

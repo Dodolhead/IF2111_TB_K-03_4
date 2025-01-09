@@ -34,3 +34,17 @@ void History(Stack history, int N) {
         printf("Kamu belum membeli barang apapun!\n");
     }
 }
+
+int main() {
+    Stack riwayat;
+    CreateStackEmpty(&riwayat);
+
+    Push(&riwayat, "AK47", 10);
+    Push(&riwayat, "Aqua", 20);
+    Push(&riwayat, "ItemA", 30);
+    Push(&riwayat, "ItemB", 40);
+    Push(&riwayat, "ItemC", 50);
+    Push(&riwayat, "ItemD", 60);
+
+    History(riwayat, 2);
+}

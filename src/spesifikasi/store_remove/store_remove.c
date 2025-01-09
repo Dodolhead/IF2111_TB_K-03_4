@@ -53,16 +53,15 @@ void StoreRemove(ArrayDin Info) {
     }
 }
 
-/*
+
 int main() {
     ArrayDin Info = MakeArrayDin();
-    ListBarang(&Info);
 
     char item[] = "Kata";
-    InsertLast(&Info, item, 100);
+    ArrInsertLast(&Info, item, 100);
 
     StoreRemove(Info);
 
     return 0;
 }
-*/
+

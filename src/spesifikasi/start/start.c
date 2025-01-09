@@ -16,6 +16,7 @@
 //         GetPassword(&userList, i, password);
 //         printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(&userList, i));
 //     }
+    // printf("[DEBUG] Memulai START_READ dengan file: %s\n", filename);
 // }
 
 // void debugAntrian() {
@@ -24,7 +25,6 @@
 // }
 
 void START_READ(char filename[], ArrayDin barangList, List userList, Queue antrianQueue) {
-    // printf("[DEBUG] Memulai START_READ dengan file: %s\n", filename);
 
     // Inisialisasi data yang diperlukan
     barangList = MakeArrayDin();
@@ -41,6 +41,7 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
     // Membaca jumlah barang
     ADVWORD(); // Membaca jumlah barang
     int jumlahBarang = arrayToInteger(currentWord.TabWord, currentWord.Length);
+    printf("[DEBUG] Jumlah barang: %d\n", jumlahBarang);
     // printf("[DEBUG] Jumlah barang: %d\n", jumlahBarang);
     ADVWORD(); // Skip newline atau spasi
 
@@ -69,7 +70,7 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
 
     // Membaca data pengguna
     for (int i = 0; i < jumlahPengguna; i++) {
-        // printf("[DEBUG] Membaca pengguna ke-%d...\n", i + 1);
+        printf("[DEBUG] Membaca pengguna ke-%d...\n", i + 1);
         int saldoPengguna = arrayToInteger(currentWord.TabWord, currentWord.Length);
         ClearBuffer();
         ADVWORD();
@@ -78,14 +79,14 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
         char namaPengguna[NMax];
         CopyWord();
         copyString(namaPengguna, currentWord.TabWord);
-        // printf("[DEBUG] Pengguna %d: Nama=%s, Saldo=%d\n", i + 1, currentWord.TabWord, saldoPengguna);
+        printf("[DEBUG] Pengguna %d: Nama=%s, Saldo=%d\n", i + 1, currentWord.TabWord, saldoPengguna);
 
         // Membaca password pengguna
         char passwordPengguna[NMax];
         ADVWORD();
         copyString(passwordPengguna, currentWord.TabWord);
 
-        // printf("[DEBUG] Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, namaPengguna, passwordPengguna, saldoPengguna);
+        printf("[DEBUG] Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, namaPengguna, passwordPengguna, saldoPengguna);
 
         // Inisialisasi ADT lainnya
         Map keranjang;
@@ -101,11 +102,11 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
         // Membaca riwayat pembelian
         ADVWORD();
         int jumlahRiwayat = arrayToInteger(currentWord.TabWord, currentWord.Length);
-        // printf("[DEBUG] Jumlah riwayat pembelian pengguna ke-%d: %d\n", i + 1, jumlahRiwayat);
+        printf("[DEBUG] Jumlah riwayat pembelian pengguna ke-%d: %d\n", i + 1, jumlahRiwayat);
         ADVWORD();
 
         for (int j = 0; j < jumlahRiwayat; j++) {
-            // printf("[DEBUG] Membaca riwayat pembelian ke-%d untuk pengguna ke-%d...\n", j + 1, i + 1);
+            printf("[DEBUG] Membaca riwayat pembelian ke-%d untuk pengguna ke-%d...\n", j + 1, i + 1);
             int totalBiaya = arrayToInteger(currentWord.TabWord, currentWord.Length);
             ADV();
 
@@ -115,17 +116,17 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
             copyString(namaBarang, currentLine.TabLine);
             ADVWORD();
 
-            // printf("[DEBUG] Riwayat %d: Nama=%s, Harga=%d\n", j + 1, namaBarang, totalBiaya);
+            printf("[DEBUG] Riwayat %d: Nama=%s, Harga=%d\n", j + 1, namaBarang, totalBiaya);
 
             // Tambahkan ke riwayat pembelian
             Push(&riwayatPembelian, namaBarang, totalBiaya);
-            // printf("[DEBUG] Riwayat ke-%d berhasil ditambahkan ke riwayat pembelian.\n", j + 1);
+            printf("[DEBUG] Riwayat ke-%d berhasil ditambahkan ke riwayat pembelian.\n", j + 1);
         }
 
         // Membaca wishlist
         int jumlahWishlist = arrayToInteger(currentWord.TabWord, currentWord.Length);
         ADV(); // Skip newline atau spasi
-        // printf("[DEBUG] Jumlah wishlist pengguna ke-%d: %d\n", i + 1, jumlahWishlist);
+        printf("[DEBUG] Jumlah wishlist pengguna ke-%d: %d\n", i + 1, jumlahWishlist);
 
         // Initialize wishlist
         CreateLinkedListEmpty(&wishlist);
@@ -137,21 +138,21 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
             char namaWishlist[101];
             SalinKalimat();
             
-            // printf ("[DEBUG] Wishlist: %s\n", currentLine.TabLine);
+            printf ("[DEBUG] Wishlist: %s\n", currentLine.TabLine);
             copyString(namaWishlist, currentLine.TabLine);
 
-            // printf("[DEBUG] Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
+            printf("[DEBUG] Wishlist %d: Nama=%s\n", j + 1, namaWishlist);
             ADV();
             // Tambahkan ke wishlist
             AddToWishlist(&userList.A[i], namaWishlist);
-            // printf("[DEBUG] Wishlist ke-%d berhasil ditambahkan.\n", j + 1);
+            printf("[DEBUG] Wishlist ke-%d berhasil ditambahkan.\n", j + 1);
 
 
         }
 
         // Tambahkan pengguna ke list
         InsertListLast(&userList, saldoPengguna, namaPengguna, passwordPengguna, keranjang, riwayatPembelian, wishlist);
-        // printf("[DEBUG] Pengguna ke-%d berhasil ditambahkan ke userList.\n", i + 1);
+        printf("[DEBUG] Pengguna ke-%d berhasil ditambahkan ke userList.\n", i + 1);
         if (i!=jumlahPengguna-1){
         ADVWORD();
         } // Skip newline atau spasi
@@ -166,7 +167,10 @@ void START_PURRMART(ArrayDin barangList, List userList, Queue antrianQueue) {
 }
 
 // int main(){
-//     START_PURRMART();
+//     ArrayDin barangList;
+//     List userList;
+//     Queue antrianQueue;
+//     START_PURRMART(barangList, userList, antrianQueue);
 // }
 
 // int main() {

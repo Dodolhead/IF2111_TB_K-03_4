@@ -11,31 +11,35 @@ int LOGIN(List users, int *loggedInUserIndex) {
     // Input username
     printf("Username: ");
     STARTWORD();
-    char username[NMax];
-    for (int i = 0; i < currentWord.Length; i++) {
-        username[i] = currentWord.TabWord[i];
-    }
-    username[currentWord.Length] = '\0';
-
-    // Input password
-    printf("Password: ");
-    STARTWORD();
-    char password[NMax];
-    for (int i = 0; i < currentWord.Length; i++) {
-        password[i] = currentWord.TabWord[i];
-    }
-    password[currentWord.Length] = '\0';
-
-    // Proses pengecekan login
-    for (int i = 0; i < MaxEl; i++) {
-        if (stringEquals(users.A[i].name, username) && stringEquals(users.A[i].password, password)) {
-            *loggedInUserIndex = i; // Tandai sebagai login
-            printf("Anda telah login ke PURRMART sebagai %s.\n", users.A[i].name);
-            return i;
+    for(int i = 0; i < MaxEl; i++) {
+        printf("user %s\n", users.A[i].name);
+        printf("www %s\n", currentWord.TabWord);
+        if (stringEquals(currentWord.TabWord, users.A[i].name)) {
+            printf("%s", users.A[i].name);
+            ClearBuffer();
+            printf("Password: ");
+            STARTWORD();
+            if (stringEquals(currentWord.TabWord, users.A[i].password)) {
+                printf("Anda telah login ke PURRMART sebagai %s.\n", users.A[i].name);
+                return i;   
+                ClearBuffer();
+            }
+            else{
+                printf("Username atau password salah. Silakan coba lagi.\n");
+                break;
+            }
+        }
+        else{
+            printf("Username atau password salah. Silakan coba lagi.\n");
+            printf("%s", users.A[i].name);
+            break;
         }
     }
-
+    
     // Jika tidak ditemukan
-    printf("Username atau password salah.\n");
     return -1;
 }
+
+// int main(){
+
+// }

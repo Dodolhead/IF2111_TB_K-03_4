@@ -3,7 +3,7 @@
 
 void LOAD(char filename[], ArrayDin barangList, List userList, Queue antrianQueue) {
     char fullPath[150];
-    sprintf(fullPath, "../../data/%s", filename);    
+    sprintf(fullPath, "src/data/%s", filename);    
     //printf("\nDEBUG: Mulai membaca file '%s'...\n", fullPath);
     START_READ(fullPath, barangList, userList, antrianQueue);
 

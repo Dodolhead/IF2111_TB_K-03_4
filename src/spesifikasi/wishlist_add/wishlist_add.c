@@ -16,6 +16,7 @@ void wishlistAdd(User *U){
     if (P == Nil || isEmptyUserLinkedList(*U)) {
         AddToWishlist(U, currentWord.TabWord);
         printf("Berhasil menambahkan %s ke wishlist!\n",currentWord.TabWord);
+        ClearBuffer();
     }
     else{
         printf("%s sudah ada di wishlist!\n",currentWord.TabWord);
@@ -27,7 +28,8 @@ void wishlistAdd(User *U){
 //     MakeList(&U);
 //     LinkedList wishlist;
 //     CreateLinkedListEmpty(&wishlist);
-
-//     wishlistAdd(&U.A[0]);
+//     for (int i =0;i<4;i++){
+//         wishlistAdd(&U.A[0]);
+//     }
 //     PrintWishlist(&U,0);
 // }

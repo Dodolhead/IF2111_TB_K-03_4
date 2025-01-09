@@ -14,6 +14,6 @@ void debugAntrian();
 
 // Fungsi utama untuk membaca konfigurasi
 void START_READ(char filename[], ArrayDin barangList, List userList, Queue antrianQueue);
-void START_PURRMART();
+void START_PURRMART( ArrayDin barangList, List userList, Queue antrianQueue);
 
 #endif

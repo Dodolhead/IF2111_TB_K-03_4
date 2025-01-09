@@ -96,7 +96,7 @@ int main(){
         ClearBuffer();
         printf("\n>> ");
         STARTWORD();
-
+        printf("%s\n", currentWord.TabWord);
         i = 0;
 
         // START
@@ -356,12 +356,9 @@ int main(){
                 }
             } 
             else if (!loggedin) { printf("ERROR: No account is loaded\n"); } 
-            ClearBuffer();
         }
-        // else { printf("ERROR: Input tidak valid!\n"); }
-        printf("test\n");
+        else { printf("ERROR: Input tidak valid!\n"); }
         printf("%s\n", currentWord.TabWord);
-        printf("test\n");
     }
     return 0;
 }

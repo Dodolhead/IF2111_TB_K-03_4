@@ -3,7 +3,7 @@
 
 int main() {
     // Deklarasi variabel
-    User user;
+    List user;
     char name[50], password[50];
     int saldo;
 
@@ -25,12 +25,12 @@ int main() {
     AddToKeranjang(&user, "M16", 120);
 
     // Menampilkan informasi user
-    PrintUserInfo(&user);
+    PrintUserInfo(user,1);
 
     // Proses pembayaran
     CartPay(&user);
 
     // Informasi user setelah transaksi
-    PrintUserInfo(&user);
+    PrintUserInfo(user,1);
 
 }
