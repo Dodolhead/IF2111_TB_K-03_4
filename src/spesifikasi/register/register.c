@@ -31,6 +31,7 @@ void REGISTER(List *users) {
     password[currentWord.Length] = '\0';
 
     printf("Pendaftaran berhasil. Selamat datang, %s!\n", username);
+    ClearBuffer();
 }
 
 // int main() {

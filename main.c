@@ -93,15 +93,11 @@ int main(){
     
     // STARTFILE("command.txt");
     while (1) {
-
+        ClearBuffer();
         printf("\n>> ");
         STARTWORD();
-        // Mencetak command
-        // i = 0;
-        // while (i < currentWord.Length) {
-        //     printf("%c", currentWord.TabWord[i]);
-        //     i++;
-        // }        
+
+        i = 0;
 
         // START
         if (stringEquals(currentWord.TabWord, "START")) {
@@ -111,8 +107,7 @@ int main(){
             
             // Mengubah tampilan HELP
             help_menu = 2;
-            
-            if (IsListuserEmpty(User)) {
+            if (IsListEmpty(&User)) {
                 printf("***** | (REGISTER) Register account | (HELP) Help | *****\n");
             } else {
                 printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
@@ -133,12 +128,13 @@ int main(){
             
             // Mengubah tampilan HELP
             help_menu = 2;
+            ClearBuffer();
         }
 
         // LOGIN
         else if (stringEquals(currentWord.TabWord, "LOGIN")) {
 
-                LOGIN(User, &acc_id); // LOGIN bakal mengembalikan index user dari List User
+                acc_id = LOGIN(User, &acc_id); // LOGIN bakal mengembalikan index user dari List User
                 loggedin = true;
 
         }
@@ -160,6 +156,7 @@ int main(){
             // } else {
             //     printf("ERROR: There's no file loaded\n");
             // }
+            }
         }
 
         // WORK
@@ -177,6 +174,7 @@ int main(){
             } else {
                 doWork(&User.A[acc_id].money); // WORK bakal menambah uang user
             }
+            ClearBuffer();
         }
 
         // STORE
@@ -204,7 +202,7 @@ int main(){
                 }
             } 
             else if (!loggedin) { printf("ERROR: nigga\n"); } 
-            else { printf("ERROR: Input tidak valid!\n"); }
+            else { printf("ERROR STORE: Input tidak valid!\n"); }ClearBuffer();
         }
         
         // HELP
@@ -291,7 +289,8 @@ int main(){
                 }
             } 
             else if (!loggedin) { printf("ERROR: There's  loadno fileed\n"); } 
-            else { printf("ERROR: Input tidak valid!\n"); }
+            else { printf("ERROR CART: Input tidak valid!\n"); }
+            ClearBuffer();
         }
 
         // HISTORY
@@ -307,6 +306,7 @@ int main(){
             } else {
                 printf("ERROR: No account is loaded\n");
             }
+            ClearBuffer();
         }
 
         // WISHLIST
@@ -356,12 +356,12 @@ int main(){
                 }
             } 
             else if (!loggedin) { printf("ERROR: No account is loaded\n"); } 
-            else { printf("ERROR: Input tidak valid!\n"); }
+            ClearBuffer();
         }
-
-        else {
-            printf("ERROR: Input tidak valid!\n");
-        }
+        // else { printf("ERROR: Input tidak valid!\n"); }
+        printf("test\n");
+        printf("%s\n", currentWord.TabWord);
+        printf("test\n");
     }
     return 0;
 }
