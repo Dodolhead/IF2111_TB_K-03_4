@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include "start.h"
 
-// Deklarasi global
-ArrayDin barangList;
-List userList;
-Queue antrianQueue;
-
 void debugBarang() {
     // printf("\nDebug Barang Toko:\n");
     for (int i = 0; i < ArrLength(barangList); i++) {
