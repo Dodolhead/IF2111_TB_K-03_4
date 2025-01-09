@@ -44,7 +44,7 @@ void DeallocateArrayDin(ArrayDin *array);
  * Fungsi untuk mengetahui apakah suatu array penuh.
  * Prekondisi: array terdefinisi
  */
-boolean IsArrFull(ArrayDin array)
+boolean IsArrFull(ArrayDin array);
 
 /**
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.

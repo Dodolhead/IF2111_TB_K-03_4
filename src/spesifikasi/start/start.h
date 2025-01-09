@@ -7,11 +7,6 @@
 #include "../../adt/mesinkalimat/linemachine.h"
 #include "../../../utilities.h"
 
-// Deklarasi global
-extern ArrayDin barangList;
-extern List userList;
-extern Queue antrianQueue;
-
 // Fungsi untuk debugging
 void debugBarang();
 void debugPengguna();
