@@ -1,27 +1,27 @@
 #include <stdio.h>
 #include "start.h"
 
-void debugBarang() {
-    // printf("\nDebug Barang Toko:\n");
-    for (int i = 0; i < ArrLength(barangList); i++) {
-        printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, barangList.A[i].name, barangList.A[i].price);
-    }
-}
+// void debugBarang() {
+//     // printf("\nDebug Barang Toko:\n");
+//     for (int i = 0; i < ArrLength(barangList); i++) {
+//         printf("Barang %d: Nama=%s, Harga=%d\n", i + 1, barangList.A[i].name, barangList.A[i].price);
+//     }
+// }
 
-void debugPengguna() {
-    // printf("\nDebug Daftar Pengguna:\n");
-    for (int i = 0; i < ListUserLength(&userList); i++) {
-        char nama[MAX_LEN], password[MAX_LEN];
-        GetName(&userList, i, nama);
-        GetPassword(&userList, i, password);
-        printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(&userList, i));
-    }
-}
+// void debugPengguna() {
+//     // printf("\nDebug Daftar Pengguna:\n");
+//     for (int i = 0; i < ListUserLength(&userList); i++) {
+//         char nama[MAX_LEN], password[MAX_LEN];
+//         GetName(&userList, i, nama);
+//         GetPassword(&userList, i, password);
+//         printf("Pengguna %d: Nama=%s, Password=%s, Saldo=%d\n", i + 1, nama, password, GetMoney(&userList, i));
+//     }
+// }
 
-void debugAntrian() {
-    printf("\nDebug Antrian Permintaan:\n");
-    displayQueue(antrianQueue);
-}
+// void debugAntrian() {
+//     printf("\nDebug Antrian Permintaan:\n");
+//     displayQueue(antrianQueue);
+// }
 
 void START_READ(char filename[], ArrayDin barangList, List userList, Queue antrianQueue) {
     // printf("[DEBUG] Memulai START_READ dengan file: %s\n", filename);
@@ -162,7 +162,7 @@ void START_READ(char filename[], ArrayDin barangList, List userList, Queue antri
 }
 
 void START_PURRMART(ArrayDin barangList, List userList, Queue antrianQueue) {
-    START_READ("src/data/config.txt", ArrayDin barangList, List userList, Queue antrianQueue);
+    START_READ("src/data/config.txt", barangList, userList, antrianQueue);
 }
 
 // int main(){

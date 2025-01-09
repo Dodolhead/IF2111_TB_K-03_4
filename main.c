@@ -75,11 +75,12 @@ int main(){
     ArrayDin Information;
     Queue request;
     List User;
+    ArrayDin barangList;
+    
 
     // Masukkan program utama
     char perintah[50] = "";
     char keterangan[50] = "";
-    char filename[50] = "config.txt";
     // ALGORTIMA
     printf("  _____  _    _ _____  _____  __  __          _____ _______ \n");
     printf(" |  __ \\| |  | |  __ \\|  __ \\|  \\/  |   /\\   |  __ \\__   __|\n");
@@ -96,11 +97,11 @@ int main(){
         printf("\n>> ");
         STARTWORD();
         // Mencetak command
-        i = 0;
-        while (i < currentWord.Length) {
-            printf("%c", currentWord.TabWord[i]);
-            i++;
-        }        
+        // i = 0;
+        // while (i < currentWord.Length) {
+        //     printf("%c", currentWord.TabWord[i]);
+        //     i++;
+        // }        
 
         // START
         if (stringEquals(currentWord.TabWord, "START")) {
@@ -110,6 +111,11 @@ int main(){
             
             // Mengubah tampilan HELP
             help_menu = 2;
+            if (IsListuserEmpty(User)) {
+                printf("***** | (REGISTER) Register account | (HELP) Help | *****\n");
+            } else {
+                printf("***** | (LOGIN) Login to your account| (REGISTER) Register account | (HELP) Help | *****\n");
+            }
         }
 
         // LOAD
